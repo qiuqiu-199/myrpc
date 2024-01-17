@@ -8,6 +8,8 @@
         <outputRelativeToContentRoot value="true" />
         <module name="annotation" />
         <module name="common" />
+        <module name="constants" />
+        <module name="protocol" />
         <module name="provider-native" />
         <module name="providercommon" />
         <module name="test-provider" />
