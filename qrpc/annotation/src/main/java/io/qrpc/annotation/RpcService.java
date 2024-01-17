@@ -22,7 +22,7 @@ public @interface RpcService {
     /**
      * 接口的class
      */
-    Class<?> interfaceclass() default void.class;
+    Class<?> interfaceClass() default void.class;
     /**
      * 接口的className
      */

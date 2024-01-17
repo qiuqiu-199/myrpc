@@ -7,12 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="annotation" />
-        <module name="qcommon" />
+        <module name="common" />
+        <module name="provider-native" />
+        <module name="providercommon" />
+        <module name="test-provider" />
+        <module name="test-scanner" />
         <module name="testscanner" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="common" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

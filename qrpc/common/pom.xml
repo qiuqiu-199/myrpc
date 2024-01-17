@@ -9,12 +9,14 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>test</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>test-scanner</module>
-        <module>test-provider</module>
-    </modules>
+    <artifactId>common</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.qiu</groupId>
+            <artifactId>annotation</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

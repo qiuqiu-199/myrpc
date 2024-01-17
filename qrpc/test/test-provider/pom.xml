@@ -9,21 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>test-scanner</artifactId>
+    <artifactId>test-provider</artifactId>
+
     <dependencies>
-        <dependency>
-            <groupId>com.qiu</groupId>
-            <artifactId>common</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.12</version>
-            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.qiu</groupId>
+            <artifactId>provider-native</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
-
-
 
 </project>
