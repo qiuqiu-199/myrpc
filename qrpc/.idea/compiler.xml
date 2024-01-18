@@ -7,11 +7,14 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="annotation" />
+        <module name="codec" />
         <module name="common" />
         <module name="constants" />
         <module name="protocol" />
         <module name="provider-native" />
         <module name="providercommon" />
+        <module name="serialization-api" />
+        <module name="serialization-jdk" />
         <module name="test-provider" />
         <module name="test-scanner" />
         <module name="testscanner" />

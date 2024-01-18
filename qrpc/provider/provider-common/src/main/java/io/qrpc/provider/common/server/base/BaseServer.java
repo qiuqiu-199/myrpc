@@ -9,6 +9,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.qrpc.codec.RpcDecoder;
+import io.qrpc.codec.RpcEncoder;
 import io.qrpc.provider.common.handler.RpcProviderHandler;
 import io.qrpc.provider.common.server.api.Server;
 import org.apache.commons.lang3.StringUtils;
@@ -52,9 +54,10 @@ public class BaseServer implements Server {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             socketChannel.pipeline()
-                                    //临时的编解码，后面会自己实现
-                                    .addLast(new StringDecoder())
-                                    .addLast(new StringEncoder())
+                                    //临时的编解码，后面会自己实现。
+                                    //第7章实现
+                                    .addLast(new RpcDecoder())
+                                    .addLast(new RpcEncoder())
                                     //由我们自定义的处理器来处理数据
                                     .addLast(new RpcProviderHandler(handlerMap));
                         }

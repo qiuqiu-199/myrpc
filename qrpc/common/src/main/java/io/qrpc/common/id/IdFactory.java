@@ -1,4 +1,4 @@
-package io.qrpc.common.scanner.id;
+package io.qrpc.common.id;
 
 import java.util.concurrent.atomic.AtomicLong;
 

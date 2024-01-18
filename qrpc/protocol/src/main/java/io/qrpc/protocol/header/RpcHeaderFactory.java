@@ -1,6 +1,6 @@
 package io.qrpc.protocol.header;
 
-import io.qrpc.common.scanner.id.IdFactory;
+import io.qrpc.common.id.IdFactory;
 import io.qrpc.constants.RpcConstants;
 import io.qrpc.protocol.enumeration.RpcType;
 
