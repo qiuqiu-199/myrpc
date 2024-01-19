@@ -6,12 +6,15 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.qrpc.common.helper.RpcServiceHelper;
 import io.qrpc.common.threadPool.ServerThreadPool;
+import io.qrpc.constants.RpcConstants;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.enumeration.RpcStatus;
 import io.qrpc.protocol.enumeration.RpcType;
 import io.qrpc.protocol.header.RpcHeader;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.protocol.response.RpcResponse;
+import net.sf.cglib.reflect.FastClass;
+import net.sf.cglib.reflect.FastMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,9 +33,11 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcProviderHandler.class);
 
     private final Map<String, Object> handlerMap;
+    private final String reflectType;
 
-    public RpcProviderHandler(Map<String, Object> handlerMap) {
+    public RpcProviderHandler(Map<String, Object> handlerMap, String reflectType) {
         this.handlerMap = handlerMap;
+        this.reflectType = reflectType;
     }
 
     //第8章模拟接收消费者的数据的临时处理，接收到数据后构造处理完毕后的数据回送给消费者
@@ -75,15 +80,17 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
         });
     }
 
-    /**f
+    /**
+     * f
      * 调用方法
+     *
      * @param requestBody 响应体
      * @return 响应结果
      * @throws NoSuchMethodException
      * @throws InvocationTargetException
      * @throws IllegalAccessException
      */
-    private Object handle(RpcRequest requestBody) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private Object handle(RpcRequest requestBody) throws Exception {
         String serviceKey = RpcServiceHelper.buildServiceKey(requestBody.getClassName(), requestBody.getVersion(), requestBody.getGroup());
         Object serviceBean = handlerMap.get(serviceKey);
         if (serviceBean == null) {
@@ -122,20 +129,46 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
     }
 
-    /**f
+    /**
+     * f
      * 通过反射调用方法
+     *
      * @param serviceBean
      * @param serviceClass
      * @param methodName
      * @param parameterTypes
      * @param parameters
      * @return
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
+     * @throws Exception
      */
-    private Object invokeMethod(Object serviceBean, Class<?> serviceClass, String methodName, Class<?>[] parameterTypes, Object[] parameters) throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+    private Object invokeMethod(Object serviceBean, Class<?> serviceClass, String methodName, Class<?>[] parameterTypes, Object[] parameters) throws Exception {
+
+        switch (this.reflectType) {
+            case RpcConstants.REFLECT_TYPE_JDK:
+                return this.invoke_jdk_method(serviceBean, serviceClass, methodName, parameterTypes, parameters);
+            case RpcConstants.REFLECT_TYPE_CGLIB:
+                return this.invoke_cglib_method(serviceBean, serviceClass, methodName, parameterTypes, parameters);
+            default:
+                throw new IllegalArgumentException("当前仅支持jdk和cglib反射方式！");
+        }
+
+    }
+
+    /**
+     *
+     */
+    private Object invoke_cglib_method(Object serviceBean, Class<?> serviceClass, String methodName, Class<?>[] parameterTypes, Object[] parameters) throws InvocationTargetException {
+        LOGGER.info("当前正在使用的反射方式为==={}", this.reflectType);
+
+        FastClass serviceFastClass = FastClass.create(serviceClass);
+        FastMethod fastMethod = serviceFastClass.getMethod(methodName, parameterTypes);
+        return fastMethod.invoke(serviceBean, parameters);
+    }
+
+    private Object invoke_jdk_method(Object serviceBean, Class<?> serviceClass, String methodName, Class<?>[] parameterTypes, Object[] parameters) throws Exception {
+        LOGGER.info("当前正在使用的反射方式为==={}", this.reflectType);
         Method method = serviceClass.getMethod(methodName, parameterTypes);
+
         method.setAccessible(true);
 
         return method.invoke(serviceBean, parameters);

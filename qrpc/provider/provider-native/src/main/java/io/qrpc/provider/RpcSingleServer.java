@@ -15,9 +15,9 @@ import io.qrpc.common.scanner.service.RpcServiceScanner;
 public class RpcSingleServer extends BaseServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcSingleServer.class);
 
-    public RpcSingleServer(String serverAddress, String scanPackage) {
+    public RpcSingleServer(String serverAddress, String scanPackage,String reflectType) {
         //TODO 这里必须调用父类构造方法否则报错，原因不明
-        super(serverAddress);
+        super(serverAddress,reflectType);
 
         try {
             this.handlerMap = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService(scanPackage);

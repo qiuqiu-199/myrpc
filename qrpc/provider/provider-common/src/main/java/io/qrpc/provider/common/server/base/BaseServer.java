@@ -34,13 +34,15 @@ public class BaseServer implements Server {
 
     protected String host = "127.0.0.1";
     protected int port = 27110;
+    private String reflectType;
     protected Map<String,Object> handlerMap = new HashMap<>();
 
-    public BaseServer(String serverAddress){
+    public BaseServer(String serverAddress,String reflectType){
         if (!StringUtils.isEmpty(serverAddress)){
             this.host = serverAddress.split(":")[0];
             this.port = Integer.parseInt(serverAddress.split(":")[1]);
         }
+        this.reflectType = reflectType;
     }
 
     @Override
@@ -59,7 +61,7 @@ public class BaseServer implements Server {
                                     .addLast(new RpcDecoder())
                                     .addLast(new RpcEncoder())
                                     //由我们自定义的处理器来处理数据
-                                    .addLast(new RpcProviderHandler(handlerMap));
+                                    .addLast(new RpcProviderHandler(handlerMap,reflectType));
                         }
                     })
                     //下面的设置对应tcp/ip协议, listen函数中的 backlog 参数，用来初始化服务端可连接队列。

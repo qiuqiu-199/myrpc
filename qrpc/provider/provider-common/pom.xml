@@ -12,4 +12,7 @@
     <artifactId>provider-common</artifactId>
 
 
+    <dependencies>
+    </dependencies>
+
 </project>
