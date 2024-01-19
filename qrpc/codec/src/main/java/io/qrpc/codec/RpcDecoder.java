@@ -2,7 +2,6 @@ package io.qrpc.codec;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.handler.codec.ByteToMessageCodec;
 import io.netty.handler.codec.ByteToMessageDecoder;
 import io.netty.util.CharsetUtil;
 import io.qrpc.common.exception.SerializerException;
@@ -11,10 +10,9 @@ import io.qrpc.constants.RpcConstants;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.enumeration.RpcType;
 import io.qrpc.protocol.header.RpcHeader;
-import io.qrpc.protocol.request.RpcRequst;
+import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.protocol.response.RpcResponse;
 import io.qrpc.serialization.api.Serialization;
-import io.qrpc.serialization.jdk.JdkSerialization;
 
 import java.util.List;
 
@@ -74,11 +72,11 @@ public class RpcDecoder extends ByteToMessageDecoder implements RpcCodec {
         //根据消息类型还原成不同的消息协议
         switch (msgTypeEnum) {
             case REQUEST:
-                RpcRequst rpcRequst = jdkSerialization.desrialize(data, RpcRequst.class);
-                if (rpcRequst != null) {
-                    RpcProtocol<RpcRequst> protocol = new RpcProtocol<>();
+                RpcRequest rpcRequest = jdkSerialization.desrialize(data, RpcRequest.class);
+                if (rpcRequest != null) {
+                    RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
                     protocol.setHeader(header);
-                    protocol.setBody(rpcRequst);
+                    protocol.setBody(rpcRequest);
 
                     list.add(protocol);
                 }

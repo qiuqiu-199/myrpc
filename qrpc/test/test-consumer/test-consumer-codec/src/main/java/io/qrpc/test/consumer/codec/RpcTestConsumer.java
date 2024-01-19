@@ -28,7 +28,6 @@ public class RpcTestConsumer {
         }finally {
             //线程休眠两秒再关闭服务提供者，否则会导致消费者和服务者在进行数据交互时关闭消费者会抛异常
             Thread.sleep(2000);
-            System.out.println("0000");
             eventExecutors.shutdownGracefully();
         }
     }

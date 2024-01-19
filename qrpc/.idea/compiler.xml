@@ -15,6 +15,7 @@
         <module name="providercommon" />
         <module name="serialization-api" />
         <module name="serialization-jdk" />
+        <module name="test-api" />
         <module name="test-consumer-codec" />
         <module name="test-provider" />
         <module name="test-scanner" />

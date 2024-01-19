@@ -3,13 +3,13 @@ package io.qrpc.protocol.request;
 import io.qrpc.protocol.base.RpcMessage;
 
 /**
- * @ClassName: RpcRequst
+ * @ClassName: RpcRequest
  * @Author: qiuzhiq
  * @Date: 2024/1/17 16:49
  * @Description: Rpc请求消息的封装，对应的请求id再消息头中
  */
 
-public class RpcRequst extends RpcMessage {
+public class RpcRequest extends RpcMessage {
     private static final long serialVersionUID = 5645393643458897838L;
 
     //类名

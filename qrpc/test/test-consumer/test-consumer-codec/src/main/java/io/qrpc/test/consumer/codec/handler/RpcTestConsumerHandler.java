@@ -5,7 +5,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.header.RpcHeaderFactory;
-import io.qrpc.protocol.request.RpcRequst;
+import io.qrpc.protocol.request.RpcRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  * @Description: 模拟发送消费者数据临时用
  */
 
-public class RpcTestConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcRequst>> {
+public class RpcTestConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcRequest>> {
     private final static Logger LOGGER = LoggerFactory.getLogger(RpcTestConsumerHandler.class);
 
 
@@ -25,15 +25,15 @@ public class RpcTestConsumerHandler extends SimpleChannelInboundHandler<RpcProto
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         LOGGER.info("=============模拟消费者发送数据：");
 
-        RpcProtocol<RpcRequst> protocol = new RpcProtocol<>();
+        RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
         protocol.setHeader(RpcHeaderFactory.getRequestHeader("jdk"));
-        RpcRequst requst = new RpcRequst();
-        requst.setClassName("io.qrpc.test.DemoService");
+        RpcRequest requst = new RpcRequest();
+        requst.setClassName("io.qrpc.test.api.DemoService");
         requst.setVersion("1.0.0");
         requst.setGroup("qiu");
         requst.setMethodName("hello");
         requst.setParameterTypes(new Class[]{String.class});
-        requst.setParameters(new Object[]{"hello,qiu"});
+        requst.setParameters(new Object[]{"qiu"});
         requst.setAsync(false);
         requst.setOneway(false);
         protocol.setBody(requst);
@@ -45,7 +45,7 @@ public class RpcTestConsumerHandler extends SimpleChannelInboundHandler<RpcProto
 
     //处理对方发送过来的数据
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcProtocol<RpcRequst> protocol) throws Exception {
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcProtocol<RpcRequest> protocol) throws Exception {
             LOGGER.info("服务提供者收到数据===》{}", JSONObject.toJSONString(protocol));
     }
 }

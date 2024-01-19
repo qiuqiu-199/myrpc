@@ -1,6 +1,7 @@
 package io.qrpc.common.scanner.service;
 
 import io.qrpc.annotation.RpcService;
+import io.qrpc.common.helper.RpcServiceHelper;
 import io.qrpc.common.scanner.ClassScanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +32,7 @@ public class RpcServiceScanner extends ClassScanner {
      */
     public static Map<String, Object> doScannerWithRpcServiceAnnotationFilterAndRegistryService(/*String host,
                                                                                                 int port,*/
-                                                                                                String scanPackage/*,
+            String scanPackage/*,
                                                                                                RegistryService registryService*/) throws Exception {
         Map<String, Object> handlerMap = new HashMap<>();
         List<String> classNameList = getClassNameList(scanPackage);
@@ -55,10 +56,9 @@ public class RpcServiceScanner extends ClassScanner {
 //                    LOGGER.info("group: " + rpcService.group());
 
                     //TODO 目前先简单处理key为服务名+版本+分组，后续完善
-                    String serviceName = getServiceName(rpcService);
-                    String key = serviceName.concat(rpcService.version()).concat(rpcService.group());
+                    String key = RpcServiceHelper.buildServiceKey(rpcService.interfaceClassName(), rpcService.version(), rpcService.group());
 
-                    handlerMap.put(key,clazz.newInstance());
+                    handlerMap.put(key, clazz.newInstance());
 
                 }
             } catch (Exception e) {
@@ -67,17 +67,5 @@ public class RpcServiceScanner extends ClassScanner {
             }
         });
         return handlerMap;
-
     }
-
-    private static String getServiceName(RpcService rpcService){
-        Class<?> aClass = rpcService.interfaceClass();
-        if (aClass == void.class) return rpcService.interfaceClassName();
-
-        String serviceName = aClass.getName();
-        if (serviceName == null || serviceName.trim().isEmpty()) serviceName = rpcService.interfaceClassName();
-
-        return serviceName;
-    }
-
 }
