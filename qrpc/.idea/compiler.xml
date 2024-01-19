@@ -10,6 +10,7 @@
         <module name="codec" />
         <module name="common" />
         <module name="constants" />
+        <module name="consumer-common" />
         <module name="protocol" />
         <module name="provider-native" />
         <module name="providercommon" />
@@ -17,6 +18,7 @@
         <module name="serialization-jdk" />
         <module name="test-api" />
         <module name="test-consumer-codec" />
+        <module name="test-consumer-handler" />
         <module name="test-provider" />
         <module name="test-scanner" />
         <module name="testscanner" />

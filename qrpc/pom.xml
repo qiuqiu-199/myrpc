@@ -17,6 +17,7 @@
         <module>protocol</module>
         <module>codec</module>
         <module>serialization</module>
+        <module>consumer</module>
     </modules>
 
     <properties>
