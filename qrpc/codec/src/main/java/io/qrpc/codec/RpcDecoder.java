@@ -96,5 +96,6 @@ public class RpcDecoder extends ByteToMessageDecoder implements RpcCodec {
                 //TODO
                 break;
         }
+        System.out.println("解码成功！");
     }
 }

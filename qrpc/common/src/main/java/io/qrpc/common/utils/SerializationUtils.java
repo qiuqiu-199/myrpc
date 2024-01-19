@@ -29,9 +29,9 @@ public class SerializationUtils {
         IntStream.range(0,padingcount).forEach((i)->{
             sb.append(PADDING_STRING);
         });
-        for (int i = 0; i < padingcount; i++) {
-            sb.append(PADDING_STRING);
-        }
+//        for (int i = 0; i < padingcount; i++) {
+//            sb.append(PADDING_STRING);
+//        }
 
         return sb.toString();
     }
