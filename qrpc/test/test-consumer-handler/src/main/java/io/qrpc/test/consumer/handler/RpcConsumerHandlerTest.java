@@ -19,8 +19,12 @@ public class RpcConsumerHandlerTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcConsumerHandlerTest.class);
     public static void main(String[] args) throws InterruptedException {
         RpcConsumer consumer = RpcConsumer.getInstance();
-        consumer.sendRequest(getProtocol());
+
+        //接收结果
+        Object result = consumer.sendRequest(getProtocol());
         LOGGER.info("消费者模拟数据发送完毕！");
+        LOGGER.info("消费者返回的数据为：{}",result.toString());
+
         Thread.sleep(2000);
         consumer.close();
     }

@@ -5,7 +5,6 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.qrpc.consumer.common.handler.RpcConsumerHandler;
 import io.qrpc.consumer.common.initializer.RpcConsumerInitializer;
@@ -32,6 +31,8 @@ public class RpcConsumer {
 
     private static volatile RpcConsumer instance;
 
+    //缓存当前消费者与服务端的连接
+    //TODO 一个handler是一个连接吗
     private static Map<String, RpcConsumerHandler> handlerMap = new ConcurrentHashMap<>();
 
     private RpcConsumer() {
@@ -53,7 +54,7 @@ public class RpcConsumer {
 
 
     //发送请求，后面由代理类调用
-    public void sendRequest(RpcProtocol<RpcRequest> protocol) throws InterruptedException {
+    public Object sendRequest(RpcProtocol<RpcRequest> protocol) throws InterruptedException {
         // TODO 暂时写死，后续引入注册中心后更新
         String ip = "127.0.0.1";
         int port = 27880;
@@ -61,16 +62,17 @@ public class RpcConsumer {
         String key = String.join("_", ip, String.valueOf(port));
         RpcConsumerHandler handler = handlerMap.get(key);
 
+        //
         if (handler == null) {
             handler = getRpcConsumerHandler(ip, port);
             handlerMap.put(key, handler);
-        } else if (!handler.getcHannel().isActive()) {
+        } else if (!handler.getcHannel().isActive()) {  //TODO 缓存中存在但是不活跃？？
             handler.close();
             handler = getRpcConsumerHandler(ip, port);
             handlerMap.put(key, handler);
         }
 
-        handler.sendRequst(protocol);
+        return handler.sendRequst(protocol);
     }
 
     //获取handler

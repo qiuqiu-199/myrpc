@@ -7,12 +7,15 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.qrpc.protocol.RpcProtocol;
+import io.qrpc.protocol.header.RpcHeader;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.protocol.response.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.SocketAddress;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @ClassName: RpcConsumerHandler
@@ -25,7 +28,10 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     private final static Logger LOGGER = LoggerFactory.getLogger(RpcConsumerHandler.class);
 
     private volatile Channel channel;  //TODO 为什么要volatile修饰？
-    private SocketAddress remotePeer;
+    private SocketAddress remotePeer;  //TODO 作用？目前并没有用上
+
+    //存储请求id与对应的Response的映射关系，当一次请求产生结果就将对应的response放在这里，可以从这里得到请求的结果
+    private Map<Long, RpcProtocol<RpcResponse>> pendingResponseMap = new ConcurrentHashMap<>();
 
     public Channel getcHannel() {
         return channel;
@@ -49,22 +55,38 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
         this.remotePeer = this.channel.remoteAddress();
     }
 
-    //接收数据时触发，对接收数据进行处理
+    //消费者接收提供者返回的数据时触发，对接收数据进行处理
     @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcProtocol<RpcResponse> rpcResponseRpcProtocol) throws Exception {
-        LOGGER.info("接受到响应数据：{}", JSONObject.toJSONString(rpcResponseRpcProtocol));
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcProtocol<RpcResponse> protocol) {
+        if (protocol == null) return;
+
+        LOGGER.info("消费者接收到响应数据：{}", JSONObject.toJSONString(protocol));
+        LOGGER.info("消费者接收到响应数据后将其存入map中...");
+
+        RpcHeader header = protocol.getHeader();
+        long requestId = header.getRequestId();
+        pendingResponseMap.put(requestId, protocol); //接收到提供者返回的结果后存入map
     }
 
 
     //消费者向提供者发送数据
-    public void sendRequst(RpcProtocol<RpcRequest> protocol){
-        LOGGER.info("消费者准备发送的数据：{}",JSONObject.toJSONString(protocol));
+    public Object sendRequst(RpcProtocol<RpcRequest> protocol) {
+        LOGGER.info("消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
         channel.writeAndFlush(protocol);
+
+        //异步转同步，循环从map中获取结果返回
+        long requestId = protocol.getHeader().getRequestId();
+        while (true) {
+            RpcProtocol<RpcResponse> responseProtocol = pendingResponseMap.remove(requestId);
+            if (responseProtocol != null) {
+                return responseProtocol.getBody().getResult();
+            }
+        }
     }
 
 
     //TODO 作用以及为什么这么写不理解
-    public void close(){
+    public void close() {
         channel.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
     }
 }
