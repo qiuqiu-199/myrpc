@@ -2,11 +2,14 @@ package io.qrpc.test.consumer.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import io.qrpc.consumer.common.RpcConsumer;
+import io.qrpc.consumer.common.future.RpcFuture;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.header.RpcHeaderFactory;
 import io.qrpc.protocol.request.RpcRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.ExecutionException;
 
 /**
  * @ClassName: RpcConsumerHandlerTest
@@ -17,15 +20,14 @@ import org.slf4j.LoggerFactory;
 
 public class RpcConsumerHandlerTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcConsumerHandlerTest.class);
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
         RpcConsumer consumer = RpcConsumer.getInstance();
 
         //接收结果
-        Object result = consumer.sendRequest(getProtocol());
+        RpcFuture future = consumer.sendRequest(getProtocol());
         LOGGER.info("消费者模拟数据发送完毕！");
-        LOGGER.info("消费者返回的数据为：{}",result.toString());
+        LOGGER.info("消费者返回的数据为：{}",future.get());
 
-        Thread.sleep(2000);
         consumer.close();
     }
 

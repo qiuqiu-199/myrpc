@@ -6,6 +6,7 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.qrpc.consumer.common.future.RpcFuture;
 import io.qrpc.consumer.common.handler.RpcConsumerHandler;
 import io.qrpc.consumer.common.initializer.RpcConsumerInitializer;
 import io.qrpc.protocol.RpcProtocol;
@@ -54,7 +55,7 @@ public class RpcConsumer {
 
 
     //发送请求，后面由代理类调用
-    public Object sendRequest(RpcProtocol<RpcRequest> protocol) throws InterruptedException {
+    public RpcFuture sendRequest(RpcProtocol<RpcRequest> protocol) throws InterruptedException {
         // TODO 暂时写死，后续引入注册中心后更新
         String ip = "127.0.0.1";
         int port = 27880;
