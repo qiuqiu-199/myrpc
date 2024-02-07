@@ -6,6 +6,7 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.qrpc.consumer.common.context.RpcContext;
 import io.qrpc.consumer.common.future.RpcFuture;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.header.RpcHeader;
@@ -76,18 +77,42 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
 
     //消费者向提供者发送数据
-    public RpcFuture sendRequst(RpcProtocol<RpcRequest> protocol) {
-        LOGGER.info("消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
+    public RpcFuture sendRequst(RpcProtocol<RpcRequest> protocol,boolean isAsync, boolean isOneWay) {
+
         channel.writeAndFlush(protocol);
 
+        return isAsync ? this.sendRequestAsync(protocol) :
+                isOneWay ? this.sendRequestOneway(protocol) : this.sendRequestSync(protocol);
+
+    }
+
+    //消费者向提供者发送数据，同步调用
+    private RpcFuture sendRequestSync(RpcProtocol<RpcRequest> protocol){
+        LOGGER.info("同步调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
         //取消while循环获取响应结果，使用RpcFuture来存放响应结果
         return this.getRpcFuture(protocol);
+    }
+    //消费者向提供者发送数据，异步调用
+    private RpcFuture sendRequestAsync(RpcProtocol<RpcRequest> protocol) {
+        LOGGER.info("异步调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
+
+        //异步调用将future存入上下文RpcContext里
+        RpcFuture future = this.getRpcFuture(protocol);
+        RpcContext.getContext().setFuture(future);
+
+        return null;
+    }
+    //消费者向提供者发送数据，单向调用
+    private RpcFuture sendRequestOneway(RpcProtocol<RpcRequest> protocol) {
+        LOGGER.info("单向调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
+
+        return null;
     }
 
     private RpcFuture getRpcFuture(RpcProtocol<RpcRequest> protocol) {
         //在这里创建好请求对应的future存入map里
         RpcFuture future = new RpcFuture(protocol);
-        pendingRpc.put(protocol.getHeader().getRequestId(),future);
+        pendingRpc.put(protocol.getHeader().getRequestId(), future);
 
         return future;
     }

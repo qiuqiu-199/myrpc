@@ -10,6 +10,7 @@ import io.qrpc.consumer.common.future.RpcFuture;
 import io.qrpc.consumer.common.handler.RpcConsumerHandler;
 import io.qrpc.consumer.common.initializer.RpcConsumerInitializer;
 import io.qrpc.protocol.RpcProtocol;
+import io.qrpc.protocol.header.RpcHeader;
 import io.qrpc.protocol.request.RpcRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,7 +74,9 @@ public class RpcConsumer {
             handlerMap.put(key, handler);
         }
 
-        return handler.sendRequst(protocol);
+        //根据请求选择的调用方式选择对应的调用方式（同步、异步和单向调用）
+        RpcRequest request = protocol.getBody();
+        return handler.sendRequst(protocol,request.isAsync(),request.isOneway());
     }
 
     //获取handler

@@ -2,6 +2,7 @@ package io.qrpc.test.consumer.handler;
 
 import com.alibaba.fastjson.JSONObject;
 import io.qrpc.consumer.common.RpcConsumer;
+import io.qrpc.consumer.common.context.RpcContext;
 import io.qrpc.consumer.common.future.RpcFuture;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.header.RpcHeaderFactory;
@@ -25,8 +26,15 @@ public class RpcConsumerHandlerTest {
 
         //接收结果
         RpcFuture future = consumer.sendRequest(getProtocol());
-        LOGGER.info("消费者模拟数据发送完毕！");
-        LOGGER.info("消费者返回的数据为：{}",future.get());
+//        LOGGER.info("消费者返回的数据为：{}",future.get());
+
+
+        //测试异步调用
+//        RpcFuture future_async = RpcContext.getContext().getFuture();
+//        LOGGER.info("异步调用结果：{}",future_async.get());
+
+        //测试单向调用
+        LOGGER.info("单向调用...");
 
         consumer.close();
     }
@@ -44,9 +52,8 @@ public class RpcConsumerHandlerTest {
         requst.setParameterTypes(new Class[]{String.class});
         requst.setParameters(new Object[]{"qiu"});
         requst.setAsync(false);
-        requst.setOneway(false);
+        requst.setOneway(true);
         protocol.setBody(requst);
-        LOGGER.info("消费者模拟的发送数据为：==》{}", JSONObject.toJSONString(protocol));
 
         return protocol;
     }
