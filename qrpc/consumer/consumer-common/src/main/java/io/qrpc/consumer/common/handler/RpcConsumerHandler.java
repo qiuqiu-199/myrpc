@@ -62,9 +62,10 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     //消费者接收提供者返回的数据时触发，对接收数据进行处理
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcProtocol<RpcResponse> protocol) {
+        LOGGER.info("");
         if (protocol == null) return;
 
-        LOGGER.info("消费者接收到响应数据：{}", JSONObject.toJSONString(protocol));
+        LOGGER.info("在Handler里消费者接收到响应数据：{}", JSONObject.toJSONString(protocol));
 
         long requestId = protocol.getHeader().getRequestId();
         RpcFuture rpcFuture = pendingRpc.remove(requestId);

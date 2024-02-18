@@ -1,6 +1,8 @@
 package io.qrpc.consumer.common.future;
 
 
+import io.qrpc.common.threadPool.ClientThreadPool;
+import io.qrpc.consumer.common.callback.AsyncRpcCallback;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.protocol.response.RpcResponse;
@@ -8,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.ResponseCache;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -26,10 +30,14 @@ import java.util.concurrent.locks.ReentrantLock;
 public class RpcFuture extends CompletableFuture<Object> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcFuture.class);
 
-    private Sync sync;
+    private Sync sync;  //基于AQS实现的内部类
     private RpcProtocol<RpcRequest> requestRpcProtocol;
     private RpcProtocol<RpcResponse> responseRpcProtocol;
     private long startTime;  //开始时间，创建RpcFuture时的时间
+
+    //3.5节新增回调接口的list和锁lock
+    private List<AsyncRpcCallback> pendingCallbacks = new ArrayList<>();//存放回调接口
+    private ReentrantLock lock = new ReentrantLock();//用于添加和执行回调方法时加锁和解锁
 
     private long responseTimeThreshold = 5000; //默认超时时间
 
@@ -86,6 +94,9 @@ public class RpcFuture extends CompletableFuture<Object> {
 
         sync.release(1);  //TODO 待进一步理解
 
+        //3.5节新增，唤醒线程时调用invokeCallback方法，以便消费者接收到数据后立即执行回调方法 TODO 待进一步理解
+        invokeCallback();
+
         //TODO 待进一步理解
         //疑：为什么在这里检查响应时间？
         //答：因为是消费者接收到响应结果的时候才要检查
@@ -95,6 +106,47 @@ public class RpcFuture extends CompletableFuture<Object> {
             LOGGER.warn("Service response time is too long. The current requestId is " + protocol.getHeader().getRequestId() + ". Response time = " + responseTime + " ms");
         }
 
+    }
+
+
+    //3.5增加回调相关方法
+    //添加回调方法，接收future的时候调用
+    public RpcFuture addCallback(AsyncRpcCallback callback){
+        LOGGER.info("添加回调方法中...");
+        lock.lock();
+        try{
+            if (isDone()){ //如果接收到了处理结果就执行回调方法，否则将回调方法加入list中等待
+                runCallbakc(callback);
+            }else{
+                this.pendingCallbacks.add(callback);
+            }
+        }finally {
+            lock.unlock();
+        }
+        return this;
+    }
+    //执行回调方法，用于异步执行回调方法
+    private void runCallbakc(final AsyncRpcCallback callback){
+        LOGGER.info("runCallback()执行回调方法中...");
+        final RpcResponse rpcResponseBody = this.responseRpcProtocol.getBody();
+        ClientThreadPool.submit(()->{
+            if (!rpcResponseBody.isError()){
+                callback.onSuccess(rpcResponseBody.getResult());
+            }else{
+                callback.onException(new RuntimeException("Response error!", new Throwable(rpcResponseBody.getError())));
+            }
+        });
+    }
+    //处理list中的callback
+    private void invokeCallback(){
+        lock.lock();
+        try {
+            for (final AsyncRpcCallback callback : pendingCallbacks){
+                runCallbakc(callback);
+            }
+        } finally {
+            lock.unlock();
+        }
     }
 
     //使用AQS自定义实现同步器  TODO 待进一步理解

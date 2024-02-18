@@ -6,6 +6,7 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.qrpc.common.threadPool.ClientThreadPool;
 import io.qrpc.consumer.common.future.RpcFuture;
 import io.qrpc.consumer.common.handler.RpcConsumerHandler;
 import io.qrpc.consumer.common.initializer.RpcConsumerInitializer;
@@ -98,5 +99,7 @@ public class RpcConsumer {
     //关闭消费者
     public void close(){
         eventLoopGroup.shutdownGracefully();
+        //3.5节新增，关闭线程池
+        ClientThreadPool.shutdowm();
     }
 }
