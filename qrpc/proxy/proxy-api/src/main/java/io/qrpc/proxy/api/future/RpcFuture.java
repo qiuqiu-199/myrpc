@@ -1,15 +1,14 @@
-package io.qrpc.consumer.common.future;
+package io.qrpc.proxy.api.future;
 
 
 import io.qrpc.common.threadPool.ClientThreadPool;
-import io.qrpc.consumer.common.callback.AsyncRpcCallback;
+import io.qrpc.proxy.api.callback.AsyncRpcCallback;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.protocol.response.RpcResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.ResponseCache;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -17,7 +16,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;
-import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -66,7 +64,8 @@ public class RpcFuture extends CompletableFuture<Object> {
     //超时阻塞获取响应协议对象中的结果
     @Override
     public Object get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
-        boolean success = sync.tryAcquireNanos(-1, unit.toNanos(responseTimeThreshold));
+        //17章之前下面这一行存在错误，responseTimeThreshold应修改为timeout
+        boolean success = sync.tryAcquireNanos(-1, unit.toNanos(timeout));
         if (success) {
             return this.responseRpcProtocol != null ? this.responseRpcProtocol.getBody().getResult() : null;
         } else {
@@ -90,12 +89,13 @@ public class RpcFuture extends CompletableFuture<Object> {
     // TODO 待进一步理解
     // 这个时候会唤醒阻塞的线程获取响应结果（冰河说的这里怎么理解？），13章
     public void done(RpcProtocol<RpcResponse> protocol) {
+        LOGGER.info("Rpcfuture#done...");
         this.responseRpcProtocol = protocol;
 
         sync.release(1);  //TODO 待进一步理解
 
         //3.5节新增，唤醒线程时调用invokeCallback方法，以便消费者接收到数据后立即执行回调方法 TODO 待进一步理解
-        invokeCallback();
+        invokeCallbacks();
 
         //TODO 待进一步理解
         //疑：为什么在这里检查响应时间？
@@ -105,14 +105,13 @@ public class RpcFuture extends CompletableFuture<Object> {
         if (responseTime > this.responseTimeThreshold) {
             LOGGER.warn("Service response time is too long. The current requestId is " + protocol.getHeader().getRequestId() + ". Response time = " + responseTime + " ms");
         }
-
     }
 
 
     //3.5增加回调相关方法
     //添加回调方法，接收future的时候调用
     public RpcFuture addCallback(AsyncRpcCallback callback){
-        LOGGER.info("添加回调方法中...");
+        LOGGER.info("RpcFuture#addCallback...");
         lock.lock();
         try{
             if (isDone()){ //如果接收到了处理结果就执行回调方法，否则将回调方法加入list中等待
@@ -127,7 +126,7 @@ public class RpcFuture extends CompletableFuture<Object> {
     }
     //执行回调方法，用于异步执行回调方法
     private void runCallbakc(final AsyncRpcCallback callback){
-        LOGGER.info("runCallback()执行回调方法中...");
+        LOGGER.info("RpcFuture#runCallback...");
         final RpcResponse rpcResponseBody = this.responseRpcProtocol.getBody();
         ClientThreadPool.submit(()->{
             if (!rpcResponseBody.isError()){
@@ -138,7 +137,7 @@ public class RpcFuture extends CompletableFuture<Object> {
         });
     }
     //处理list中的callback
-    private void invokeCallback(){
+    private void invokeCallbacks(){
         lock.lock();
         try {
             for (final AsyncRpcCallback callback : pendingCallbacks){
@@ -158,13 +157,13 @@ public class RpcFuture extends CompletableFuture<Object> {
         private final int pending = 0;
 
         //实现这两个方法来保证锁的独占性
-        @Override
-        protected boolean tryAcquire(int arg) {
+        protected boolean tryAcquire(int acquires) {
+            LOGGER.info("RpcFuture.Sync#tryAcquire...");
             return getState() == done;
         }
 
-        @Override
         protected boolean tryRelease(int arg) {
+            LOGGER.info("RpcFuture.Sync#tryRelease...");
             if (getState() == pending) {
                 if (compareAndSetState(pending, done)) {
                     return true;
@@ -174,6 +173,7 @@ public class RpcFuture extends CompletableFuture<Object> {
         }
 
         public boolean isDone() {
+            LOGGER.info("RpcFuture.Sync#isDone...");
             getState();  //TODO 待进一步理解
             return getState() == done;
         }

@@ -7,11 +7,11 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.qrpc.common.threadPool.ClientThreadPool;
-import io.qrpc.consumer.common.future.RpcFuture;
+import io.qrpc.proxy.api.consumer.Consumer;
+import io.qrpc.proxy.api.future.RpcFuture;
 import io.qrpc.consumer.common.handler.RpcConsumerHandler;
 import io.qrpc.consumer.common.initializer.RpcConsumerInitializer;
 import io.qrpc.protocol.RpcProtocol;
-import io.qrpc.protocol.header.RpcHeader;
 import io.qrpc.protocol.request.RpcRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,7 +26,8 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Description: 消费者启动端
  */
 
-public class RpcConsumer {
+//实现Consumer接口的sendRequest方法
+public class RpcConsumer implements Consumer {
     private final static Logger LOGGER = LoggerFactory.getLogger(RpcConsumer.class);
 
     private final Bootstrap bootstrap;
@@ -57,7 +58,9 @@ public class RpcConsumer {
 
 
     //发送请求，后面由代理类调用
+    @Override
     public RpcFuture sendRequest(RpcProtocol<RpcRequest> protocol) throws InterruptedException {
+        LOGGER.info("RpcConsumer#sendRequest...");
         // TODO 暂时写死，后续引入注册中心后更新
         String ip = "127.0.0.1";
         int port = 27880;
@@ -65,7 +68,7 @@ public class RpcConsumer {
         String key = String.join("_", ip, String.valueOf(port));
         RpcConsumerHandler handler = handlerMap.get(key);
 
-        //
+        //TODO 待进一步理解
         if (handler == null) {
             handler = getRpcConsumerHandler(ip, port);
             handlerMap.put(key, handler);
@@ -82,6 +85,7 @@ public class RpcConsumer {
 
     //获取handler
     private RpcConsumerHandler getRpcConsumerHandler(String ip, int port) throws InterruptedException {
+        LOGGER.info("RpcConsumer#getRpcConsumerHandler连接服务端中...");
         ChannelFuture future;
         future = bootstrap.connect(ip, port).sync();
         future.addListener((ChannelFutureListener) listener -> {

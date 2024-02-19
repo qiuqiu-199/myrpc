@@ -13,7 +13,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>test-consumer-codec</module>
+        <module>test-consumer-native</module>
     </modules>
+
+
 
 
 </project>

@@ -1,6 +1,6 @@
 package io.qrpc.consumer.common.context;
 
-import io.qrpc.consumer.common.future.RpcFuture;
+import io.qrpc.proxy.api.future.RpcFuture;
 
 /**
  * @ClassName: RpcContext

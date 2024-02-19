@@ -7,9 +7,8 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.qrpc.consumer.common.context.RpcContext;
-import io.qrpc.consumer.common.future.RpcFuture;
+import io.qrpc.proxy.api.future.RpcFuture;
 import io.qrpc.protocol.RpcProtocol;
-import io.qrpc.protocol.header.RpcHeader;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.protocol.response.RpcResponse;
 import org.slf4j.Logger;
@@ -62,7 +61,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     //消费者接收提供者返回的数据时触发，对接收数据进行处理
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcProtocol<RpcResponse> protocol) {
-        LOGGER.info("");
+        LOGGER.info("RpcConsumerHandler#channelRead0...");
         if (protocol == null) return;
 
         LOGGER.info("在Handler里消费者接收到响应数据：{}", JSONObject.toJSONString(protocol));
@@ -72,7 +71,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
 //        消费者接收到来自提供者的存入结果存入future中
         if (rpcFuture != null) {
             rpcFuture.done(protocol);
-            LOGGER.info("消费者接收到来自提供者的存入结果存入rpc中");
+            LOGGER.info("消费者接收到来自提供者的结果存入future中");
         }
     }
 
@@ -80,18 +79,19 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     //消费者向提供者发送数据
     public RpcFuture sendRequst(RpcProtocol<RpcRequest> protocol,boolean isAsync, boolean isOneWay) {
 
-        channel.writeAndFlush(protocol);
+//        channel.writeAndFlush(protocol);  注：3.4-3.5bug根源，见记录
 
         return isAsync ? this.sendRequestAsync(protocol) :
                 isOneWay ? this.sendRequestOneway(protocol) : this.sendRequestSync(protocol);
-
     }
 
     //消费者向提供者发送数据，同步调用
     private RpcFuture sendRequestSync(RpcProtocol<RpcRequest> protocol){
         LOGGER.info("同步调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
         //取消while循环获取响应结果，使用RpcFuture来存放响应结果
-        return this.getRpcFuture(protocol);
+        RpcFuture rpcFuture = this.getRpcFuture(protocol);
+        channel.writeAndFlush(protocol);
+        return rpcFuture;
     }
     //消费者向提供者发送数据，异步调用
     private RpcFuture sendRequestAsync(RpcProtocol<RpcRequest> protocol) {
@@ -100,13 +100,14 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
         //异步调用将future存入上下文RpcContext里
         RpcFuture future = this.getRpcFuture(protocol);
         RpcContext.getContext().setFuture(future);
+        channel.writeAndFlush(protocol);
 
         return null;
     }
     //消费者向提供者发送数据，单向调用
     private RpcFuture sendRequestOneway(RpcProtocol<RpcRequest> protocol) {
         LOGGER.info("单向调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
-
+        channel.writeAndFlush(protocol);
         return null;
     }
 

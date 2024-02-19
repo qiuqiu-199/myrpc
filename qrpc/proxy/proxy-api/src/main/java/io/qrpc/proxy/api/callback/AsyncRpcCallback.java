@@ -1,4 +1,4 @@
-package io.qrpc.consumer.common.callback;
+package io.qrpc.proxy.api.callback;
 
 /**
  * @InterfaceName: AsyncRpcCallback

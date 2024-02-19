@@ -1,10 +1,8 @@
 package io.qrpc.test.consumer.handler;
 
-import com.alibaba.fastjson.JSONObject;
 import io.qrpc.consumer.common.RpcConsumer;
-import io.qrpc.consumer.common.callback.AsyncRpcCallback;
-import io.qrpc.consumer.common.context.RpcContext;
-import io.qrpc.consumer.common.future.RpcFuture;
+import io.qrpc.proxy.api.callback.AsyncRpcCallback;
+import io.qrpc.proxy.api.future.RpcFuture;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.header.RpcHeaderFactory;
 import io.qrpc.protocol.request.RpcRequest;
@@ -54,7 +52,6 @@ public class RpcConsumerHandlerTest {
 
     private static RpcProtocol<RpcRequest> getProtocol() {
         LOGGER.info("=============模拟消费者发送数据：");
-
         RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
         protocol.setHeader(RpcHeaderFactory.getRequestHeader("jdk"));
         RpcRequest requst = new RpcRequest();

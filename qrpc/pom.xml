@@ -18,6 +18,7 @@
         <module>codec</module>
         <module>serialization</module>
         <module>consumer</module>
+        <module>proxy</module>
     </modules>
 
     <properties>
