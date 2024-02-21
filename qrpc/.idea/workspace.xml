@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7e1ec8a4-5749-49d8-a54f-94278c8c64e7" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/consumer/consumer-common/src/main/java/io/qrpc/consumer/common/handler/RpcConsumerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/consumer/consumer-common/src/main/java/io/qrpc/consumer/common/handler/RpcConsumerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/consumer/consumer-native/src/main/java/io/qrpc/consumer/RpcClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/consumer/consumer-native/src/main/java/io/qrpc/consumer/RpcClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/object/ObjectProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/object/ObjectProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/proxy/proxy-jdk/src/main/java/io/qrpc/proxy/jdk/JdkProxyFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/proxy/proxy-jdk/src/main/java/io/qrpc/proxy/jdk/JdkProxyFactory.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -45,19 +46,31 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/async/IAsyncObjectProxy.java">
+        <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/config/ProxyConfig.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" selection-start-line="11" selection-end-line="21" selection-end-column="1" />
+            <state relative-caret-position="425">
+              <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/object/ObjectProxy.java">
+        <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/ProxyFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="590">
-              <caret line="160" column="31" lean-forward="true" selection-start-line="160" selection-start-column="31" selection-end-line="160" selection-end-column="31" />
+            <state relative-caret-position="238">
+              <caret line="14" column="32" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/BaseProxyFactory.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="343">
+              <caret line="30" column="18" selection-end-line="36" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -66,10 +79,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/consumer/consumer-native/src/main/java/io/qrpc/consumer/RpcClient.java">
+        <entry file="file://$PROJECT_DIR$/proxy/proxy-jdk/src/main/java/io/qrpc/proxy/jdk/JdkProxyFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="50" column="52" lean-forward="true" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
+            <state relative-caret-position="391">
+              <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,10 +91,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java">
+        <entry file="file://$PROJECT_DIR$/consumer/consumer-native/src/main/java/io/qrpc/consumer/RpcClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
+            <state relative-caret-position="309">
+              <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -95,8 +108,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="AnnotationType" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -115,11 +128,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/serialization/serialization-jdk/src/main/java/io/qrpc/serialization/jdk/JdkSerialization.java" />
-        <option value="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcCodec.java" />
-        <option value="$PROJECT_DIR$/codec/pom.xml" />
         <option value="$PROJECT_DIR$/common/src/main/java/io/qrpc/common/exception/SerializerException.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/test/test-consumer/test-consumer-codec/src/main/java/io/qrpc/test/consumer/codec/handler/RpcConsumerHandler.java" />
         <option value="$PROJECT_DIR$/test/test-consumer/test-consumer-codec/src/main/java/io/qrpc/test/consumer/codec/init/RpcTestConsumerInitializer.java" />
         <option value="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcEncoder.java" />
@@ -134,7 +143,6 @@
         <option value="$PROJECT_DIR$/test/test-provider/pom.xml" />
         <option value="$PROJECT_DIR$/test/test-consumer/test-consumer-codec/src/main/java/io/qrpc/test/consumer/codec/handler/RpcTestConsumerHandler.java" />
         <option value="$PROJECT_DIR$/test/test-consumer/test-consumer-codec/src/main/java/io/qrpc/test/consumer/codec/RpcTestConsumer.java" />
-        <option value="$PROJECT_DIR$/test/test-provider/src/main/java/io/qrpc/test/provider/service/impl/ProviderDemoServiceImpl.java" />
         <option value="$PROJECT_DIR$/provider/pom.xml" />
         <option value="$PROJECT_DIR$/constants/src/main/java/io/qrpc/constants/RpcConstants.java" />
         <option value="$PROJECT_DIR$/provider/provider-common/pom.xml" />
@@ -159,12 +167,17 @@
         <option value="$PROJECT_DIR$/test/test-provider/src/main/resources/log4j.properties" />
         <option value="$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/resources/log4j.properties" />
         <option value="$PROJECT_DIR$/test/test-consumer-handler/src/main/java/io/qrpc/test/consumer/handler/RpcConsumerHandlerTest.java" />
-        <option value="$PROJECT_DIR$/proxy/proxy-jdk/src/main/java/io/qrpc/proxy/jdk/JdkProxyFactory.java" />
         <option value="$PROJECT_DIR$/consumer/consumer-common/src/main/java/io/qrpc/consumer/common/RpcConsumer.java" />
         <option value="$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java" />
         <option value="$PROJECT_DIR$/consumer/consumer-common/src/main/java/io/qrpc/consumer/common/handler/RpcConsumerHandler.java" />
         <option value="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/async/IAsyncObjectProxy.java" />
+        <option value="$PROJECT_DIR$/test/test-provider/src/main/java/io/qrpc/test/provider/service/impl/ProviderDemoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/ProxyFactory.java" />
+        <option value="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/BaseProxyFactory.java" />
         <option value="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/object/ObjectProxy.java" />
+        <option value="$PROJECT_DIR$/proxy/proxy-jdk/src/main/java/io/qrpc/proxy/jdk/JdkProxyFactory.java" />
+        <option value="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/config/ProxyConfig.java" />
         <option value="$PROJECT_DIR$/consumer/consumer-native/src/main/java/io/qrpc/consumer/RpcClient.java" />
       </list>
     </option>
@@ -199,7 +212,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="979" />
@@ -416,6 +429,17 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="proxy" type="462c0819:PsiDirectoryNode" />
+              <item name="proxy-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="consumer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -484,6 +508,46 @@
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
@@ -625,6 +689,17 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="provider" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-provider" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="provider" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
@@ -782,14 +857,11 @@
       <workItem from="1708133465429" duration="25149000" />
       <workItem from="1708263745722" duration="403000" />
       <workItem from="1708306285945" duration="3132000" />
-      <workItem from="1708479789294" duration="13658000" />
+      <workItem from="1708479789294" duration="18443000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.18 at 17h 52m 53s.xml">
-      <configuration name="RpcSingleServerTest.startRpcProvider" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.18 at 18h 01m 06s.xml">
       <configuration name="RpcSingleServerTest.startRpcProvider" configurationId="JUnit" />
     </history-entry>
@@ -817,9 +889,12 @@
     <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.21 at 11h 17m 40s.xml">
       <configuration name="RpcSingleServerTest.startRpcProvider" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.21 at 17h 35m 38s.xml">
+      <configuration name="RpcSingleServerTest.startRpcProvider" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="130799000" />
+    <option name="totallyTimeSpent" value="135584000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -841,7 +916,7 @@
       <window_info id="Favorites" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32904148" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.058073655" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.15014164" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4490085" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -942,23 +1017,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/constants/src/main/java/io/qrpc/constants/RpcConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="4" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="16" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/provider/provider-common/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/consumer/consumer-common/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/test-consumer/test-consumer-codec/src/main/java/io/qrpc/test/consumer/codec/init/RpcTestConsumerInitializer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -1121,11 +1179,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-595" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
@@ -1142,23 +1195,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test-consumer/test-consumer-codec/pom.xml">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test-provider/src/main/java/io/qrpc/test/provider/service/impl/ProviderDemoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="106">
-          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test-api/src/main/java/io/qrpc/test/api/DemoService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-        </state>
-      </provider>
     </entry>
     <entry file="jar://D:/JDK/src.zip!/java/util/concurrent/locks/AbstractQueuedSynchronizer.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -1272,16 +1308,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/proxy/proxy-jdk/src/main/java/io/qrpc/proxy/jdk/JdkProxyFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="65">
-          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/consumer/consumer-common/src/main/java/io/qrpc/consumer/common/initializer/RpcConsumerInitializer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -1345,18 +1371,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="29" column="42" selection-start-line="29" selection-start-column="42" selection-end-line="29" selection-end-column="42" />
+        <state relative-caret-position="255">
+          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-api/src/main/java/io/qrpc/test/api/DemoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-provider/src/main/java/io/qrpc/test/provider/service/impl/ProviderDemoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="121" column="28" selection-start-line="121" selection-start-column="28" selection-end-line="121" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/object/ObjectProxy.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="160" column="31" lean-forward="true" selection-start-line="160" selection-start-column="31" selection-end-line="160" selection-end-column="31" />
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="method#createRequest#0;class#ObjectProxy#0" />
+            <element signature="method#getClassType#0;class#ObjectProxy#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/config/ProxyConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1365,8 +1427,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/consumer/consumer-native/src/main/java/io/qrpc/consumer/RpcClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="50" column="52" lean-forward="true" selection-start-line="50" selection-start-column="52" selection-end-line="50" selection-end-column="52" />
+        <state relative-caret-position="309">
+          <caret line="51" column="39" lean-forward="true" selection-start-line="51" selection-start-column="39" selection-end-line="51" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/ProxyFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="32" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/BaseProxyFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="30" column="18" selection-end-line="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/proxy-jdk/src/main/java/io/qrpc/proxy/jdk/JdkProxyFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="28" column="24" lean-forward="true" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

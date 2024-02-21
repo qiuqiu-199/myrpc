@@ -1,5 +1,7 @@
 package io.qrpc.proxy.jdk;
 
+import io.qrpc.proxy.api.BaseProxyFactory;
+import io.qrpc.proxy.api.ProxyFactory;
 import io.qrpc.proxy.api.consumer.Consumer;
 import io.qrpc.proxy.api.object.ObjectProxy;
 import org.slf4j.Logger;
@@ -11,36 +13,25 @@ import java.lang.reflect.Proxy;
  * @ClassName: JdkProxyFactory
  * @Author: qiuzhiq
  * @Date: 2024/2/18 17:16
- * @Description:
+ * @Description: 20章动态代理扩展优化后的简洁版本
  */
 
-public class JdkProxyFactory {
+public class JdkProxyFactory<T> extends BaseProxyFactory<T> implements ProxyFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger(JdkProxyFactory.class);
 
-    private String serviceVersion;
-    private String serviceGroup;
-    private String seriliazationType;
-    private long timeout;
-    private Consumer consumer;//消费者启动端
-    private boolean async;
-    private boolean oneway;
-
-    public JdkProxyFactory(String serviceVersion, String serviceGroup, String seriliazationType, long timeout, Consumer consumer, boolean async, boolean oneway) {
-        this.serviceVersion = serviceVersion;
-        this.serviceGroup = serviceGroup;
-        this.seriliazationType = seriliazationType;
-        this.timeout = timeout;
-        this.consumer = consumer;
-        this.async = async;
-        this.oneway = oneway;
-    }
-
+    /**
+     * @author: qiu
+     * @date: 2024/2/21 23:21
+     * @param: null
+     * @return: null
+     * @description: 20章优化，继承BaseProxyFactory并实现ProxyFactory#getProxy方法
+     */
     public <T> T getProxy(Class<T> clazz){
         LOGGER.info("JdkProxyFactory#getProxy...");
         return (T) Proxy.newProxyInstance(
                 clazz.getClassLoader(),
-                new Class[]{clazz}, //new Class<?>[]{clazz}
-                new ObjectProxy<T>(clazz,serviceVersion,serviceGroup,timeout,consumer,seriliazationType,async,oneway)
+                new Class<?>[]{clazz}, //new Class[]{clazz}区别？
+                proxy //20章直接取用父类BaseProxyFactory的成员变量
                 );
     }
 }

@@ -12,13 +12,12 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
 
 /**
  * @ClassName: ObjectProxy
  * @Author: qiuzhiq
  * @Date: 2024/2/18 15:46
- * @Description:
+ * @Description: 18章新增
  */
 
 public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
