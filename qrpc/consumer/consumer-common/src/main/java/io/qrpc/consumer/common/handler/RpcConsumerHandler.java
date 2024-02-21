@@ -36,17 +36,20 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     private Map<Long, RpcFuture> pendingRpc = new ConcurrentHashMap<>();
 
     public Channel getcHannel() {
+        LOGGER.info("RpcConsumerHandler#getcHannel...");
         return channel;
 
     }
 
     public SocketAddress getRemotePeer() {
+        LOGGER.info("RpcConsumerHandler#getRemotePeer...");
         return remotePeer;
     }
 
     //注册连接时触发，获取channel
     @Override
     public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        LOGGER.info("RpcConsumerHandler#channelRegistered...");
         super.channelRegistered(ctx);
         this.channel = ctx.channel();
     }
@@ -54,6 +57,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     //激活连接时触发，获取SocketAddress
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        LOGGER.info("RpcConsumerHandler#channelActive...");
         super.channelActive(ctx);
         this.remotePeer = this.channel.remoteAddress();
     }
@@ -71,13 +75,14 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
 //        消费者接收到来自提供者的存入结果存入future中
         if (rpcFuture != null) {
             rpcFuture.done(protocol);
-            LOGGER.info("消费者接收到来自提供者的结果存入future中");
+            LOGGER.info("RpcConsumerHandler#channelRead0...消费者接收到来自提供者的结果存入future中");
         }
     }
 
 
     //消费者向提供者发送数据
     public RpcFuture sendRequst(RpcProtocol<RpcRequest> protocol,boolean isAsync, boolean isOneWay) {
+        LOGGER.info("RpcConsumerHandler#sendRequst...");
 
 //        channel.writeAndFlush(protocol);  注：3.4-3.5bug根源，见记录
 
@@ -87,7 +92,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
     //消费者向提供者发送数据，同步调用
     private RpcFuture sendRequestSync(RpcProtocol<RpcRequest> protocol){
-        LOGGER.info("同步调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
+        LOGGER.info("RpcConsumerHandler#sendRequstSync同步调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
         //取消while循环获取响应结果，使用RpcFuture来存放响应结果
         RpcFuture rpcFuture = this.getRpcFuture(protocol);
         channel.writeAndFlush(protocol);
@@ -95,7 +100,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     }
     //消费者向提供者发送数据，异步调用
     private RpcFuture sendRequestAsync(RpcProtocol<RpcRequest> protocol) {
-        LOGGER.info("异步调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
+        LOGGER.info("RpcConsumerHandler#sendRequstAsync异步调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
 
         //异步调用将future存入上下文RpcContext里
         RpcFuture future = this.getRpcFuture(protocol);
@@ -106,12 +111,13 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     }
     //消费者向提供者发送数据，单向调用
     private RpcFuture sendRequestOneway(RpcProtocol<RpcRequest> protocol) {
-        LOGGER.info("单向调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
+        LOGGER.info("RpcConsumerHandler#sendRequstOneway单向调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
         channel.writeAndFlush(protocol);
         return null;
     }
 
     private RpcFuture getRpcFuture(RpcProtocol<RpcRequest> protocol) {
+        LOGGER.info("RpcConsumerHandler#getRpcFuture...");
         //在这里创建好请求对应的future存入map里
         RpcFuture future = new RpcFuture(protocol);
         pendingRpc.put(protocol.getHeader().getRequestId(), future);
@@ -122,6 +128,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
     //TODO 作用以及为什么这么写不理解
     public void close() {
+        LOGGER.info("RpcConsumerHandler#close...");
         channel.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
     }
 }

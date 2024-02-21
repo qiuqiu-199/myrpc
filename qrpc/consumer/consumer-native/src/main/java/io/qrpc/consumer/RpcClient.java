@@ -1,6 +1,9 @@
 package io.qrpc.consumer;
 
+import com.sun.org.apache.bcel.internal.generic.LOOKUPSWITCH;
 import io.qrpc.consumer.common.RpcConsumer;
+import io.qrpc.proxy.api.async.IAsyncObjectProxy;
+import io.qrpc.proxy.api.object.ObjectProxy;
 import io.qrpc.proxy.jdk.JdkProxyFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +41,20 @@ public class RpcClient {
         return proxyFactory.getProxy(interfaceClass);
     }
 
+    /**
+     * @author: qiu
+     * @date: 2024/2/21 16:42
+     * @param: interfaceClass
+     * @return: io.qrpc.proxy.api.async.IAsyncObjectProxy
+     * @description: 19章，构建异步化调用对象
+     */
+    public <T> IAsyncObjectProxy createAsync(Class<T> interfaceClass){
+        LOGGER.info("RpcClient#createAsync...");
+        return new ObjectProxy<T>(interfaceClass,serviceVersion,serviceGroup,timeout,RpcConsumer.getInstance(),seriliazationType,async,oneway);
+    }
+
     public void shutdown(){
+        LOGGER.info("RpcClient#shutdown...");
         RpcConsumer.getInstance().close();
     }
 }
