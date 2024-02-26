@@ -1,6 +1,8 @@
 package io.qrpc.registry.zookeeper;
 
 import io.qrpc.common.helper.RpcServiceHelper;
+import io.qrpc.loadBalancer.api.ServiceLoadBalancer;
+import io.qrpc.loadBalancer.random.RandomLoadBalancer;
 import io.qrpc.protocol.meta.ServiceMeta;
 import io.qrpc.registry.api.RegistryService;
 import io.qrpc.registry.api.config.RegistryConfig;
@@ -15,9 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 /**
  * @ClassName: ZookeeperRegistryService
@@ -36,6 +36,9 @@ public class ZookeeperRegistryService implements RegistryService {
     public static final String ZK_BASE_PATH = "/q_rpc";
     //服务注册与发现的ServiceDiscovery实例，用来在Zookeeper中进行服务注册和发现事宜
     private ServiceDiscovery<ServiceMeta> serviceDiscovery;
+
+    //负载均衡接口
+    private ServiceLoadBalancer<ServiceInstance<ServiceMeta>> serviceLoadBalancer;
 
     /**
      * @author: qiu
@@ -64,6 +67,9 @@ public class ZookeeperRegistryService implements RegistryService {
                 .basePath(ZK_BASE_PATH)
                 .build();
         this.serviceDiscovery.start();
+
+        //24章新增，后续SPI扩展，这里先直接new
+        this.serviceLoadBalancer = new RandomLoadBalancer<>();
     }
 
     /**
@@ -122,6 +128,7 @@ public class ZookeeperRegistryService implements RegistryService {
      * @param: invokerHashcode
      * @return: io.qrpc.protocol.meta.ServiceMeta
      * @description: 21章新增。根据服务名和invokerHashcode从Zookeeper里获取服务的元数据，invokerHashcode目前没用上，预留给后续的负载均衡策略扩展。
+     * 24章，使用负载均衡实现类来选择其中一个服务
      */
     @Override
     public ServiceMeta discovery(String serviceKey, int invokerHashcode) throws Exception {
@@ -130,25 +137,10 @@ public class ZookeeperRegistryService implements RegistryService {
         //接着将ServiceInstance中的服务员数据返回
         Collection<ServiceInstance<ServiceMeta>> serviceInstances = serviceDiscovery.queryForInstances(serviceKey);
         //目前使用随机策略选择ServiceInstance
-        ServiceInstance<ServiceMeta> instance = this.selectOneServiceInstance((List<ServiceInstance<ServiceMeta>>) serviceInstances);
+        ServiceInstance<ServiceMeta> instance = this.serviceLoadBalancer.select((List<ServiceInstance<ServiceMeta>>)serviceInstances,invokerHashcode);
         if (instance != null) return instance.getPayload();
 
         return null;
-    }
-
-    /**
-     * @author: qiu
-     * @date: 2024/2/22 17:46
-     * @param: serviceInstances
-     * @return: org.apache.curator.x.discovery.ServiceInstance<io.qrpc.protocol.meta.ServiceMeta>
-     * @description: 21章新增，基于随机策略选择一个服务
-     */
-    private ServiceInstance<ServiceMeta> selectOneServiceInstance(List<ServiceInstance<ServiceMeta>> serviceInstances) {
-        if (serviceInstances == null || serviceInstances.isEmpty()) return null;
-
-        Random random = new Random();
-        int index = random.nextInt(serviceInstances.size());
-        return serviceInstances.get(index);
     }
 
     /**

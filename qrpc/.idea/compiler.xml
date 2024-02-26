@@ -13,6 +13,8 @@
         <module name="constants" />
         <module name="consumer-common" />
         <module name="consumer-native" />
+        <module name="loadBalancer-api" />
+        <module name="loadBalancer-random" />
         <module name="protocol" />
         <module name="provider-common" />
         <module name="provider-native" />

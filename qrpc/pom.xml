@@ -20,6 +20,7 @@
         <module>consumer</module>
         <module>proxy</module>
         <module>registry</module>
+        <module>loadBalancer</module>
     </modules>
 
     <properties>
