@@ -1,8 +1,10 @@
 package io.qrpc.proxy.api.config;
 
 import io.qrpc.proxy.api.consumer.Consumer;
+import io.qrpc.registry.api.RegistryService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -14,6 +16,7 @@ import java.io.Serializable;
  */
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ProxyConfig<T> implements Serializable {
     private static final long serialVersionUID = 2447008678604797411L;
     private Class<T> clazz;
@@ -24,4 +27,5 @@ public class ProxyConfig<T> implements Serializable {
     private boolean async;
     private boolean oneway;
     private Consumer consumer;
+    private RegistryService registryService;
 }

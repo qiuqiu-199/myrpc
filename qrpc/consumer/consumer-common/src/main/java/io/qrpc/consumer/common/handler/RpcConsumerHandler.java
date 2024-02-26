@@ -75,7 +75,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
 //        消费者接收到来自提供者的存入结果存入future中
         if (rpcFuture != null) {
             rpcFuture.done(protocol);
-            LOGGER.info("RpcConsumerHandler#channelRead0...消费者接收到来自提供者的结果存入future中");
+            LOGGER.info("RpcConsumerHandler#channelRead0消费者接收到来自提供者的结果存入future中...");
         }
     }
 

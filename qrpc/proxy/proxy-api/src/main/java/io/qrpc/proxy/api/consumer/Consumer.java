@@ -3,6 +3,7 @@ package io.qrpc.proxy.api.consumer;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.proxy.api.future.RpcFuture;
+import io.qrpc.registry.api.RegistryService;
 
 /**
  * @InterfaceName: Consumer
@@ -12,5 +13,5 @@ import io.qrpc.proxy.api.future.RpcFuture;
  */
 
 public interface Consumer {
-    RpcFuture sendRequest(RpcProtocol<RpcRequest> protocol) throws Exception;
+    RpcFuture sendRequest(RpcProtocol<RpcRequest> protocol, RegistryService registryService) throws Exception;
 }

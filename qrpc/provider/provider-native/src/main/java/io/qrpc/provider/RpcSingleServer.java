@@ -3,7 +3,7 @@ package io.qrpc.provider;
 import io.qrpc.provider.common.server.base.BaseServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import io.qrpc.common.scanner.service.RpcServiceScanner;
+import io.qrpc.provider.common.scanner.RpcServiceScanner;
 
 /**
  * @ClassName: RpcSingleServer
@@ -15,12 +15,12 @@ import io.qrpc.common.scanner.service.RpcServiceScanner;
 public class RpcSingleServer extends BaseServer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcSingleServer.class);
 
-    public RpcSingleServer(String serverAddress, String scanPackage,String reflectType) {
+    public RpcSingleServer(String serverAddress, String scanPackage,String registryAddress,String registryType,String reflectType) {
         //TODO 这里必须调用父类构造方法否则报错，原因不明
-        super(serverAddress,reflectType);
+        super(serverAddress,registryAddress,registryType,reflectType);
 
         try {
-            this.handlerMap = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService(scanPackage);
+            this.handlerMap = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService(scanPackage,this.host,this.port,this.registryService);
         } catch (Exception e) {
             LOGGER.error("RPC Server init error",e);
         }

@@ -14,10 +14,12 @@
         <module name="consumer-common" />
         <module name="consumer-native" />
         <module name="protocol" />
+        <module name="provider-common" />
         <module name="provider-native" />
-        <module name="providercommon" />
         <module name="proxy-api" />
         <module name="proxy-jdk" />
+        <module name="registry-api" />
+        <module name="registry-zookeeper" />
         <module name="serialization-api" />
         <module name="serialization-jdk" />
         <module name="test-api" />
@@ -25,6 +27,7 @@
         <module name="test-consumer-handler" />
         <module name="test-consumer-native" />
         <module name="test-provider" />
+        <module name="test-registry" />
         <module name="test-scanner" />
         <module name="testscanner" />
       </profile>

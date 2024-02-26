@@ -27,11 +27,11 @@ public class JdkProxyFactory<T> extends BaseProxyFactory<T> implements ProxyFact
      * @description: 20章优化，继承BaseProxyFactory并实现ProxyFactory#getProxy方法
      */
     public <T> T getProxy(Class<T> clazz){
-        LOGGER.info("JdkProxyFactory#getProxy...");
+        LOGGER.info("JdkProxyFactory#getProxy JDK代理工厂生成代理对象...");
         return (T) Proxy.newProxyInstance(
                 clazz.getClassLoader(),
                 new Class<?>[]{clazz}, //new Class[]{clazz}区别？
-                proxy //20章直接取用父类BaseProxyFactory的成员变量
+                proxy //20章直接取用父类BaseProxyFactory的成员变量，该变量实现了InvocationHandler
                 );
     }
 }

@@ -6,13 +6,17 @@ import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.qrpc.common.helper.RpcServiceHelper;
 import io.qrpc.common.threadPool.ClientThreadPool;
+import io.qrpc.consumer.common.helper.RpcConsumerHandlerHelper;
+import io.qrpc.protocol.meta.ServiceMeta;
 import io.qrpc.proxy.api.consumer.Consumer;
 import io.qrpc.proxy.api.future.RpcFuture;
 import io.qrpc.consumer.common.handler.RpcConsumerHandler;
 import io.qrpc.consumer.common.initializer.RpcConsumerInitializer;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.request.RpcRequest;
+import io.qrpc.registry.api.RegistryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,41 +61,54 @@ public class RpcConsumer implements Consumer {
     }
 
 
-    //发送请求，后面由代理类调用
+    /**
+     * @author: qiu
+     * @date: 2024/2/25 13:46
+     * @param: null
+     * @return: null
+     * @description: 发送请求，后面由代理类调用
+     * 23章修改，引入注册中心，通过服务与发现接口根据请求参数获取服务元数据，根据服务元数据获取handler来发送请求
+     */
     @Override
-    public RpcFuture sendRequest(RpcProtocol<RpcRequest> protocol) throws InterruptedException {
-        LOGGER.info("RpcConsumer#sendRequest...");
-        // TODO 暂时写死，后续引入注册中心后更新
-        String ip = "127.0.0.1";
-        int port = 27880;
-
-        String key = String.join("_", ip, String.valueOf(port));
-        RpcConsumerHandler handler = handlerMap.get(key);
-
-        //TODO 待进一步理解
-        if (handler == null) {
-            handler = getRpcConsumerHandler(ip, port);
-            handlerMap.put(key, handler);
-        } else if (!handler.getcHannel().isActive()) {  //TODO 缓存中存在但是不活跃？？
-            handler.close();
-            handler = getRpcConsumerHandler(ip, port);
-            handlerMap.put(key, handler);
-        }
-
-        //根据请求选择的调用方式选择对应的调用方式（同步、异步和单向调用）
+    public RpcFuture sendRequest(RpcProtocol<RpcRequest> protocol, RegistryService registryService) throws Exception {
+        LOGGER.info("RpcConsumer#sendRequest消费者端发送请求...");
         RpcRequest request = protocol.getBody();
-        return handler.sendRequst(protocol,request.isAsync(),request.isOneway());
+        //获取请求要调用的远程方法所在类、版本、分组
+        String serviceKey = RpcServiceHelper.buildServiceKey(request.getClassName(), request.getVersion(), request.getGroup());
+        Object[] parameters = request.getParameters();
+
+        //invokerHashcode使用第一个参数的哈希值，没有参数就用serviceKey的哈希值
+        int invokerHashcode = parameters == null ? serviceKey.hashCode() : parameters[0].hashCode();
+
+        //根据serviceKey和invokerHashcode通过接口获取服务元数据serviceMeta
+        ServiceMeta serviceMeta = registryService.discovery(serviceKey, invokerHashcode);
+
+        //根据serviceMeta获取对应的ConsumerHandler，通过Handler发送请求并接收结果
+        if (serviceMeta != null) {
+            RpcConsumerHandler consumerHandler = RpcConsumerHandlerHelper.get(serviceMeta);
+            if (consumerHandler == null) {
+                consumerHandler = getRpcConsumerHandler(serviceMeta.getRegistryAddr(), serviceMeta.getPort());
+                RpcConsumerHandlerHelper.put(serviceMeta, consumerHandler);
+            } else if (!consumerHandler.getcHannel().isActive()) { //缓存中存在但是不活跃，TODO 待进一步理解
+                consumerHandler.close();
+                consumerHandler = getRpcConsumerHandler(serviceMeta.getRegistryAddr(), serviceMeta.getPort());
+                RpcConsumerHandlerHelper.put(serviceMeta, consumerHandler);
+            }
+            //根据请求选择的调用方式选择对应的调用方式（同步、异步和单向调用）
+            return consumerHandler.sendRequst(protocol, request.isAsync(), request.isOneway());
+        }
+        return null;
     }
 
-    //获取handler
+    //获取handler，与Netty服务端建立连接
     private RpcConsumerHandler getRpcConsumerHandler(String ip, int port) throws InterruptedException {
-        LOGGER.info("RpcConsumer#getRpcConsumerHandler连接服务端中...");
+        LOGGER.info("RpcConsumer#getRpcConsumerHandler连接Netty服务端中...");
         ChannelFuture future;
         future = bootstrap.connect(ip, port).sync();
         future.addListener((ChannelFutureListener) listener -> {
-            if (future.isSuccess()) LOGGER.info("连接服务端{}:{}成功！", ip, port);
+            if (future.isSuccess()) LOGGER.info("连接Netty服务端{}:{}成功！", ip, port);
             else {
-                LOGGER.error("连接服务端{}:{}失败", ip, port);
+                LOGGER.error("连接Netty服务端{}:{}失败", ip, port);
                 future.cause().printStackTrace();
                 eventLoopGroup.shutdownGracefully();
             }
@@ -101,9 +118,19 @@ public class RpcConsumer implements Consumer {
     }
 
     //关闭消费者
-    public void close(){
+
+    /**
+     * @author: qiu
+     * @date: 2024/2/25 13:56
+     * @param:
+     * @return: void
+     * @description: 关闭消费者的Netty客户端连接
+     * 3.5节新增，关闭线程池
+     * 23章修改，关闭Handler
+     */
+    public void close() {
+        RpcConsumerHandlerHelper.closeRpcClientHandler();
         eventLoopGroup.shutdownGracefully();
-        //3.5节新增，关闭线程池
         ClientThreadPool.shutdowm();
     }
 }

@@ -2,6 +2,8 @@ package io.qrpc.proxy.api;
 
 import io.qrpc.proxy.api.config.ProxyConfig;
 import io.qrpc.proxy.api.object.ObjectProxy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @ClassName: BaseProxyFactory
@@ -11,6 +13,7 @@ import io.qrpc.proxy.api.object.ObjectProxy;
  */
 
 public abstract class BaseProxyFactory<T> implements ProxyFactory {
+    private static final Logger LOGGER = LoggerFactory.getLogger(BaseProxyFactory.class);
     protected ObjectProxy<T> proxy;
 
     /**
@@ -22,15 +25,17 @@ public abstract class BaseProxyFactory<T> implements ProxyFactory {
      */
     @Override
     public <T> void init(ProxyConfig<T> config) {
+        LOGGER.info("BaseProxyFactory#init 代理工厂初始化中，创建ObjectProxy...");
         this.proxy = new ObjectProxy(
                 config.getClazz(),
                 config.getServiceVersion(),
                 config.getServiceGroup(),
+                config.getSerializationType(),
                 config.getTimeout(),
                 config.getConsumer(),
-                config.getSerializationType(),
                 config.isAsync(),
-                config.isOneway()
+                config.isOneway(),
+                config.getRegistryService()
                 );
     }
 }

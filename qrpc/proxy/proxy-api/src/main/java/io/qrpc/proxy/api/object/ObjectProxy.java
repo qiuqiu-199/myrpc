@@ -6,6 +6,7 @@ import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.proxy.api.async.IAsyncObjectProxy;
 import io.qrpc.proxy.api.consumer.Consumer;
 import io.qrpc.proxy.api.future.RpcFuture;
+import io.qrpc.registry.api.RegistryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,6 +32,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     private String serializationType;
     private boolean async;
     private boolean oneway;
+    private RegistryService registryService;
 
     //2种构造方法
     //构造方法1：17章暂未用到
@@ -39,7 +41,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     }
 
     //构造方法2：全参构造
-    public ObjectProxy(Class<T> clazz, String serviceVersion, String serviceGroup, long timeout, Consumer consumer, String serializationType, boolean async, boolean oneway) {
+    public ObjectProxy(Class<T> clazz, String serviceVersion, String serviceGroup, String serializationType, long timeout, Consumer consumer, boolean async, boolean oneway,RegistryService registryService) {
         this.clazz = clazz;
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
@@ -48,8 +50,19 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         this.serializationType = serializationType;
         this.async = async;
         this.oneway = oneway;
+        this.registryService = registryService;
     }
 
+    /**
+     * @author: qiu
+     * @date: 2024/2/26 9:45
+     * @param: proxy
+     * @param: method
+     * @param: args
+     * @return: java.lang.Object
+     * @description: 代理方法，封装请求协议对象并发送请求、接收结果
+     * 23章，调用sendRequest增加参数RegistryService
+     */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         LOGGER.info("ObjectProxy#invoke动态代理的同步调用...");
@@ -97,7 +110,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         }
         LOGGER.info("代理信息======end");
 
-        RpcFuture future = this.consumer.sendRequest(protocol);
+        RpcFuture future = this.consumer.sendRequest(protocol,registryService);
         return future == null ? null : timeout > 0 ? future.get(timeout, TimeUnit.MILLISECONDS) : future.get();
     }
 
@@ -108,6 +121,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
      * @param: args
      * @return: io.qrpc.proxy.api.future.RpcFuture
      * @description: 19章，由异步化调用对象调用，根据传入方法名及参数调用远程方法
+     * 23章，调用sendRequest增加参数RegistryService
      */
     @Override
     public RpcFuture call(String funName, Object... args) {
@@ -115,7 +129,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         RpcProtocol<RpcRequest> request = createRequest(this.clazz.getName(), funName, args);
         RpcFuture future = null;
         try {
-            future = this.consumer.sendRequest(request);
+            future = this.consumer.sendRequest(request,registryService);
         } catch (Exception e) {
             LOGGER.error("动态代理的异步调用过程中出错：{}", e);
         }

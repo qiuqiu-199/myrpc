@@ -1,7 +1,5 @@
 package io.qrpc.test.scanner;
 
-import io.qrpc.annotation.RpcReference;
-import io.qrpc.annotation.RpcService;
 import io.qrpc.common.scanner.ClassScanner;
 import io.qrpc.common.scanner.reference.ReferenceScanner;
 import io.qrpc.common.scanner.service.RpcServiceScanner;
