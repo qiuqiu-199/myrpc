@@ -1,0 +1,1 @@
+spiService=io.qrpc.test.spi.service.impl.SPIServiceImpl

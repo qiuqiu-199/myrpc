@@ -24,6 +24,7 @@
         <module name="registry-zookeeper" />
         <module name="serialization-api" />
         <module name="serialization-jdk" />
+        <module name="spi" />
         <module name="test-api" />
         <module name="test-consumer-codec" />
         <module name="test-consumer-handler" />
@@ -31,6 +32,7 @@
         <module name="test-provider" />
         <module name="test-registry" />
         <module name="test-scanner" />
+        <module name="test-spi" />
         <module name="testscanner" />
       </profile>
     </annotationProcessing>
