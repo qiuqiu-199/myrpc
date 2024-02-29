@@ -4,9 +4,41 @@
     <list default="true" id="7e1ec8a4-5749-49d8-a54f-94278c8c64e7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codec/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/codec/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcCodec.java" beforeDir="false" afterPath="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcCodec.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcEncoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codec/target/classes/io/qrpc/codec/RpcCodec.class" beforeDir="false" afterPath="$PROJECT_DIR$/codec/target/classes/io/qrpc/codec/RpcCodec.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codec/target/classes/io/qrpc/codec/RpcDecoder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/codec/target/classes/io/qrpc/codec/RpcDecoder$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codec/target/classes/io/qrpc/codec/RpcDecoder.class" beforeDir="false" afterPath="$PROJECT_DIR$/codec/target/classes/io/qrpc/codec/RpcDecoder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/codec/target/classes/io/qrpc/codec/RpcEncoder.class" beforeDir="false" afterPath="$PROJECT_DIR$/codec/target/classes/io/qrpc/codec/RpcEncoder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/target/classes/META-INF/common.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/src/main/java/io/qrpc/constants/RpcConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/constants/src/main/java/io/qrpc/constants/RpcConstants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/constants/target/classes/io/qrpc/constants/RpcConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/constants/target/classes/io/qrpc/constants/RpcConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/consumer/consumer-common/target/classes/META-INF/consumer-common.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/registry/registry-zookeeper/target/classes/io/qrpc/registry/zookeeper/ZookeeperRegistryService.class" beforeDir="false" afterPath="$PROJECT_DIR$/registry/registry-zookeeper/target/classes/io/qrpc/registry/zookeeper/ZookeeperRegistryService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/protocol/target/classes/META-INF/protocol.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/registry/target/classes/META-INF/registry.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/serialization/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/serialization/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serialization/serialization-api/src/main/java/io/qrpc/serialization/api/Serialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/serialization/serialization-api/src/main/java/io/qrpc/serialization/api/Serialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serialization/serialization-api/target/classes/io/qrpc/serialization/api/Serialization.class" beforeDir="false" afterPath="$PROJECT_DIR$/serialization/serialization-api/target/classes/io/qrpc/serialization/api/Serialization.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serialization/serialization-jdk/src/main/java/io/qrpc/serialization/jdk/JdkSerialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/serialization/serialization-jdk/src/main/java/io/qrpc/serialization/jdk/JdkSerialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/serialization/serialization-jdk/target/classes/io/qrpc/serialization/jdk/JdkSerialization.class" beforeDir="false" afterPath="$PROJECT_DIR$/serialization/serialization-jdk/target/classes/io/qrpc/serialization/jdk/JdkSerialization.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spi/target/classes/io/qrpc/spi/loader/ExtensionLoader$Holder.class" beforeDir="false" afterPath="$PROJECT_DIR$/spi/target/classes/io/qrpc/spi/loader/ExtensionLoader$Holder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spi/target/classes/io/qrpc/spi/loader/ExtensionLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/spi/target/classes/io/qrpc/spi/loader/ExtensionLoader.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/target/classes/META-INF/test.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-consumer-handler/src/main/java/io/qrpc/test/consumer/handler/RpcConsumerHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-consumer-handler/src/main/java/io/qrpc/test/consumer/handler/RpcConsumerHandlerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-consumer-handler/target/classes/io/qrpc/test/consumer/handler/RpcConsumerHandlerTest$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-consumer-handler/target/classes/io/qrpc/test/consumer/handler/RpcConsumerHandlerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-consumer-handler/target/classes/io/qrpc/test/consumer/handler/RpcConsumerHandlerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-consumer/test-consumer-native/target/classes/io/test/consumer/RpcConsumerTestNative.class" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-consumer/test-consumer-native/target/classes/io/test/consumer/RpcConsumerTestNative.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-provider/target/classes/META-INF/test-provider.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-scanner/src/main/java/io/qrpc/test/scanner/ScannerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-scanner/src/main/java/io/qrpc/test/scanner/ScannerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-scanner/src/main/java/io/qrpc/test/scanner/provider/ProviderDemoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-scanner/src/main/java/io/qrpc/test/scanner/provider/ProviderDemoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-scanner/target/classes/io/qrpc/test/scanner/ScannerTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-scanner/target/classes/io/qrpc/test/scanner/ScannerTest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test-scanner/target/classes/io/qrpc/test/scanner/provider/ProviderDemoService.class" beforeDir="false" afterPath="$PROJECT_DIR$/test/test-scanner/target/classes/io/qrpc/test/scanner/provider/ProviderDemoService.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -45,6 +77,8 @@
     <ignored path="$PROJECT_DIR$/loadBalancer/loadBalancer-random/target/" />
     <ignored path="$PROJECT_DIR$/spi/target/" />
     <ignored path="$PROJECT_DIR$/test/test-spi/target/" />
+    <ignored path="$PROJECT_DIR$/serialization/serialization-json/target/" />
+    <ignored path="$PROJECT_DIR$/serialization/serialization-protostuff/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,39 +89,12 @@
     <favorites_list name="qrpc" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="514">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/annotation/SPI.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="164">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/serialization/serialization-json/src/main/java/io/qrpc/serialization/json/JsonSerialization.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="20" selection-end-line="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/annotation/SpiClass.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="28" lean-forward="true" selection-end-line="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/factory/ExtensionFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/factory/SpiExtensionFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+            <state relative-caret-position="-612">
+              <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -96,69 +103,78 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/src/main/java/test/TestOptional.java">
+        <entry file="file://$PROJECT_DIR$/serialization/serialization-json/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+            <state relative-caret-position="160">
+              <caret line="14" selection-start-line="14" selection-end-line="23" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/test-spi/src/main/resources/META-INF/q/external/io.qrpc.test.spi.service.SPIService">
+        <entry file="file://$PROJECT_DIR$/serialization/serialization-json/src/main/resources/META-INF/q/internal/io.qrpc.serialization.api.Serialization">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="55" selection-start-column="55" selection-end-column="55" />
+              <caret column="49" selection-start-column="49" selection-end-column="49" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/test-spi/src/main/java/io/qrpc/test/spi/SPITest.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/serialization/serialization-protostuff/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="55" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
+            <state relative-caret-position="357">
+              <caret line="20" selection-start-line="20" selection-end-line="29" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="42" column="92" selection-start-line="42" selection-start-column="92" selection-end-line="42" selection-end-column="92" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/serialization/serialization-protostuff/src/main/java/io/qrpc/serialization/protostuff/ProtostuffSerialization.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="52" column="38" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1105#1135#0" expanded="true" />
+                <element signature="e#1434#1464#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java">
+        <entry file="file://$PROJECT_DIR$/serialization/serialization-protostuff/src/main/resources/META-INF/q/internal/io.qrpc.serialization.api.Serialization">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="533">
-              <caret line="399" column="5" lean-forward="true" selection-start-line="214" selection-start-column="4" selection-end-line="399" selection-end-column="5" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state>
+              <caret column="67" selection-start-column="67" selection-end-column="67" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="jar://D:/JDK/src.zip!/java/util/Objects.java">
+        <entry file="file://$PROJECT_DIR$/codec/pom.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="225" column="11" lean-forward="true" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="61" />
-              <folding>
-                <element signature="e#1410#1411#0" expanded="true" />
-                <element signature="e#1471#1472#0" expanded="true" />
-                <element signature="e#8380#8381#0" expanded="true" />
-                <element signature="e#8414#8415#0" expanded="true" />
-                <element signature="e#8972#8973#0" expanded="true" />
-                <element signature="e#9006#9007#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="399">
+              <caret line="41" column="48" selection-start-line="41" selection-start-column="48" selection-end-line="41" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
+        <entry file="file://$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcEncoder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1133">
-              <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
+            <state relative-caret-position="144">
+              <caret line="45" selection-start-line="45" selection-end-line="45" />
             </state>
           </provider>
         </entry>
@@ -194,27 +210,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/provider/provider-common/src/main/java/io/qrpc/provider/common/scanner/RpcServiceScanner.java" />
-        <option value="$PROJECT_DIR$/test/test-provider/src/main/java/io/qrpc/test/provider/single/RpcSingleServerTest.java" />
-        <option value="$PROJECT_DIR$/provider/provider-native/src/main/java/io/qrpc/provider/RpcSingleServer.java" />
-        <option value="$PROJECT_DIR$/common/src/main/java/io/qrpc/common/scanner/ClassScanner.java" />
-        <option value="$PROJECT_DIR$/proxy/proxy-api/pom.xml" />
-        <option value="$PROJECT_DIR$/proxy/pom.xml" />
-        <option value="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/consumer/Consumer.java" />
-        <option value="$PROJECT_DIR$/registry/registry-api/src/main/java/io/qrpc/registry/api/RegistryService.java" />
-        <option value="$PROJECT_DIR$/consumer/pom.xml" />
-        <option value="$PROJECT_DIR$/common/src/main/java/io/qrpc/common/exception/RegistryException.java" />
-        <option value="$PROJECT_DIR$/registry/registry-api/src/main/java/io/qrpc/registry/api/config/RegistryConfig.java" />
-        <option value="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/config/ProxyConfig.java" />
-        <option value="$PROJECT_DIR$/protocol/src/main/java/io/qrpc/protocol/meta/ServiceMeta.java" />
-        <option value="$PROJECT_DIR$/consumer/consumer-common/src/main/java/io/qrpc/consumer/common/helper/RpcConsumerHandlerHelper.java" />
-        <option value="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/object/ObjectProxy.java" />
-        <option value="$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java" />
-        <option value="$PROJECT_DIR$/consumer/consumer-native/src/main/java/io/qrpc/consumer/RpcClient.java" />
-        <option value="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/BaseProxyFactory.java" />
-        <option value="$PROJECT_DIR$/proxy/proxy-jdk/src/main/java/io/qrpc/proxy/jdk/JdkProxyFactory.java" />
-        <option value="$PROJECT_DIR$/consumer/consumer-common/src/main/java/io/qrpc/consumer/common/RpcConsumer.java" />
-        <option value="$PROJECT_DIR$/consumer/consumer-common/src/main/java/io/qrpc/consumer/common/handler/RpcConsumerHandler.java" />
         <option value="$PROJECT_DIR$/provider/provider-common/src/main/java/io/qrpc/provider/common/server/base/BaseServer.java" />
         <option value="$PROJECT_DIR$/loadBalancer/pom.xml" />
         <option value="$PROJECT_DIR$/loadBalancer/loadBalancer-random/pom.xml" />
@@ -236,7 +231,6 @@
         <option value="$PROJECT_DIR$/test/test-spi/src/main/java/io/qrpc/test/spi/service/SPIService.java" />
         <option value="$PROJECT_DIR$/test/test-spi/src/main/resources/META-INF/q/external/io.qrpc.test.spi.service.SPIService" />
         <option value="$PROJECT_DIR$/test/test-spi/src/main/java/io/qrpc/test/spi/SPITest.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/test/src/main/resources/META-INF.services/com.study.spring.spi.Phone" />
         <option value="$PROJECT_DIR$/test/src/main/java/com/study/spring/spi/Test.java" />
         <option value="$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/annotation/SPI.java" />
@@ -244,7 +238,29 @@
         <option value="$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/factory/ExtensionFactory.java" />
         <option value="$PROJECT_DIR$/test/src/main/java/test/TestOptional.java" />
         <option value="$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/factory/SpiExtensionFactory.java" />
+        <option value="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcDecoder.java" />
+        <option value="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcEncoder.java" />
+        <option value="$PROJECT_DIR$/constants/src/main/java/io/qrpc/constants/RpcConstants.java" />
+        <option value="$PROJECT_DIR$/serialization/pom.xml" />
+        <option value="$PROJECT_DIR$/serialization/serialization-api/src/main/java/io/qrpc/serialization/api/Serialization.java" />
+        <option value="$PROJECT_DIR$/serialization/serialization-jdk/src/main/java/io/qrpc/serialization/jdk/JdkSerialization.java" />
+        <option value="$PROJECT_DIR$/serialization/serialization-jdk/src/main/resources/META-INF.q.internal/io.qrpc.serialization.api.Serialization" />
+        <option value="$PROJECT_DIR$/test/pom.xml" />
+        <option value="$PROJECT_DIR$/test/test-scanner/src/main/java/io/qrpc/test/scanner/ScannerTest.java" />
+        <option value="$PROJECT_DIR$/test/test-scanner/src/main/java/io/qrpc/test/scanner/provider/ProviderDemoService.java" />
+        <option value="$PROJECT_DIR$/test/test-consumer-handler/src/main/java/io/qrpc/test/consumer/handler/RpcConsumerHandlerTest.java" />
         <option value="$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java" />
+        <option value="$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcCodec.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/object/ObjectProxy.java" />
+        <option value="$PROJECT_DIR$/serialization/serialization-json/src/main/resources/META-INF/q/internal/io.qrpc.serialization.api.Serialization" />
+        <option value="$PROJECT_DIR$/serialization/serialization-json/src/main/java/io/qrpc/serialization/json/JsonSerialization.java" />
+        <option value="$PROJECT_DIR$/serialization/serialization-protostuff/pom.xml" />
+        <option value="$PROJECT_DIR$/serialization/serialization-protostuff/src/main/resources/META-INF/q/internal/io.qrpc.serialization.api.Serialization" />
+        <option value="$PROJECT_DIR$/codec/pom.xml" />
+        <option value="$PROJECT_DIR$/serialization/serialization-json/pom.xml" />
+        <option value="$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java" />
+        <option value="$PROJECT_DIR$/serialization/serialization-protostuff/src/main/java/io/qrpc/serialization/protostuff/ProtostuffSerialization.java" />
       </list>
     </option>
   </component>
@@ -278,9 +294,9 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="-8" />
-    <option name="width" value="977" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-9" />
+    <option name="width" value="978" />
     <option name="height" value="1030" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -302,90 +318,25 @@
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
+              <item name="codec" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
+              <item name="codec" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="annotation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="factory" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="loader" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="codec" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="codec" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -393,38 +344,83 @@
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="codec" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="codec" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="test-spi" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="test-spi" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer-common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer-common" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="test-spi" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer-common" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="test-spi" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer-common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer-common" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer-native" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer-native" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer-native" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer-native" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
@@ -432,41 +428,109 @@
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="test-spi" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer-native" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="test-spi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="test-spi" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="spi" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-              <item name="impl" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="test-spi" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-api" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-json" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-protostuff" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-protostuff" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-protostuff" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-protostuff" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-protostuff" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="protostuff" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-protostuff" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
@@ -474,23 +538,83 @@
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
               <item name="qrpc" type="462c0819:PsiDirectoryNode" />
-              <item name="test" type="462c0819:PsiDirectoryNode" />
-              <item name="test-spi" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-protostuff" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="external" type="462c0819:PsiDirectoryNode" />
+              <item name="internal" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization" type="462c0819:PsiDirectoryNode" />
+              <item name="serialization-protostuff" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer-native" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer-native" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer-native" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer-native" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="qrpc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="qrpc" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer" type="462c0819:PsiDirectoryNode" />
+              <item name="test-consumer-native" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="consumer" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -507,17 +631,20 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\job\project\myrpc\qrpc\serialization\serialization-json\src\main\resources\META-INF\q" />
+      <recent name="E:\job\project\myrpc\qrpc\serialization\serialization-jdk\src\main\resources\META-INF\q\internal" />
+      <recent name="E:\job\project\myrpc\qrpc\serialization\serialization-jdk\src\main\java\io\qrpc\serialization\jdk" />
       <recent name="E:\job\project\myrpc\qrpc\test\src\main\resources\META-INF.services" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="io.qrpc.test.registry" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\job\project\myrpc\qrpc\serialization\serialization-json\src\main\resources" />
+      <recent name="E:\job\project\myrpc\qrpc\serialization\serialization-jdk\src\main\resources\META-INF.q.internal" />
+      <recent name="E:\job\project\myrpc\qrpc\serialization\serialization-jdk\src\main\resources" />
+      <recent name="E:\job\project\myrpc\qrpc\serialization\serialization-jdk\src\main\resources\META-INF\q\external" />
       <recent name="E:\job\project\myrpc\qrpc\registry\src\main\resources" />
-      <recent name="E:\job\project\myrpc\qrpc\registry\src\main\java" />
-      <recent name="E:\job\project\myrpc\qrpc\test" />
-      <recent name="E:\job\project\myrpc\qrpc\test\test-registry\src\main\resources" />
-      <recent name="E:\job\project\myrpc\qrpc\test\test-consumer\test-consumer-native\src\main\resources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -532,7 +659,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SPITest">
+  <component name="RunManager" selected="JUnit.RpcConsumerTestNative.testInterfaceRpc">
     <configuration name="SPITest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="io.qrpc.test.spi.SPITest" />
       <module name="test-spi" />
@@ -585,22 +712,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RpcConsumerTestNative.testAsyncInterfaceRpc" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="test-consumer-native" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.test.consumer.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="io.test.consumer" />
-      <option name="MAIN_CLASS_NAME" value="io.test.consumer.RpcConsumerTestNative" />
-      <option name="METHOD_NAME" value="testAsyncInterfaceRpc" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="RpcConsumerTestNative.testInterfaceRpc" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="test-consumer-native" />
       <extension name="coverage">
@@ -617,13 +728,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RpcSingleServerTest.startRpcProvider" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="test-provider" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.qrpc.test.provider.single.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="io.qrpc.test.provider.single" />
+      <option name="MAIN_CLASS_NAME" value="io.qrpc.test.provider.single.RpcSingleServerTest" />
+      <option name="METHOD_NAME" value="startRpcProvider" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RpcConsumerTestNative.testInterfaceRpc" />
+        <item itemvalue="JUnit.RpcSingleServerTest.startRpcProvider" />
         <item itemvalue="Application.SPITest" />
         <item itemvalue="Application.TestOptional" />
         <item itemvalue="Application.Test" />
-        <item itemvalue="JUnit.RpcConsumerTestNative.testAsyncInterfaceRpc" />
-        <item itemvalue="JUnit.RpcConsumerTestNative.testInterfaceRpc" />
       </list>
     </recent_temporary>
   </component>
@@ -654,44 +781,45 @@
       <workItem from="1708832567935" duration="101000" />
       <workItem from="1708832999546" duration="25480000" />
       <workItem from="1708958351773" duration="21993000" />
-      <workItem from="1709083169297" duration="12657000" />
+      <workItem from="1709083169297" duration="21885000" />
+      <workItem from="1709171822526" duration="10984000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.25 at 16h 07m 15s.xml">
+    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.29 at 13h 42m 22s.xml">
       <configuration name="RpcConsumerTestNative.testInterfaceRpc" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.25 at 16h 10m 38s.xml">
-      <configuration name="RpcConsumerTestNative.testInterfaceRpc" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.25 at 16h 24m 24s.xml">
-      <configuration name="RpcConsumerTestNative.testInterfaceRpc" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.25 at 16h 24m 34s.xml">
-      <configuration name="RpcConsumerTestNative.testInterfaceRpc" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.25 at 16h 31m 31s.xml">
+    <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.29 at 13h 46m 50s.xml">
       <configuration name="RpcSingleServerTest.startRpcProvider" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.26 at 10h 10m 11s.xml">
-      <configuration name="RpcSingleServerTest.startRpcProvider" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.26 at 10h 13m 25s.xml">
-      <configuration name="RpcSingleServerTest.startRpcProvider" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.26 at 16h 45m 37s.xml">
+    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.29 at 13h 46m 53s.xml">
       <configuration name="RpcConsumerTestNative.testInterfaceRpc" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RpcConsumerTestNative_testAsyncInterfaceRpc - 2024.02.26 at 16h 47m 54s.xml">
-      <configuration name="RpcConsumerTestNative.testAsyncInterfaceRpc" configurationId="JUnit" />
+    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.29 at 13h 51m 26s.xml">
+      <configuration name="RpcConsumerTestNative.testInterfaceRpc" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.26 at 22h 24m 57s.xml">
+    <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.29 at 14h 24m 23s.xml">
       <configuration name="RpcSingleServerTest.startRpcProvider" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.29 at 14h 48m 04s.xml">
+      <configuration name="RpcConsumerTestNative.testInterfaceRpc" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.29 at 14h 48m 29s.xml">
+      <configuration name="RpcSingleServerTest.startRpcProvider" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.29 at 14h 48m 49s.xml">
+      <configuration name="RpcConsumerTestNative.testInterfaceRpc" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RpcSingleServerTest_startRpcProvider - 2024.02.29 at 14h 55m 36s.xml">
+      <configuration name="RpcSingleServerTest.startRpcProvider" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RpcConsumerTestNative_testInterfaceRpc - 2024.02.29 at 14h 55m 55s.xml">
+      <configuration name="RpcConsumerTestNative.testInterfaceRpc" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="221160000" />
+    <option name="totallyTimeSpent" value="241372000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -703,18 +831,18 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5876133" visible="true" weight="0.25536194" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5876133" visible="true" weight="0.27010724" />
       <window_info id="Structure" order="1" sideWeight="0.41238672" side_tool="true" weight="0.3789765" />
       <window_info id="Designer" order="2" />
       <window_info id="UI Designer" order="3" />
       <window_info id="Favorites" order="4" sideWeight="0.84985834" side_tool="true" weight="0.22453083" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286119" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.21671388" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.47733712" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49932975" visible="true" weight="0.54532576" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.2917847" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3286119" />
@@ -722,9 +850,9 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.5594901" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Spring" order="10" weight="0.32904148" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.32904148" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.3286119" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50067025" side_tool="true" weight="0.49433428" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.35835695" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.19971672" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -792,84 +920,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/provider/provider-common/src/main/java/io/qrpc/provider/common/scanner/RpcServiceScanner.java</url>
-          <line>56</line>
-          <properties />
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/jsontype/impl/AsPropertyTypeDeserializer.class</url>
-          <line>69</line>
-          <properties />
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/deser/BeanDeserializer.class</url>
-          <line>346</line>
-          <properties />
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/apache/curator/curator-x-discovery/2.12.0/curator-x-discovery-2.12.0.jar!/org/apache/curator/x/discovery/details/ServiceDiscoveryImpl.class</url>
-          <line>207</line>
-          <properties />
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/apache/curator/curator-x-discovery/2.12.0/curator-x-discovery-2.12.0.jar!/org/apache/curator/x/discovery/details/JsonInstanceSerializer.class</url>
-          <line>24</line>
-          <properties />
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/ObjectMapper.class</url>
-          <line>721</line>
-          <properties />
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/ObjectMapper.class</url>
-          <line>1092</line>
-          <properties />
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/deser/BeanDeserializer.class</url>
-          <line>328</line>
-          <properties />
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/deser/BeanDeserializer.class</url>
-          <line>414</line>
-          <properties />
-          <option name="timeStamp" value="17" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/deser/SettableBeanProperty.class</url>
-          <line>409</line>
-          <properties />
-          <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/deser/SettableBeanProperty.class</url>
-          <line>178</line>
-          <properties />
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/deser/std/UntypedObjectDeserializer.class</url>
-          <line>70</line>
-          <properties />
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/jsontype/impl/AsPropertyTypeDeserializer.class</url>
-          <line>106</line>
-          <properties />
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/deser/BeanDeserializer.class</url>
           <line>450</line>
           <properties />
@@ -882,12 +932,6 @@
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/provider/provider-native/src/main/java/io/qrpc/provider/RpcSingleServer.java</url>
-          <line>22</line>
-          <properties />
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/registry/src/main/java/com/study/spring/spi/Test.java</url>
           <line>15</line>
           <properties />
@@ -895,21 +939,9 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/test/test-spi/src/main/java/io/qrpc/test/spi/SPITest.java</url>
-          <line>14</line>
-          <properties />
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/test/test-spi/src/main/java/io/qrpc/test/spi/SPITest.java</url>
           <line>15</line>
           <properties />
           <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java</url>
-          <line>235</line>
-          <properties />
-          <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/test/src/main/java/com/study/spring/spi/Test.java</url>
@@ -928,6 +960,42 @@
           <line>7</line>
           <properties />
           <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java</url>
+          <line>178</line>
+          <properties />
+          <option name="timeStamp" value="56" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java</url>
+          <line>311</line>
+          <properties />
+          <option name="timeStamp" value="62" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java</url>
+          <line>229</line>
+          <properties />
+          <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java</url>
+          <line>302</line>
+          <properties />
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcEncoder.java</url>
+          <line>46</line>
+          <properties />
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java</url>
+          <line>338</line>
+          <properties />
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -972,370 +1040,335 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/object/ObjectProxy.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/curator/curator-x-discovery/2.12.0/curator-x-discovery-2.12.0.jar!/org/apache/curator/x/discovery/details/ServiceDiscoveryImpl.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="20">
-          <caret line="135" column="20" selection-start-line="135" selection-start-column="20" selection-end-line="135" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#createRequest#0;class#ObjectProxy#0" />
-            <element signature="method#getClassType#0;class#ObjectProxy#0" />
-          </folding>
+        <state relative-caret-position="123">
+          <caret line="207" selection-start-line="207" selection-end-line="207" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/loadBalancer/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/loadBalancer/loadBalancer-api/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/loadBalancer/loadBalancer-random/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="40" selection-start-line="16" selection-start-column="40" selection-end-line="16" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="26" column="43" selection-start-line="26" selection-start-column="43" selection-end-line="26" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test-provider/src/main/resources/log4j.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="37" column="88" lean-forward="true" selection-start-line="37" selection-start-column="88" selection-end-line="37" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="54" column="54" selection-start-line="54" selection-start-column="54" selection-end-line="54" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/loadBalancer/loadBalancer-api/src/main/java/io/qrpc/loadBalancer/api/ServiceLoadBalancer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="1" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/loadBalancer/loadBalancer-random/src/main/java/io/qrpc/loadBalancer/random/RandomLoadBalancer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="30" column="32" selection-end-line="37" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/registry-zookeeper/src/main/java/io/qrpc/registry/zookeeper/ZookeeperRegistryService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="699">
-          <caret line="143" column="5" selection-start-line="123" selection-start-column="4" selection-end-line="143" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/main/java/com/study/spring/spi/Pingguo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="e#190#191#0" expanded="true" />
-            <element signature="e#226#227#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/main/java/com/study/spring/spi/Xiaomi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="e#188#189#0" expanded="true" />
-            <element signature="e#224#225#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/resources/META-INF.services/com.study.spring.spi.Phone">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/java/com/study/spring/spi/Huawei.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/java/com/study/spring/spi/Phone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/java/com/study/spring/spi/Pingguo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/java/com/study/spring/spi/Xiaomi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/registry/src/main/java/com/study/spring/spi/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/annotation.java" />
-    <entry file="file://$PROJECT_DIR$/spi/pom.xml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://D:/JDK/src.zip!/java/util/Enumeration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="281">
-          <caret line="60" column="17" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/JDK/src.zip!/java/lang/ClassLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="235">
-          <caret line="1220" column="22" selection-start-line="1220" selection-start-column="22" selection-end-line="1220" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/JDK/src.zip!/java/util/Properties.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-258">
-          <caret line="340" column="12" selection-start-line="340" selection-start-column="12" selection-end-line="340" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test-spi/src/main/java/io/qrpc/test/spi/service/impl.java" />
-    <entry file="file://$PROJECT_DIR$/test/test-spi/src/main/java/io/qrpc/test/api/service/SPIService.java" />
-    <entry file="file://$PROJECT_DIR$/test/test-spi/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test-spi/src/main/java/io/qrpc/test/spi/service/SPIService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="11" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/JDK/src.zip!/java/lang/Class.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="392" column="13" selection-start-line="392" selection-start-column="13" selection-end-line="392" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/test-spi/src/main/java/io/qrpc/test/spi/service/impl/SPIServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="20" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#338#339#0" expanded="true" />
-            <element signature="e#382#383#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.26/mysql-connector-java-8.0.26.jar!/META-INF/services/java.sql.Driver">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.26/mysql-connector-java-8.0.26.jar!/com/mysql/cj/LocalizedErrorMessages.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="249" column="45" selection-start-line="249" selection-start-column="45" selection-end-line="249" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/mysql/mysql-connector-java/8.0.26/mysql-connector-java-8.0.26.jar!/com/mysql/cj/jdbc/Driver.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="10" column="17" selection-start-line="10" selection-start-column="17" selection-end-line="10" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/main/resources/META-INF.services/com.study.spring.spi.Phone">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="10" selection-start-column="10" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/main/java/com/study/spring/spi/Huawei.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="34" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/main/java/com/study/spring/spi/Phone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/JDK/src.zip!/java/util/ServiceLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="343" column="52" selection-start-line="343" selection-start-column="52" selection-end-line="343" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/main/java/com/study/spring/spi/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="16" selection-start-line="16" selection-end-line="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/5.2.20.RELEASE/spring-beans-5.2.20.RELEASE.jar!/META-INF/spring.factories">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="82" selection-start-column="82" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/5.2.20.RELEASE/spring-beans-5.2.20.RELEASE.jar!/org/springframework/beans/ExtendedBeanInfoFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="14" column="57" selection-start-line="14" selection-start-column="57" selection-end-line="14" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/springframework/spring-beans/5.2.20.RELEASE/spring-beans-5.2.20.RELEASE.jar!/org/springframework/beans/BeanInfoFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/JDK/src.zip!/java/util/Optional.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="214" column="48" selection-start-line="214" selection-start-column="48" selection-end-line="214" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/annotation/SPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="20" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/annotation/SpiClass.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/curator/curator-x-discovery/2.12.0/curator-x-discovery-2.12.0.jar!/org/apache/curator/x/discovery/details/JsonInstanceSerializer.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="13" column="28" lean-forward="true" selection-end-line="15" />
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/factory/ExtensionFactory.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/ObjectMapper.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        <state relative-caret-position="105">
+          <caret line="1092" selection-start-line="1092" selection-end-line="1092" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/deser/SettableBeanProperty.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="399" column="5" lean-forward="true" selection-start-line="214" selection-start-column="4" selection-end-line="399" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="105">
+          <caret line="178" selection-start-line="178" selection-end-line="178" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/src/main/java/test/TestOptional.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/deser/std/UntypedObjectDeserializer.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        <state relative-caret-position="123">
+          <caret line="70" selection-start-line="70" selection-end-line="70" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/factory/SpiExtensionFactory.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/jsontype/impl/AsPropertyTypeDeserializer.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="105">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/codehaus/jackson/jackson-mapper-asl/1.9.13/jackson-mapper-asl-1.9.13.jar!/org/codehaus/jackson/map/deser/BeanDeserializer.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1133">
-          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
+        <state relative-caret-position="123">
+          <caret line="346" selection-start-line="346" selection-end-line="346" />
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/JDK/src.zip!/java/util/Objects.java">
+    <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/future/RpcFuture.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="225" column="11" lean-forward="true" selection-start-line="225" selection-start-column="11" selection-end-line="225" selection-end-column="61" />
-          <folding>
-            <element signature="e#1410#1411#0" expanded="true" />
-            <element signature="e#1471#1472#0" expanded="true" />
-            <element signature="e#8380#8381#0" expanded="true" />
-            <element signature="e#8414#8415#0" expanded="true" />
-            <element signature="e#8972#8973#0" expanded="true" />
-            <element signature="e#9006#9007#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="265">
+          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/test-spi/src/main/resources/META-INF/q/external/io.qrpc.test.spi.service.SPIService">
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-jdk/target/classes/META-INF.q.internal/io.qrpc.serialization.api.Serialization">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="55" selection-start-column="55" selection-end-column="55" />
+        <state relative-caret-position="495">
+          <caret line="46" column="39" selection-start-line="46" selection-start-column="39" selection-end-line="46" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/proxy-jdk/src/main/java/io/qrpc/proxy/jdk/JdkProxyFactory.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/annotation/src/main/java/io/qrpc/annotation/RpcService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="129">
+          <caret line="19" column="18" selection-start-line="19" selection-start-column="18" selection-end-line="19" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-scanner/src/main/java/io/qrpc/test/scanner/provider/ProviderDemoService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="9" column="23" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-consumer-handler/src/main/java/io/qrpc/test/consumer/handler/RpcConsumerHandlerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-32">
+          <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-jdk/target/classes/META-INF.q.external/io.qrpc.serialization.api.Serialization" />
+    <entry file="jar://D:/JDK/src.zip!/java/lang/ClassLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="1143" column="42" selection-start-line="1143" selection-start-column="42" selection-end-line="1143" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-jdk/src/main/resources/META-INF/q/external/io.qrpc.serialization.api.Serialization" />
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-jdk/src/main/resources/external/io.qrpc.serialization.api.Serialization" />
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-jdk/src/main/resources/external.q.internal/io.qrpc.serialization.api.Serialization" />
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-jdk/src/main/resources/external.q/io.qrpc.serialization.api.Serialization" />
+    <entry file="file://$PROJECT_DIR$/test/test-scanner/src/main/java/io/qrpc/test/scanner/ScannerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-provider/src/main/java/io/qrpc/test/provider/single/RpcSingleServerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/test-spi/src/main/java/io/qrpc/test/spi/SPITest.java">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-jdk/src/main/resources/META-INF.q.internal/io.qrpc.serialization.api.Serialization">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="105" selection-start-line="105" selection-end-line="105" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/object/ObjectProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="113" column="22" selection-start-line="113" selection-start-column="22" selection-end-line="113" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-jdk/src/main/java/io/qrpc/serialization/jdk/JdkSerialization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="29" column="68" selection-start-line="29" selection-start-column="68" selection-end-line="29" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-json/target/classes/META-INF/q/internal/io.qrpc.serialization.api.Serialization">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="49" lean-forward="true" selection-start-column="49" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/BaseProxyFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/proxy/proxy-api/src/main/java/io/qrpc/proxy/api/ProxyFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" column="55" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
+          <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/consumer/consumer-native/src/main/java/io/qrpc/consumer/RpcClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="97" column="33" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/consumer/consumer-common/src/main/java/io/qrpc/consumer/common/RpcConsumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="97" column="37" selection-start-line="97" selection-start-column="37" selection-end-line="97" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/consumer/consumer-common/src/main/java/io/qrpc/consumer/common/handler/RpcConsumerHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="83" column="21" selection-start-line="83" selection-start-column="21" selection-end-line="83" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcDecoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="26" column="33" selection-start-line="26" selection-start-column="33" selection-end-line="26" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-api/src/main/java/io/qrpc/serialization/api/Serialization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="17" selection-start-line="13" selection-start-column="17" selection-end-line="13" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-jdk/src/main/resources/META-INF/q/internal/io.qrpc.serialization.api.Serialization">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="46" selection-start-column="46" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/io/netty/netty-codec/4.1.77.Final/netty-codec-4.1.77.Final.jar!/io/netty/handler/codec/MessageToByteEncoder.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="93">
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/provider/provider-native/src/main/java/io/qrpc/provider/RpcSingleServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/provider/provider-common/src/main/java/io/qrpc/provider/common/scanner/RpcServiceScanner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="56" selection-start-line="56" selection-end-line="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcCodec.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="23" selection-start-line="23" selection-end-line="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codec/src/main/java/io/qrpc/codec/RpcEncoder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spi/src/main/java/io/qrpc/spi/loader/ExtensionLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="302" selection-start-line="302" selection-end-line="302" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-json/src/main/resources/META-INF/q/internal/io.qrpc.serialization.api.Serialization">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="49" selection-start-column="49" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/codec/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="41" column="48" selection-start-line="41" selection-start-column="48" selection-end-line="41" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-json/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="14" selection-start-line="14" selection-end-line="23" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-protostuff/src/main/resources/META-INF/q/internal/io.qrpc.serialization.api.Serialization">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="67" selection-start-column="67" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-protostuff/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="20" selection-start-line="20" selection-end-line="29" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test-consumer/test-consumer-native/src/main/java/io/test/consumer/RpcConsumerTestNative.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="42" column="92" selection-start-line="42" selection-start-column="92" selection-end-line="42" selection-end-column="92" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-protostuff/src/main/java/io/qrpc/serialization/protostuff/ProtostuffSerialization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="52" column="38" selection-start-line="52" selection-start-column="38" selection-end-line="52" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1105#1135#0" expanded="true" />
+            <element signature="e#1434#1464#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/serialization/serialization-json/src/main/java/io/qrpc/serialization/json/JsonSerialization.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-612">
+          <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1394,7 +1427,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>proxy-jdk</last-edited>
+          <last-edited>serialization-protostuff</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

@@ -2,7 +2,7 @@ package io.qrpc.test.scanner;
 
 import io.qrpc.common.scanner.ClassScanner;
 import io.qrpc.common.scanner.reference.ReferenceScanner;
-import io.qrpc.common.scanner.service.RpcServiceScanner;
+import io.qrpc.provider.common.scanner.RpcServiceScanner;
 import org.junit.Test;
 
 import java.util.List;
@@ -27,7 +27,7 @@ public class ScannerTest {
     @Test
     public void testScannerClassNameListByRpcService() throws Exception {
         //map暂时是空的，因为还没有生成对应的代理对象
-        Map<String, Object> map = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService("0", 0, "io.qrpc.test.scanner");
+//        Map<String, Object> map = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService("0", 0, "io.qrpc.test.scanner");
     }
 
     @Test

@@ -9,6 +9,6 @@ import io.qrpc.test.scanner.service.DemoService;
  * @Date: 2024/1/16 15:47
  * @Description: 服务的实现类
  */
-@RpcService(interfaceclass = DemoService.class,interfaceClassName = "io.qrpc.test.scanner.service.DemoService",version = "1.0.0",group = "qiu")
+@RpcService(interfaceClass = DemoService.class,interfaceClassName = "io.qrpc.test.scanner.service.DemoService",version = "1.0.0",group = "qiu")
 public class ProviderDemoService implements DemoService {
 }

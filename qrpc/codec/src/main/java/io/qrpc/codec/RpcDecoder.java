@@ -25,6 +25,16 @@ import java.util.List;
 
 public class RpcDecoder extends ByteToMessageDecoder implements RpcCodec {
 
+    /**
+     * @author: qiu
+     * @date: 2024/2/28 22:11
+     * @param: ctx
+     * @param: byteBuf
+     * @param: list
+     * @return: void
+     * @description: 消息解码
+     * 26章修改，根据请求头的序列化类型参数选择对应的序列化实现类对消息进行反序列化
+     */
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf byteBuf, List<Object> list) throws Exception {
         if (byteBuf.readableBytes() < RpcConstants.HEADER_TOTAL_LEN) return;
@@ -66,8 +76,9 @@ public class RpcDecoder extends ByteToMessageDecoder implements RpcCodec {
         header.setRequestId(requestId);//消息ID
         header.setSerailizationType(serializationType);//序列化类型
         header.setMsgLen(dataLength);//消息长度
-        //TODO 序列化类型选择，带扩展
-        Serialization jdkSerialization = getJdkSerialization();
+        //序列化类型选择，待扩展
+        //26章已扩展
+        Serialization jdkSerialization = getJdkSerialization(serializationType);
 
         //根据消息类型还原成不同的消息协议
         switch (msgTypeEnum) {

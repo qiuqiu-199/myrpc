@@ -2,6 +2,7 @@ package io.qrpc.codec;
 
 import io.qrpc.serialization.api.Serialization;
 import io.qrpc.serialization.jdk.JdkSerialization;
+import io.qrpc.spi.loader.ExtensionLoader;
 
 /**
  * @ClassName: RpcCodec
@@ -11,7 +12,15 @@ import io.qrpc.serialization.jdk.JdkSerialization;
  */
 
 public interface RpcCodec {
-    default Serialization getJdkSerialization() {
-        return new JdkSerialization();
+    /**
+     * @author: qiu
+     * @date: 2024/2/28 22:09
+     * @param: serializationType
+     * @return: io.qrpc.serialization.api.Serialization
+     * @description: 序列化类型
+     * 26章SPI扩展，给定的序列化类型参数通过SPI机制加载对应的扩展类
+     */
+    default Serialization getJdkSerialization(String serializationType) {
+        return ExtensionLoader.getExtension(Serialization.class,serializationType);
     }
 }

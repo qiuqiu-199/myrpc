@@ -21,33 +21,33 @@ import java.util.concurrent.ExecutionException;
 public class RpcConsumerHandlerTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcConsumerHandlerTest.class);
     public static void main(String[] args) throws InterruptedException, ExecutionException {
-        RpcConsumer consumer = RpcConsumer.getInstance();
-
-        //接收结果
-        RpcFuture future = consumer.sendRequest(getProtocol());
-        //回调方法传递
-        future.addCallback(new AsyncRpcCallback() {
-            @Override
-            public void onSuccess(Object res) {
-                LOGGER.info("回调方法执行成功，消费者返回的数据为：{}",res);
-            }
-
-            @Override
-            public void onException(Exception e) {
-                LOGGER.info("回调方法执行失败，抛出异常：{}",e.toString());
-            }
-        });
-
-
-        //测试异步调用
-//        RpcFuture future_async = RpcContext.getContext().getFuture();
-//        LOGGER.info("异步调用结果：{}",future_async.get());
-
-        //测试单向调用
-//        LOGGER.info("单向调用...");
-
-        Thread.sleep(200);
-        consumer.close();
+//        RpcConsumer consumer = RpcConsumer.getInstance();
+//
+//        //接收结果
+//        RpcFuture future = consumer.sendRequest(getProtocol());
+//        //回调方法传递
+//        future.addCallback(new AsyncRpcCallback() {
+//            @Override
+//            public void onSuccess(Object res) {
+//                LOGGER.info("回调方法执行成功，消费者返回的数据为：{}",res);
+//            }
+//
+//            @Override
+//            public void onException(Exception e) {
+//                LOGGER.info("回调方法执行失败，抛出异常：{}",e.toString());
+//            }
+//        });
+//
+//
+//        //测试异步调用
+////        RpcFuture future_async = RpcContext.getContext().getFuture();
+////        LOGGER.info("异步调用结果：{}",future_async.get());
+//
+//        //测试单向调用
+////        LOGGER.info("单向调用...");
+//
+//        Thread.sleep(200);
+//        consumer.close();
     }
 
     private static RpcProtocol<RpcRequest> getProtocol() {

@@ -7,6 +7,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -27,7 +28,7 @@ public class ExtensionLoader<T> {
 
     //扩展配置文件应在目录的定义，扩展配置文件应以接口全类名命名
     private final static String SERVICES_DIRECTORY = "META-INF/services/";
-    private final static String Q_DIRECTORY = "META/q/";
+    private final static String Q_DIRECTORY = "META-INF/q/";
     private final static String Q_DIRECTORY_EXTERNAL = "META-INF/q/external/";
     private final static String Q_DIRECTORY_INTERNAL = "META-INF/q/internal/";
     private final static String[] SPI_DIRECTORYS = new String[]{
@@ -78,6 +79,7 @@ public class ExtensionLoader<T> {
      * 如果没有提供实现类标识，那么返回默认实现类的对象，否则返回指定的实现类的对象。
      */
     public static <T> T getExtension(final Class<T> clazz, String name) {
+
         return StringUtils.isEmpty(name) ?
                 getExtensionLoader(clazz)
                         .getDefaultSpiClassInstance()
@@ -294,11 +296,15 @@ public class ExtensionLoader<T> {
     private void loadDiretory(final Map<String, Class<?>> classes) {
         for (String dir : SPI_DIRECTORYS) {
             String fileName = dir + clazz.getName();
+            File file = new File(fileName);
+            boolean res = file.exists();
             try {
-                Enumeration<URL> urls = Objects.nonNull(this.classLoader) ?
-                        classLoader.getResources(fileName)
-                        :
-                        ClassLoader.getSystemResources(fileName);
+                Enumeration<URL> urls;
+                if( Objects.nonNull(this.classLoader))
+                    urls = classLoader.getResources(fileName);
+                else
+                    urls = ClassLoader.getSystemResources(fileName);
+
                 if (Objects.nonNull(urls)) {
                     while (urls.hasMoreElements()) {
                         URL url = urls.nextElement();
