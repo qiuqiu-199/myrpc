@@ -13,6 +13,8 @@ import io.qrpc.protocol.enumeration.RpcType;
 import io.qrpc.protocol.header.RpcHeader;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.protocol.response.RpcResponse;
+import io.qrpc.reflect.api.ReflectInvoker;
+import io.qrpc.spi.loader.ExtensionLoader;
 import net.sf.cglib.reflect.FastClass;
 import net.sf.cglib.reflect.FastMethod;
 import org.slf4j.Logger;
@@ -26,18 +28,28 @@ import java.util.Map;
  * @ClassName: RpcProviderHandler
  * @Author: qiuzhiq
  * @Date: 2024/1/17 10:33
- * @Description: 对来自服务消费者的数据处理器。到这一步，前面已经做完解码工作了
+ * @Description: 对来自服务消费者的数据处理器。到这一步，前面已经做完解码工作了。
  */
 
 public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcRequest>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcProviderHandler.class);
 
     private final Map<String, Object> handlerMap;
-    private final String reflectType;
 
+    //反射扩展接口，创建当前类对象时加载对应的反射方式
+    private final ReflectInvoker reflectInvoker;
+
+    /**
+     * @author: qiu
+     * @date: 2024/2/29 22:44
+     * @param: handlerMap
+     * @param: reflectType
+     * @return: null
+     * @description: 37章修改。构造方法由传递过来的反射类型加载对应的反射方式
+     */
     public RpcProviderHandler(Map<String, Object> handlerMap, String reflectType) {
         this.handlerMap = handlerMap;
-        this.reflectType = reflectType;
+        reflectInvoker = ExtensionLoader.getExtension(ReflectInvoker.class,reflectType);
     }
 
     //第8章模拟接收消费者的数据的临时处理，接收到数据后构造处理完毕后的数据回送给消费者
@@ -81,16 +93,14 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
     }
 
     /**
-     * f
-     * 调用方法
-     *
-     * @param requestBody 响应体
-     * @return 响应结果
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
+     * @author: qiu
+     * @date: 2024/2/29 22:45
+     * @param: requestBody
+     * @return: java.lang.Object
+     * @description: 解析请求体，预备通过反射调用真实方法，返回真实方法处理结果
+     * 37章修改，引入SPI机制动态加载反射方式
      */
-    private Object handle(RpcRequest requestBody) throws Exception {
+    private Object handle(RpcRequest requestBody) throws Throwable {
         String serviceKey = RpcServiceHelper.buildServiceKey(requestBody.getClassName(), requestBody.getVersion(), requestBody.getGroup());
         Object serviceBean = handlerMap.get(serviceKey);
         if (serviceBean == null) {
@@ -109,7 +119,6 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
             for (Class<?> parameterType : parameterTypes) {
                 LOGGER.debug(parameterType.getName());
             }
-
         } else {
             LOGGER.debug("无参数");
         }
@@ -125,52 +134,6 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
             LOGGER.debug("无参数值");
         }
 
-        return invokeMethod(serviceBean, serviceClass, methodName, parameterTypes, parameters);
-
-    }
-
-    /**
-     * f
-     * 通过反射调用方法
-     *
-     * @param serviceBean
-     * @param serviceClass
-     * @param methodName
-     * @param parameterTypes
-     * @param parameters
-     * @return
-     * @throws Exception
-     */
-    private Object invokeMethod(Object serviceBean, Class<?> serviceClass, String methodName, Class<?>[] parameterTypes, Object[] parameters) throws Exception {
-
-        switch (this.reflectType) {
-            case RpcConstants.REFLECT_TYPE_JDK:
-                return this.invoke_jdk_method(serviceBean, serviceClass, methodName, parameterTypes, parameters);
-            case RpcConstants.REFLECT_TYPE_CGLIB:
-                return this.invoke_cglib_method(serviceBean, serviceClass, methodName, parameterTypes, parameters);
-            default:
-                throw new IllegalArgumentException("当前仅支持jdk和cglib反射方式！");
-        }
-
-    }
-
-    /**
-     *
-     */
-    private Object invoke_cglib_method(Object serviceBean, Class<?> serviceClass, String methodName, Class<?>[] parameterTypes, Object[] parameters) throws InvocationTargetException {
-        LOGGER.info("当前正在使用的反射方式为==={}", this.reflectType);
-
-        FastClass serviceFastClass = FastClass.create(serviceClass);
-        FastMethod fastMethod = serviceFastClass.getMethod(methodName, parameterTypes);
-        return fastMethod.invoke(serviceBean, parameters);
-    }
-
-    private Object invoke_jdk_method(Object serviceBean, Class<?> serviceClass, String methodName, Class<?>[] parameterTypes, Object[] parameters) throws Exception {
-        LOGGER.info("当前正在使用的反射方式为==={}", this.reflectType);
-        Method method = serviceClass.getMethod(methodName, parameterTypes);
-
-        method.setAccessible(true);
-
-        return method.invoke(serviceBean, parameters);
+        return this.reflectInvoker.invokeMethod(serviceBean, serviceClass, methodName, parameterTypes, parameters);
     }
 }

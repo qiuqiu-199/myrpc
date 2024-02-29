@@ -372,7 +372,7 @@ public class ExtensionLoader<T> {
         }
         //如果没有SiClass注解
         if (!subClass.isAnnotationPresent(SpiClass.class)) {
-            throw new IllegalStateException("load extension resource error," + subClass + "without @" + SpiClass.class + " annotation");
+            throw new IllegalStateException("load extension resource error," + subClass + " without @" + SpiClass.class + " annotation");
         }
 
         //如果map里没有直接存入，否则抛异常

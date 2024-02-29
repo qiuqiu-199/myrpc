@@ -21,6 +21,9 @@
         <module name="proxy-api" />
         <module name="proxy-cglib" />
         <module name="proxy-jdk" />
+        <module name="reflect-api" />
+        <module name="reflect-cglib" />
+        <module name="reflect-jdk" />
         <module name="registry-api" />
         <module name="registry-zookeeper" />
         <module name="serialization-api" />

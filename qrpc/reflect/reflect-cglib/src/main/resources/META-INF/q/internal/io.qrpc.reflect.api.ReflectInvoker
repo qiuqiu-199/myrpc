@@ -1,0 +1,1 @@
+cglib=io.qrpc.reflect.cglib.CglibReflectInvoker

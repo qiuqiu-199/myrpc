@@ -22,6 +22,7 @@
         <module>registry</module>
         <module>loadBalancer</module>
         <module>spi</module>
+        <module>reflect</module>
     </modules>
 
     <properties>
