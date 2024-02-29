@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public abstract class BaseProxyFactory<T> implements ProxyFactory {
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseProxyFactory.class);
-    protected ObjectProxy<T> proxy;
+    protected ObjectProxy<T> objectProxy;
 
     /**
      * @author: qiu
@@ -26,7 +26,7 @@ public abstract class BaseProxyFactory<T> implements ProxyFactory {
     @Override
     public <T> void init(ProxyConfig<T> config) {
         LOGGER.info("BaseProxyFactory#init 代理工厂初始化中，创建ObjectProxy...");
-        this.proxy = new ObjectProxy(
+        this.objectProxy = new ObjectProxy(
                 config.getClazz(),
                 config.getServiceVersion(),
                 config.getServiceGroup(),

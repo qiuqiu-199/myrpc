@@ -56,7 +56,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     /**
      * @author: qiu
      * @date: 2024/2/26 9:45
-     * @param: proxy
+     * @param: objectProxy
      * @param: method
      * @param: args
      * @return: java.lang.Object
@@ -119,7 +119,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
      * @date: 2024/2/21 16:38
      * @param: funName
      * @param: args
-     * @return: io.qrpc.proxy.api.future.RpcFuture
+     * @return: io.qrpc.objectProxy.api.future.RpcFuture
      * @description: 19章，由异步化调用对象调用，根据传入方法名及参数调用远程方法
      * 23章，调用sendRequest增加参数RegistryService
      */

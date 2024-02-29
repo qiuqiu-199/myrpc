@@ -15,7 +15,7 @@ public interface IAsyncObjectProxy {
      * @date: 2024/2/21 16:15
      * @param: funName
      * @param: args
-     * @return: io.qrpc.proxy.api.future.RpcFuture
+     * @return: io.qrpc.objectProxy.api.future.RpcFuture
      * @description:
      */
     RpcFuture call(String funName, Object... args);

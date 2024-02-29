@@ -21,26 +21,27 @@ import java.util.concurrent.ExecutionException;
 public class RpcConsumerTestNative {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcConsumerTestNative.class);
 
+    //测试代理的同步异步获取结果用
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        RpcClient client = new RpcClient("127.0.0.1:2181","zookeeper","1.0.0", "qiu", "jdk", 3000333, false, false);
-        //同步调用
-//        DemoService demoService = client.create(DemoService.class);
-//        String res = demoService.hello("qiuzhiq");
-        
-        //异步调用
-        IAsyncObjectProxy demoService = client.createAsync(DemoService.class);
-        RpcFuture future = demoService.call("hello", "qiuzhiq");
-        Object res = future.get();
-
-        LOGGER.info("返回的结果数据====>>>"+res);
-        client.shutdown();
+//        RpcClient client = new RpcClient("127.0.0.1:2181","zookeeper","1.0.0", "qiu", "jdk", 3000333, false, false);
+//        //同步调用
+////        DemoService demoService = client.create(DemoService.class);
+////        String res = demoService.hello("qiuzhiq");
+//
+//        //异步调用
+//        IAsyncObjectProxy demoService = client.createAsync(DemoService.class);
+//        RpcFuture future = demoService.call("hello", "qiuzhiq");
+//        Object res = future.get();
+//
+//        LOGGER.info("返回的结果数据====>>>"+res);
+//        client.shutdown();
     }
 
     //以下三个方法，整合RegistryService后的消费者端测试
-    RpcClient rpcClient;
+    private RpcClient rpcClient;
     @Before
     public void init(){
-        rpcClient = new RpcClient("127.0.0.1:2181", "zookeeper", "1.0.0", "qiu", "protostuff", 307777700, false, false);
+        rpcClient = new RpcClient("127.0.0.1:2181", "zookeeper", "1.0.0", "qiu", "protostuff", "cglib",3000, false, false);
     }
 
     @Test

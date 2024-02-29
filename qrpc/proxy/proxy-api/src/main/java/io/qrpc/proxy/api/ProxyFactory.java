@@ -1,6 +1,7 @@
 package io.qrpc.proxy.api;
 
 import io.qrpc.proxy.api.config.ProxyConfig;
+import io.qrpc.spi.annotation.SPI;
 
 /**
  * @ClassName: ProxyFactory
@@ -8,7 +9,7 @@ import io.qrpc.proxy.api.config.ProxyConfig;
  * @Date: 2024/2/21 22:50
  * @Description: 20章新增，用来创建代理对象的工厂接口
  */
-
+@SPI
 public interface ProxyFactory {
 
     //获取代理对象

@@ -107,11 +107,10 @@ public class BaseServer implements Server {
                     .option(ChannelOption.SO_BACKLOG, 128)
                     .childOption(ChannelOption.SO_KEEPALIVE, true);
             ChannelFuture future = bootstrap.bind(host, port).sync();
-            LOGGER.info("Server start on {}:{}", host, port);
+            LOGGER.info("Netty Server start on {}:{}", host, port);
             future.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             LOGGER.error("rpc服务器启动失败：", e);
-//            e.printStackTrace();
         } finally {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();

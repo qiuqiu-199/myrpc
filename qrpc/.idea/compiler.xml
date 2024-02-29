@@ -19,6 +19,7 @@
         <module name="provider-common" />
         <module name="provider-native" />
         <module name="proxy-api" />
+        <module name="proxy-cglib" />
         <module name="proxy-jdk" />
         <module name="registry-api" />
         <module name="registry-zookeeper" />
