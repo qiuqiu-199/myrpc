@@ -1,5 +1,8 @@
 package io.qrpc.loadBalancer.api;
 
+import io.qrpc.constants.RpcConstants;
+import io.qrpc.spi.annotation.SPI;
+
 import java.util.List;
 
 /**
@@ -8,7 +11,7 @@ import java.util.List;
  * @Date: 2024/2/26 16:25
  * @Description: 24章新增，负载均衡通用接口
  */
-
+@SPI(RpcConstants.SERVICE_LOAD_BALANCER_RANDOM)
 public interface ServiceLoadBalancer<T> {
     /**
      * @author: qiu
@@ -18,5 +21,5 @@ public interface ServiceLoadBalancer<T> {
      * @return: T
      * @description: 24章新增，负载均衡方法
      */
-    T select(List<T> servers, int hashcode);
+    T select(List<T> servers, int hashcode,String sourceIp);
 }

@@ -14,7 +14,10 @@
         <module name="consumer-common" />
         <module name="consumer-native" />
         <module name="loadBalancer-api" />
+        <module name="loadBalancer-consistentHash-zk" />
         <module name="loadBalancer-random" />
+        <module name="loadBalancer-robin" />
+        <module name="loadBalancer-sourceip-hash" />
         <module name="protocol" />
         <module name="provider-common" />
         <module name="provider-native" />

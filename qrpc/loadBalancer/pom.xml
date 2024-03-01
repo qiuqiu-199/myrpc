@@ -14,7 +14,33 @@
     <modules>
         <module>loadBalancer-api</module>
         <module>loadBalancer-random</module>
+        <module>loadBalancer-robin</module>
+        <module>loadBalancer-sourceip-hash</module>
+        <module>loadBalancer-consistentHash-zk</module>
     </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.qiu</groupId>
+            <artifactId>spi</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qiu</groupId>
+            <artifactId>constants</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qiu</groupId>
+            <artifactId>protocol</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.qiu</groupId>-->
+            <!--<artifactId>registry-api</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+        <!--</dependency>-->
+    </dependencies>
 
 
 </project>

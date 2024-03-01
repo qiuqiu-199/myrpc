@@ -52,14 +52,15 @@ public class BaseServer implements Server {
      * @param: reflectType
      * @return: null
      * @description: 22章修改，构造方法根据传入的注册中心地址和注册中心类型引入注册中心
+     * 42章，构造方法增加负载均衡参数
      */
-    public BaseServer(String serverAddress, String registryAddress, String registryType, String reflectType) {
+    public BaseServer(String serverAddress, String registryAddress, String registryType, String reflectType,String loadBalancer) {
         if (!StringUtils.isEmpty(serverAddress)) {
             this.host = serverAddress.split(":")[0];
             this.port = Integer.parseInt(serverAddress.split(":")[1]);
         }
         this.reflectType = reflectType;
-        this.registryService = getRegistryService(registryAddress, registryType);
+        this.registryService = getRegistryService(registryAddress, registryType,loadBalancer);
     }
 
     /**
@@ -69,14 +70,15 @@ public class BaseServer implements Server {
      * @param: registryType
      * @return: io.qrpc.registry.api.RegistryService
      * @description: 22章新增，预留SPI扩展，目前先直接用new来给提供者引入注册中心
+     * 42章，方法增加负载均衡参数
      */
-    private RegistryService getRegistryService(String registryAddress, String registryType) {
+    private RegistryService getRegistryService(String registryAddress, String registryType,String loadBalancer) {
         //TODO 22章预留SPI扩展
         RegistryService registryService = null;
         //根据传入的注册地址与注册类型创建对应的注册中心服务
         try {
             registryService = new ZookeeperRegistryService();
-            registryService.init(new RegistryConfig(registryAddress, registryType));
+            registryService.init(new RegistryConfig(registryAddress, registryType,loadBalancer));
         } catch (Exception e) {
             LOGGER.error("RPC Server启动失败！：{}", e);
         }

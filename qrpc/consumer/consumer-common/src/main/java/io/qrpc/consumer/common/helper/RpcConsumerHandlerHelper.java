@@ -29,7 +29,9 @@ public class RpcConsumerHandlerHelper {
      * @description: 23章新增，生成map的key，ip_port
      */
     private static String getKey(ServiceMeta serviceMeta) {
-        return String.join("_", serviceMeta.getRegistryAddr(), String.valueOf(serviceMeta.getPort()));
+        return String.join("_",
+                serviceMeta.getServiceAddr(),
+                String.valueOf(serviceMeta.getServicePort()));
     }
 
     /**

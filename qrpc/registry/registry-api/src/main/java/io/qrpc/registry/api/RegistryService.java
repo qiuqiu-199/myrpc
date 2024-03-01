@@ -35,7 +35,7 @@ public interface RegistryService {
      * @return: io.qrpc.protocol.meta.ServiceMeta
      * @description: 服务发现
      */
-    ServiceMeta discovery(String serviceKey, int invokerHashcode) throws Exception;
+    ServiceMeta discovery(String serviceKey, int invokerHashcode,String sourceIp) throws Exception;
     /**
      * @author: qiu
      * @date: 2024/2/22 11:11

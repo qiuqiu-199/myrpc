@@ -8,6 +8,7 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.qrpc.common.helper.RpcServiceHelper;
 import io.qrpc.common.threadPool.ClientThreadPool;
+import io.qrpc.common.utils.IpUtils;
 import io.qrpc.consumer.common.helper.RpcConsumerHandlerHelper;
 import io.qrpc.protocol.meta.ServiceMeta;
 import io.qrpc.proxy.api.consumer.Consumer;
@@ -28,6 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Author: qiuzhiq
  * @Date: 2024/1/19 17:37
  * @Description: 消费者启动端
+ * 44章，增加源IP成员变量，构造时赋值
  */
 
 //实现Consumer接口的sendRequest方法
@@ -38,12 +40,14 @@ public class RpcConsumer implements Consumer {
     private final EventLoopGroup eventLoopGroup;
 
     private static volatile RpcConsumer instance;
+    private final String localIp;
 
     //缓存当前消费者与服务端的连接
     //TODO 一个handler是一个连接吗
     private static Map<String, RpcConsumerHandler> handlerMap = new ConcurrentHashMap<>();
 
     private RpcConsumer() {
+        localIp = IpUtils.getLocalHostIp();
         bootstrap = new Bootstrap();
         eventLoopGroup = new NioEventLoopGroup(4);
         bootstrap.group(eventLoopGroup)
@@ -81,17 +85,17 @@ public class RpcConsumer implements Consumer {
         int invokerHashcode = parameters == null ? serviceKey.hashCode() : parameters[0].hashCode();
 
         //根据serviceKey和invokerHashcode通过接口获取服务元数据serviceMeta
-        ServiceMeta serviceMeta = registryService.discovery(serviceKey, invokerHashcode);
+        ServiceMeta serviceMeta = registryService.discovery(serviceKey, invokerHashcode,localIp);
 
         //根据serviceMeta获取对应的ConsumerHandler，通过Handler发送请求并接收结果
         if (serviceMeta != null) {
             RpcConsumerHandler consumerHandler = RpcConsumerHandlerHelper.get(serviceMeta);
             if (consumerHandler == null) {
-                consumerHandler = getRpcConsumerHandler(serviceMeta.getRegistryAddr(), serviceMeta.getPort());
+                consumerHandler = getRpcConsumerHandler(serviceMeta.getServiceAddr(), serviceMeta.getServicePort());
                 RpcConsumerHandlerHelper.put(serviceMeta, consumerHandler);
             } else if (!consumerHandler.getcHannel().isActive()) { //缓存中存在但是不活跃，TODO 待进一步理解
                 consumerHandler.close();
-                consumerHandler = getRpcConsumerHandler(serviceMeta.getRegistryAddr(), serviceMeta.getPort());
+                consumerHandler = getRpcConsumerHandler(serviceMeta.getServiceAddr(), serviceMeta.getServicePort());
                 RpcConsumerHandlerHelper.put(serviceMeta, consumerHandler);
             }
             //根据请求选择的调用方式选择对应的调用方式（同步、异步和单向调用）

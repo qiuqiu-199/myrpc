@@ -6,6 +6,7 @@ import io.qrpc.loadBalancer.random.RandomLoadBalancer;
 import io.qrpc.protocol.meta.ServiceMeta;
 import io.qrpc.registry.api.RegistryService;
 import io.qrpc.registry.api.config.RegistryConfig;
+import io.qrpc.spi.loader.ExtensionLoader;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
@@ -46,6 +47,7 @@ public class ZookeeperRegistryService implements RegistryService {
      * @param: config
      * @return: void
      * @description: 21章新增，构建CuratorFramework客户端并初始化ServiceDiscovery对象 TODO 待进一步理解
+     *42章，根据注册配置的负载均衡参数加载负载均衡接口的SPI实现类
      */
     @Override
     public void init(RegistryConfig config) throws Exception {
@@ -69,7 +71,7 @@ public class ZookeeperRegistryService implements RegistryService {
         this.serviceDiscovery.start();
 
         //24章新增，后续SPI扩展，这里先直接new
-        this.serviceLoadBalancer = new RandomLoadBalancer<>();
+        this.serviceLoadBalancer = ExtensionLoader.getExtension(ServiceLoadBalancer.class,config.getServiceLoadBalance());
     }
 
     /**
@@ -91,8 +93,8 @@ public class ZookeeperRegistryService implements RegistryService {
         ServiceInstance<ServiceMeta> serviceInstance = ServiceInstance
                 .<ServiceMeta>builder()
                 .name(RpcServiceHelper.buildServiceKey(serviceMeta.getServiceName(), serviceMeta.getServiceVersion(), serviceMeta.getServiceGroup()))
-                .address(serviceMeta.getRegistryAddr())
-                .port(serviceMeta.getPort())
+                .address(serviceMeta.getServiceAddr())
+                .port(serviceMeta.getServicePort())
                 .payload(serviceMeta)
                 .build();
 
@@ -113,8 +115,8 @@ public class ZookeeperRegistryService implements RegistryService {
         ServiceInstance<ServiceMeta> serviceInstance = ServiceInstance
                 .<ServiceMeta>builder()
                 .name(RpcServiceHelper.buildServiceKey(serviceMeta.getServiceName(), serviceMeta.getServiceVersion(), serviceMeta.getServiceGroup()))
-                .address(serviceMeta.getRegistryAddr())
-                .port(serviceMeta.getPort())
+                .address(serviceMeta.getServiceAddr())
+                .port(serviceMeta.getServicePort())
                 .payload(serviceMeta)
                 .build();
 
@@ -131,13 +133,13 @@ public class ZookeeperRegistryService implements RegistryService {
      * 24章，使用负载均衡实现类来选择其中一个服务
      */
     @Override
-    public ServiceMeta discovery(String serviceKey, int invokerHashcode) throws Exception {
+    public ServiceMeta discovery(String serviceKey, int invokerHashcode,String sourceIp) throws Exception {
         LOGGER.info("ZookeeperRegistryService#discovery发现服务中...");
         //首先调用ServiceDiscovery#queryForInstance方法根据服务名获取ServiceInstance的集合，根据某种策略中集合中选取一个ServiceInstance
         //接着将ServiceInstance中的服务员数据返回
         Collection<ServiceInstance<ServiceMeta>> serviceInstances = serviceDiscovery.queryForInstances(serviceKey);
         //目前使用随机策略选择ServiceInstance
-        ServiceInstance<ServiceMeta> instance = this.serviceLoadBalancer.select((List<ServiceInstance<ServiceMeta>>)serviceInstances,invokerHashcode);
+        ServiceInstance<ServiceMeta> instance = this.serviceLoadBalancer.select((List<ServiceInstance<ServiceMeta>>)serviceInstances,invokerHashcode,sourceIp);
         if (instance != null) return instance.getPayload();
 
         return null;

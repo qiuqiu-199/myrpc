@@ -24,5 +24,7 @@ public class RpcConstants {
     public static final String SERIALIZATION_PROTOSTUFF = "protostuff";
     public static final String SERIALIZATION_HESSIAN2 = "hessian2";
 
-
+    //负载均衡
+    public static final String SERVICE_LOAD_BALANCER_RANDOM = "random";
+    public static final String SERVICE_LOAD_BALANCER_ZKCONSISTENTHASH = "zkconsistenthash";
 }

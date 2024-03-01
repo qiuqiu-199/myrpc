@@ -228,6 +228,7 @@ public class ExtensionLoader<T> {
         Class<?> aClass = getExtensionClasses()
                 .get(name);
         if (Objects.isNull(aClass)) {
+            System.out.println(name);
             throw new IllegalStateException("name is error");
         }
         //先试图从spiInstances中获取需要的扩展类的对象，如果为空说明还没有创建对象，就通过Class对象创建实现类的对象存入spiInstances中，创建失败就抛异常

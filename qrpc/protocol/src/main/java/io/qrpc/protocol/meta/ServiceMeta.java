@@ -22,6 +22,6 @@ public class ServiceMeta implements Serializable {
     private String serviceName;//服务名
     private String serviceVersion;//服务版本
     private String serviceGroup;//服务分组
-    private String registryAddr;//服务ip
-    private int port;//服务端口
+    private String serviceAddr;//服务ip
+    private int servicePort;//服务端口
 }

@@ -40,6 +40,7 @@ public class RpcClient {
             String serviceGroup,
             String seriliazationType,
             String proxyType,
+            String loadBalancer,
             long timeout,
             boolean async,
             boolean oneway) {
@@ -50,7 +51,7 @@ public class RpcClient {
         this.timeout = timeout;
         this.async = async;
         this.oneway = oneway;
-        this.registryService = this.getRegistryService(registryAddress,registryType);
+        this.registryService = this.getRegistryService(registryAddress,registryType,loadBalancer);
     }
 
     /**
@@ -61,12 +62,12 @@ public class RpcClient {
      * @return: io.qrpc.registry.api.RegistryService
      * @description:
      */
-    private RegistryService getRegistryService(String registryAddress, String registryType) {
+    private RegistryService getRegistryService(String registryAddress, String registryType,String loadBalancer) {
         if (StringUtils.isEmpty(registryType)) throw new IllegalArgumentException("未指定registryType！！");
         //23章，后续使用SPI扩展，目前先使用zookeeper
         ZookeeperRegistryService registryService = new ZookeeperRegistryService();
         try {
-            registryService.init(new RegistryConfig(registryAddress,registryType));
+            registryService.init(new RegistryConfig(registryAddress,registryType,loadBalancer));
         } catch (Exception e) {
             LOGGER.error("RpcClient初始化registryService失败：{}",e);
             throw new RegistryException(e.getMessage(),e);
