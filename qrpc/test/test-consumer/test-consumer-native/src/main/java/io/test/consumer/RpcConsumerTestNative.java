@@ -41,7 +41,7 @@ public class RpcConsumerTestNative {
     private RpcClient rpcClient;
     @Before
     public void init(){
-        rpcClient = new RpcClient("127.0.0.1:2181", "zookeeper", "1.0.0", "qiu", "protostuff", "cglib","ZkConsistentHash",3000, false, false);
+        rpcClient = new RpcClient("127.0.0.1:2181", "zookeeper", "1.0.0", "qiu", "protostuff", "cglib","leastconnection",3000, false, false);
     }
 
     @Test

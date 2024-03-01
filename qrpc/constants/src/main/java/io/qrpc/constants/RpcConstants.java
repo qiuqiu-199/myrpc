@@ -27,4 +27,9 @@ public class RpcConstants {
     //负载均衡
     public static final String SERVICE_LOAD_BALANCER_RANDOM = "random";
     public static final String SERVICE_LOAD_BALANCER_ZKCONSISTENTHASH = "zkconsistenthash";
+
+    //加权版负载均衡
+    public static final String SERVICE_ENHANCED_LOAD_BALANCE_PREFIX = "enhanced_";//加权版权重前缀
+    public static final int SERVICE_WEIGHT_MIN = 1;//最小权重
+    public static final int SERVICE_WEIGHT_MAX = 100;//最高权重
 }

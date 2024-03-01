@@ -1,1 +1,2 @@
 robin=io.qrpc.loadBalancer.robin.RobinLoadBalancer
+robinweight=io.qrpc.loadBalancer.robin.RobinWeightLoadBalancer

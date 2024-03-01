@@ -1,1 +1,2 @@
 random=io.qrpc.loadBalancer.random.RandomLoadBalancer
+randomweight=io.qrpc.loadBalancer.random.RandomWeightLoadBalancer

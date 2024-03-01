@@ -10,6 +10,7 @@ import io.qrpc.common.helper.RpcServiceHelper;
 import io.qrpc.common.threadPool.ClientThreadPool;
 import io.qrpc.common.utils.IpUtils;
 import io.qrpc.consumer.common.helper.RpcConsumerHandlerHelper;
+import io.qrpc.loadBalancer.context.ConnectionsContext;
 import io.qrpc.protocol.meta.ServiceMeta;
 import io.qrpc.proxy.api.consumer.Consumer;
 import io.qrpc.proxy.api.future.RpcFuture;
@@ -91,11 +92,11 @@ public class RpcConsumer implements Consumer {
         if (serviceMeta != null) {
             RpcConsumerHandler consumerHandler = RpcConsumerHandlerHelper.get(serviceMeta);
             if (consumerHandler == null) {
-                consumerHandler = getRpcConsumerHandler(serviceMeta.getServiceAddr(), serviceMeta.getServicePort());
+                consumerHandler = getRpcConsumerHandler(serviceMeta);
                 RpcConsumerHandlerHelper.put(serviceMeta, consumerHandler);
             } else if (!consumerHandler.getcHannel().isActive()) { //缓存中存在但是不活跃，TODO 待进一步理解
                 consumerHandler.close();
-                consumerHandler = getRpcConsumerHandler(serviceMeta.getServiceAddr(), serviceMeta.getServicePort());
+                consumerHandler = getRpcConsumerHandler(serviceMeta);
                 RpcConsumerHandlerHelper.put(serviceMeta, consumerHandler);
             }
             //根据请求选择的调用方式选择对应的调用方式（同步、异步和单向调用）
@@ -104,15 +105,26 @@ public class RpcConsumer implements Consumer {
         return null;
     }
 
-    //获取handler，与Netty服务端建立连接
-    private RpcConsumerHandler getRpcConsumerHandler(String ip, int port) throws InterruptedException {
+    /**
+     * @author: qiu
+     * @date: 2024/3/1 19:54
+     * @param: meta
+     * @return: io.qrpc.consumer.common.handler.RpcConsumerHandler
+     * @description: 与Netty服务端建立连接，并返回handler
+     * 6.5节修改，参数修改为ServiceMeta，连接成功后应将连接数的信息保存到ConnectionContext里
+     */
+    private RpcConsumerHandler getRpcConsumerHandler(ServiceMeta meta) throws InterruptedException {
         LOGGER.info("RpcConsumer#getRpcConsumerHandler连接Netty服务端中...");
         ChannelFuture future;
-        future = bootstrap.connect(ip, port).sync();
+        future = bootstrap.connect(meta.getServiceAddr(), meta.getServicePort()).sync();
         future.addListener((ChannelFutureListener) listener -> {
-            if (future.isSuccess()) LOGGER.info("连接Netty服务端{}:{}成功！", ip, port);
+            if (future.isSuccess()) {
+                LOGGER.info("连接Netty服务端{}:{}成功！", meta.getServiceAddr(), meta.getServicePort());
+                //6.5节，连接成功后，连接数+1
+                ConnectionsContext.addConnection(meta);
+            }
             else {
-                LOGGER.error("连接Netty服务端{}:{}失败", ip, port);
+                LOGGER.error("连接Netty服务端{}:{}失败", meta.getServiceAddr(), meta.getServicePort());
                 future.cause().printStackTrace();
                 eventLoopGroup.shutdownGracefully();
             }

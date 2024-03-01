@@ -1,1 +1,2 @@
 iphash=io.qrpc.sourceip.hash.SourceIpHashLoadBalancer
+iphashweight=io.qrpc.sourceip.hash.SourceIpHashweightLoadBalancer

@@ -24,4 +24,5 @@ public class ServiceMeta implements Serializable {
     private String serviceGroup;//服务分组
     private String serviceAddr;//服务ip
     private int servicePort;//服务端口
+    private int weight; //服务权重，权重越高，选中该服务的机会越大
 }

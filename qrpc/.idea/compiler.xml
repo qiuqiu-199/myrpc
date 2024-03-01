@@ -15,6 +15,7 @@
         <module name="consumer-native" />
         <module name="loadBalancer-api" />
         <module name="loadBalancer-consistentHash-zk" />
+        <module name="loadBalancer-least-connections" />
         <module name="loadBalancer-random" />
         <module name="loadBalancer-robin" />
         <module name="loadBalancer-sourceip-hash" />

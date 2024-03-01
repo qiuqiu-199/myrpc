@@ -3,6 +3,7 @@ package io.qrpc.provider.common.scanner;
 import io.qrpc.annotation.RpcService;
 import io.qrpc.common.helper.RpcServiceHelper;
 import io.qrpc.common.scanner.ClassScanner;
+import io.qrpc.constants.RpcConstants;
 import io.qrpc.protocol.meta.ServiceMeta;
 import io.qrpc.registry.api.RegistryService;
 import org.slf4j.Logger;
@@ -53,7 +54,9 @@ public class RpcServiceScanner extends ClassScanner {
                             rpcService.version(),
                             rpcService.group(),
                             host,
-                            port);
+                            port,
+                            getweight(rpcService.weight())
+                    );
                     registryService.registry(serviceMeta);
 
                     //TODO 目前先简单处理key为服务名+版本+分组，后续完善
@@ -65,6 +68,21 @@ public class RpcServiceScanner extends ClassScanner {
             }
         });
         return handlerMap;
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/1 14:27
+     * @param: weight
+     * @return: int
+     * @description: 6.5节新增，让用户设定的权重不超过上下限
+     */
+    private static int getweight(int weight) {
+        if (weight < RpcConstants.SERVICE_WEIGHT_MIN)
+            return RpcConstants.SERVICE_WEIGHT_MIN;
+        else if (weight > RpcConstants.SERVICE_WEIGHT_MAX)
+            return RpcConstants.SERVICE_WEIGHT_MAX;
+        return weight;
     }
 
     /**

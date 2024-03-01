@@ -2,6 +2,7 @@ package io.qrpc.registry.zookeeper;
 
 import io.qrpc.common.helper.RpcServiceHelper;
 import io.qrpc.loadBalancer.api.ServiceLoadBalancer;
+import io.qrpc.loadBalancer.helper.ServiceLoadBalancerHelper;
 import io.qrpc.loadBalancer.random.RandomLoadBalancer;
 import io.qrpc.protocol.meta.ServiceMeta;
 import io.qrpc.registry.api.RegistryService;
@@ -39,7 +40,7 @@ public class ZookeeperRegistryService implements RegistryService {
     private ServiceDiscovery<ServiceMeta> serviceDiscovery;
 
     //负载均衡接口
-    private ServiceLoadBalancer<ServiceInstance<ServiceMeta>> serviceLoadBalancer;
+    private ServiceLoadBalancer<ServiceMeta> serviceLoadBalancer;
 
     /**
      * @author: qiu
@@ -135,12 +136,17 @@ public class ZookeeperRegistryService implements RegistryService {
     @Override
     public ServiceMeta discovery(String serviceKey, int invokerHashcode,String sourceIp) throws Exception {
         LOGGER.info("ZookeeperRegistryService#discovery发现服务中...");
-        //首先调用ServiceDiscovery#queryForInstance方法根据服务名获取ServiceInstance的集合，根据某种策略中集合中选取一个ServiceInstance
+        //首先调用ServiceDiscovery#queryForInstance方法根据服务名获取ServiceInstance的集合，根据某种负载均衡策略从集合中选取一个ServiceInstance
         //接着将ServiceInstance中的服务员数据返回
         Collection<ServiceInstance<ServiceMeta>> serviceInstances = serviceDiscovery.queryForInstances(serviceKey);
-        //目前使用随机策略选择ServiceInstance
-        ServiceInstance<ServiceMeta> instance = this.serviceLoadBalancer.select((List<ServiceInstance<ServiceMeta>>)serviceInstances,invokerHashcode,sourceIp);
-        if (instance != null) return instance.getPayload();
+
+        ServiceMeta meta = this.serviceLoadBalancer.select(
+                ServiceLoadBalancerHelper.getServiceMetaList((List<ServiceInstance<ServiceMeta>>)serviceInstances),
+                invokerHashcode,
+                sourceIp
+        );
+
+        if (meta != null) return meta;
 
         return null;
     }

@@ -47,6 +47,11 @@
             <artifactId>loadBalancer-consistentHash-zk</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.qiu</groupId>
+            <artifactId>loadBalancer-least-connections</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

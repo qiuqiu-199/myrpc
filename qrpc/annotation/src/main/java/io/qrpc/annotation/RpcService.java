@@ -37,4 +37,9 @@ public @interface RpcService {
      * 接口的分组
      */
     String group() default "";
+
+    /**
+     * 服务权重，默认1
+     */
+    int weight() default 1;
 }
