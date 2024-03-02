@@ -1,0 +1,1 @@
+nacos=io.qrpc.registry.nacos.NacosRegistryService

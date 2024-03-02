@@ -32,4 +32,10 @@ public class RpcConstants {
     public static final String SERVICE_ENHANCED_LOAD_BALANCE_PREFIX = "enhanced_";//加权版权重前缀
     public static final int SERVICE_WEIGHT_MIN = 1;//最小权重
     public static final int SERVICE_WEIGHT_MAX = 100;//最高权重
+
+    //注册中心类型及对应的注册中心地址
+    public final static String REGISTRY_TYPE_ZOOKEEPER = "zookeeper";
+    public final static String REGISTRY_TYPE_ZOOKEEPER_ADDR = "127.0.0.1:2181";
+    public final static String REGISTRY_TYPE_NACOS = "nacos";
+    public final static String REGISTRY_TYPE_NACOS_ADDR = "127.0.0.1:8848";
 }

@@ -1,5 +1,6 @@
 package io.test.consumer;
 
+import io.qrpc.constants.RpcConstants;
 import io.qrpc.consumer.RpcClient;
 import io.qrpc.proxy.api.async.IAsyncObjectProxy;
 import io.qrpc.proxy.api.future.RpcFuture;
@@ -41,7 +42,7 @@ public class RpcConsumerTestNative {
     private RpcClient rpcClient;
     @Before
     public void init(){
-        rpcClient = new RpcClient("127.0.0.1:2181", "zookeeper", "1.0.0", "qiu", "protostuff", "cglib","leastconnection",3000, false, false);
+        rpcClient = new RpcClient(RpcConstants.REGISTRY_TYPE_NACOS_ADDR, RpcConstants.REGISTRY_TYPE_NACOS, "1.0.0", "qiu", "protostuff", "cglib","random",3000, false, false);
     }
 
     @Test

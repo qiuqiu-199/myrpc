@@ -29,6 +29,7 @@
         <module name="reflect-cglib" />
         <module name="reflect-jdk" />
         <module name="registry-api" />
+        <module name="registry-nacos" />
         <module name="registry-zookeeper" />
         <module name="serialization-api" />
         <module name="serialization-jdk" />

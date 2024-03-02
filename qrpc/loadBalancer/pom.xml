@@ -36,6 +36,7 @@
             <artifactId>protocol</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+        <!--zookeeper客户端-->
         <dependency>
             <groupId>org.apache.curator</groupId>
             <artifactId>curator-framework</artifactId>

@@ -16,6 +16,7 @@ import io.qrpc.provider.common.server.api.Server;
 import io.qrpc.registry.api.RegistryService;
 import io.qrpc.registry.api.config.RegistryConfig;
 import io.qrpc.registry.zookeeper.ZookeeperRegistryService;
+import io.qrpc.spi.loader.ExtensionLoader;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,7 +78,7 @@ public class BaseServer implements Server {
         RegistryService registryService = null;
         //根据传入的注册地址与注册类型创建对应的注册中心服务
         try {
-            registryService = new ZookeeperRegistryService();
+            registryService = ExtensionLoader.getExtension(RegistryService.class,registryType);
             registryService.init(new RegistryConfig(registryAddress, registryType,loadBalancer));
         } catch (Exception e) {
             LOGGER.error("RPC Server启动失败！：{}", e);

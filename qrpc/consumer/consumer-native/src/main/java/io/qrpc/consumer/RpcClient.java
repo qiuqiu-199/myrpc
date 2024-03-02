@@ -65,7 +65,8 @@ public class RpcClient {
     private RegistryService getRegistryService(String registryAddress, String registryType,String loadBalancer) {
         if (StringUtils.isEmpty(registryType)) throw new IllegalArgumentException("未指定registryType！！");
         //23章，后续使用SPI扩展，目前先使用zookeeper
-        ZookeeperRegistryService registryService = new ZookeeperRegistryService();
+        //6.5SPI扩展
+        RegistryService registryService = ExtensionLoader.getExtension(RegistryService.class,registryType);
         try {
             registryService.init(new RegistryConfig(registryAddress,registryType,loadBalancer));
         } catch (Exception e) {

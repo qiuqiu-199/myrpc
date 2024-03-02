@@ -18,6 +18,6 @@ public class RpcServiceHelper {
      * @return 三个部分用井号拼接的字符串
      */
     public static String buildServiceKey(String serviceName, String serviceVersion, String group) {
-        return String.join("#", serviceName, serviceVersion, group);
+        return String.join("-", serviceName, serviceVersion, group);
     }
 }

@@ -2,6 +2,7 @@ package io.qrpc.registry.api;
 
 import io.qrpc.protocol.meta.ServiceMeta;
 import io.qrpc.registry.api.config.RegistryConfig;
+import io.qrpc.spi.annotation.SPI;
 
 /**
  * @InterfaceName: RegistryService
@@ -9,7 +10,7 @@ import io.qrpc.registry.api.config.RegistryConfig;
  * @Date: 2024/2/22 11:01
  * @Description: 21章，注册中心顶层接口，定义了5个服务注册与发现相关方法，基于zookeeper或者其他的注册中心需要实现这些方法
  */
-
+@SPI
 public interface RegistryService {
     /**
      * @author: qiu

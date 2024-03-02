@@ -7,6 +7,7 @@ import io.qrpc.loadBalancer.random.RandomLoadBalancer;
 import io.qrpc.protocol.meta.ServiceMeta;
 import io.qrpc.registry.api.RegistryService;
 import io.qrpc.registry.api.config.RegistryConfig;
+import io.qrpc.spi.annotation.SpiClass;
 import io.qrpc.spi.loader.ExtensionLoader;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @ClassName: ZookeeperRegistryService
@@ -27,7 +29,7 @@ import java.util.List;
  * @Date: 2024/2/22 11:16
  * @Description: 21章新增，基于Zookeeper实现注册中心并实现服务注册与发现相关的5个方法
  */
-
+@SpiClass
 public class ZookeeperRegistryService implements RegistryService {
     public static final Logger LOGGER = LoggerFactory.getLogger(ZookeeperRegistryService.class);
     //初始化CuratorFramework客户端的时候，进行连接重试的间隔时间
@@ -140,8 +142,9 @@ public class ZookeeperRegistryService implements RegistryService {
         //接着将ServiceInstance中的服务员数据返回
         Collection<ServiceInstance<ServiceMeta>> serviceInstances = serviceDiscovery.queryForInstances(serviceKey);
 
+        //这里调用的select方法的第一个参数使用stream将ServiceInstance<ServiceMeta>列表转换成ServiceMeta列表。
         ServiceMeta meta = this.serviceLoadBalancer.select(
-                ServiceLoadBalancerHelper.getServiceMetaList((List<ServiceInstance<ServiceMeta>>)serviceInstances),
+                serviceInstances.stream().map(ServiceInstance::getPayload).collect(Collectors.toList()),
                 invokerHashcode,
                 sourceIp
         );
