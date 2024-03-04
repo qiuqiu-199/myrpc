@@ -34,8 +34,19 @@ public class RpcConstants {
     public static final int SERVICE_WEIGHT_MAX = 100;//最高权重
 
     //注册中心类型及对应的注册中心地址
-    public final static String REGISTRY_TYPE_ZOOKEEPER = "zookeeper";
-    public final static String REGISTRY_TYPE_ZOOKEEPER_ADDR = "127.0.0.1:2181";
-    public final static String REGISTRY_TYPE_NACOS = "nacos";
-    public final static String REGISTRY_TYPE_NACOS_ADDR = "127.0.0.1:8848";
+    public static final String REGISTRY_TYPE_ZOOKEEPER = "zookeeper";
+    public static final String REGISTRY_TYPE_ZOOKEEPER_ADDR = "127.0.0.1:2181";
+    public static final String REGISTRY_TYPE_NACOS = "nacos";
+    public static final String REGISTRY_TYPE_NACOS_ADDR = "127.0.0.1:8848";
+
+    //7节，新增心跳消息类型
+    public static final String HEARTBEAT_PING = "ping";
+    public static final String HEARTBEAT_PONG = "pong";
+
+    //7节，新增定义一些设置channel处理器的key
+    public static final String CODEC_ENCODER = "encoder";
+    public static final String CODEC_DEVODER = "decoder";
+    public static final String CODEC_HANDLER = "handle";
+    public static final String CODEC_SERVER_IDEL_HANDLER = "server-idle-handler";
+    public static final String CODEC_CLIENT_IDLE_HANDLER = "client-idle-handler";
 }

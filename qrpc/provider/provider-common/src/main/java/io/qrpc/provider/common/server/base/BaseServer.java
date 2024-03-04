@@ -9,9 +9,12 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.qrpc.codec.RpcDecoder;
 import io.qrpc.codec.RpcEncoder;
+import io.qrpc.constants.RpcConstants;
 import io.qrpc.provider.common.handler.RpcProviderHandler;
+import io.qrpc.provider.common.manager.ProviderConnectionManager;
 import io.qrpc.provider.common.server.api.Server;
 import io.qrpc.registry.api.RegistryService;
 import io.qrpc.registry.api.config.RegistryConfig;
@@ -23,6 +26,10 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName: BaseServer
@@ -40,54 +47,73 @@ public class BaseServer implements Server {
     protected String host = "127.0.0.1";
     protected int port = 27110;
     private String reflectType;  //反射类型，是jdk还是cglib
+    //保存扫描到的服务接口实现类的Class对象
     protected Map<String, Object> handlerMap = new HashMap<>();
 
     protected RegistryService registryService;
 
+    //7节，用于提供者定时发送心跳信息和移除连接缓存中的非活跃连接
+    protected ScheduledExecutorService executorService;
+    protected int heartbeatInterval = 3000;
+    protected int scanNotActiveChannelInterval = 6000;
+
     /**
      * @author: qiu
      * @date: 2024/2/24 16:59
-     * @param: serverAddress
-     * @param: registryAddress
-     * @param: registryType
-     * @param: reflectType
-     * @return: null
      * @description: 22章修改，构造方法根据传入的注册中心地址和注册中心类型引入注册中心
      * 42章，构造方法增加负载均衡参数
      */
-    public BaseServer(String serverAddress, String registryAddress, String registryType, String reflectType,String loadBalancer) {
+    public BaseServer(
+            String serverAddress,
+            String registryAddress,
+            String registryType,
+            String reflectType,
+            String loadBalancer,
+            int heartbeatInterval,
+            int scanNotActiveChannelInterval
+    ) {
         if (!StringUtils.isEmpty(serverAddress)) {
             this.host = serverAddress.split(":")[0];
             this.port = Integer.parseInt(serverAddress.split(":")[1]);
         }
         this.reflectType = reflectType;
-        this.registryService = getRegistryService(registryAddress, registryType,loadBalancer);
+        this.registryService = getRegistryService(registryAddress, registryType, loadBalancer);
+
+        //参数小于0，则使用默认值
+        if (heartbeatInterval > 0) this.heartbeatInterval = heartbeatInterval;
+        if (scanNotActiveChannelInterval > 0) this.scanNotActiveChannelInterval = heartbeatInterval;
     }
 
     /**
      * @author: qiu
      * @date: 2024/2/24 17:05
-     * @param: registryAddress
-     * @param: registryType
-     * @return: io.qrpc.registry.api.RegistryService
      * @description: 22章新增，预留SPI扩展，目前先直接用new来给提供者引入注册中心
      * 42章，方法增加负载均衡参数
      */
-    private RegistryService getRegistryService(String registryAddress, String registryType,String loadBalancer) {
-        //TODO 22章预留SPI扩展
+    private RegistryService getRegistryService(String registryAddress, String registryType, String loadBalancer) {
+        // 22章预留SPI扩展
         RegistryService registryService = null;
         //根据传入的注册地址与注册类型创建对应的注册中心服务
         try {
-            registryService = ExtensionLoader.getExtension(RegistryService.class,registryType);
-            registryService.init(new RegistryConfig(registryAddress, registryType,loadBalancer));
+            registryService = ExtensionLoader.getExtension(RegistryService.class, registryType);
+            registryService.init(new RegistryConfig(registryAddress, registryType, loadBalancer));
         } catch (Exception e) {
             LOGGER.error("RPC Server启动失败！：{}", e);
         }
         return registryService;
     }
 
+    /**
+     * @author: qiu
+     * @date: 2024/3/4 13:48
+     * @description: 7节修改，增加IdleStateHandler
+     */
     @Override
     public void startNettyServer() {
+        //服务端启动后，开启心跳机制
+//        this.startHeartbeat();
+
+        //创建Netty服务端
         NioEventLoopGroup bossGroup = new NioEventLoopGroup();
         NioEventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
@@ -95,14 +121,13 @@ public class BaseServer implements Server {
             bootstrap.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)
                     .childHandler(new ChannelInitializer<SocketChannel>() {
                         @Override
-                        protected void initChannel(SocketChannel socketChannel) throws Exception {
+                        protected void initChannel(SocketChannel socketChannel) {
                             socketChannel.pipeline()
-                                    //临时的编解码，后面会自己实现。
-                                    //第7章实现
-                                    .addLast(new RpcDecoder())
-                                    .addLast(new RpcEncoder())
+                                    .addLast(RpcConstants.CODEC_DEVODER, new RpcDecoder())
+                                    .addLast(RpcConstants.CODEC_ENCODER, new RpcEncoder())
+                                    .addLast(RpcConstants.CODEC_SERVER_IDEL_HANDLER, new IdleStateHandler(0, 0, heartbeatInterval+1000, TimeUnit.MILLISECONDS))
                                     //由我们自定义的处理器来处理数据
-                                    .addLast(new RpcProviderHandler(handlerMap, reflectType));
+                                    .addLast(RpcConstants.CODEC_HANDLER, new RpcProviderHandler(handlerMap, reflectType));
                         }
                     })
                     //下面的设置对应tcp/ip协议, listen函数中的 backlog 参数，用来初始化服务端可连接队列。
@@ -118,5 +143,22 @@ public class BaseServer implements Server {
             workerGroup.shutdownGracefully();
             bossGroup.shutdownGracefully();
         }
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/4 9:30
+     * @description: 7节，定义两个定时任务，分别清理和发送心跳
+     */
+    private void startHeartbeat() {
+        executorService = Executors.newScheduledThreadPool(2);
+        //定时扫描清理连接缓存中的非活跃连接
+        executorService.scheduleAtFixedRate(() -> {
+            LOGGER.info("提供者正在扫描清理非活跃的连接...");
+            ProviderConnectionManager.removeNotActiveChannel();
+        }, 10, this.heartbeatInterval, TimeUnit.MILLISECONDS);
+
+        //定时发送ping信息
+        executorService.scheduleAtFixedRate(ProviderConnectionManager::sendPingFromProvider, 10, this.scanNotActiveChannelInterval, TimeUnit.MILLISECONDS);
     }
 }

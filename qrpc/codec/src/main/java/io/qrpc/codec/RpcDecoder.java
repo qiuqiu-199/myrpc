@@ -82,7 +82,10 @@ public class RpcDecoder extends ByteToMessageDecoder implements RpcCodec {
 
         //根据消息类型还原成不同的消息协议
         switch (msgTypeEnum) {
+            //来自消费者的消息统一反序列化为RpcRequest，不管是请求消息、消费者发送的ping消息还是pong消息
             case REQUEST:
+            case HEARTBEAT_FROM_CONSUMER:
+            case HEARTBEAT_TO_PROVIDER:
                 RpcRequest rpcRequest = jdkSerialization.desrialize(data, RpcRequest.class);
                 if (rpcRequest != null) {
                     RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
@@ -92,7 +95,11 @@ public class RpcDecoder extends ByteToMessageDecoder implements RpcCodec {
                     list.add(protocol);
                 }
                 break;
+
+            //来自提供者的消息统一反序列化为RpcResponse，不管是响应消息、提供者发送的ping消息还是pong消息
             case RESPONSE:
+            case HEARTBEAT_FROM_PROVIDER:
+            case HEARTBEAT_TO_CONSUMER:
                 RpcResponse rpcResponse = jdkSerialization.desrialize(data, RpcResponse.class);
                 if (rpcResponse != null) {
                     RpcProtocol<RpcResponse> protocol = new RpcProtocol<>();
@@ -101,10 +108,6 @@ public class RpcDecoder extends ByteToMessageDecoder implements RpcCodec {
 
                     list.add(protocol);
                 }
-            case HEARTBEAT:
-                //TODO
-                break;
         }
-        System.out.println("解码成功！");
     }
 }

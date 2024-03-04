@@ -13,8 +13,12 @@ public enum RpcType {
     REQUEST(1),
     //响应消息
     RESPONSE(2),
+
     //心跳消息
-    HEARTBEAT(3);
+    HEARTBEAT_FROM_CONSUMER(3),//消费者发送的ping消息
+    HEARTBEAT_FROM_PROVIDER(5),//提供者发送的ping消息
+    HEARTBEAT_TO_PROVIDER(6), //消费者发送的pong消息
+    HEARTBEAT_TO_CONSUMER(4); //提供者发送的pong消息
 
     private final int type;
 

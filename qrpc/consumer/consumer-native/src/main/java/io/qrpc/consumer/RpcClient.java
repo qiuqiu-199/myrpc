@@ -33,6 +33,9 @@ public class RpcClient {
     private boolean oneway;
     private RegistryService registryService;
 
+    private int heartbeatInterval;
+    private int scanNotActiveChannelInterval;
+
     public RpcClient(
             String registryAddress,
             String registryType,
@@ -43,7 +46,9 @@ public class RpcClient {
             String loadBalancer,
             long timeout,
             boolean async,
-            boolean oneway) {
+            boolean oneway,
+            int heartbeatInterval,
+            int scanNotActiveChannelInterval) {
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
         this.seriliazationType = seriliazationType;
@@ -51,7 +56,9 @@ public class RpcClient {
         this.timeout = timeout;
         this.async = async;
         this.oneway = oneway;
-        this.registryService = this.getRegistryService(registryAddress,registryType,loadBalancer);
+        this.registryService = this.getRegistryService(registryAddress, registryType, loadBalancer);
+        this.heartbeatInterval = heartbeatInterval;
+        this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
     }
 
     /**
@@ -62,16 +69,16 @@ public class RpcClient {
      * @return: io.qrpc.registry.api.RegistryService
      * @description:
      */
-    private RegistryService getRegistryService(String registryAddress, String registryType,String loadBalancer) {
+    private RegistryService getRegistryService(String registryAddress, String registryType, String loadBalancer) {
         if (StringUtils.isEmpty(registryType)) throw new IllegalArgumentException("未指定registryType！！");
         //23章，后续使用SPI扩展，目前先使用zookeeper
         //6.5SPI扩展
-        RegistryService registryService = ExtensionLoader.getExtension(RegistryService.class,registryType);
+        RegistryService registryService = ExtensionLoader.getExtension(RegistryService.class, registryType);
         try {
-            registryService.init(new RegistryConfig(registryAddress,registryType,loadBalancer));
+            registryService.init(new RegistryConfig(registryAddress, registryType, loadBalancer));
         } catch (Exception e) {
-            LOGGER.error("RpcClient初始化registryService失败：{}",e);
-            throw new RegistryException(e.getMessage(),e);
+            LOGGER.error("RpcClient初始化registryService失败：{}", e);
+            throw new RegistryException(e.getMessage(), e);
         }
         return registryService;
     }
@@ -84,7 +91,7 @@ public class RpcClient {
      * @description: 20章优化，通过ProxyFactory接收基于jdk实现的动态代理工厂对象，并初始化代理工厂对象，然后返回代理工厂对象创建的代理对象
      * 32章修改，使用SPI机制获取代理工厂接口的扩展类对象
      */
-    public <T> T create(Class<T> interfaceClass){
+    public <T> T create(Class<T> interfaceClass) {
         LOGGER.info("RpcClient#create RPC客户端创建代理工厂并创建同步代理对象...");
         //这里多传入一个Consumer对象
 
@@ -100,7 +107,7 @@ public class RpcClient {
                         timeout,
                         async,
                         oneway,
-                        RpcConsumer.getInstance(),
+                        RpcConsumer.getInstance(this.heartbeatInterval, this.scanNotActiveChannelInterval),
                         registryService)
         );
         return proxyFactory.getProxy(interfaceClass);
@@ -113,23 +120,23 @@ public class RpcClient {
      * @return: io.qrpc.objectProxy.api.async.IAsyncObjectProxy
      * @description: 19章，构建异步化调用对象
      */
-    public <T> IAsyncObjectProxy createAsync(Class<T> interfaceClass){
+    public <T> IAsyncObjectProxy createAsync(Class<T> interfaceClass) {
         LOGGER.info("RpcClient#createAsync RPC客户端创建异步化代理对象...");
-        return new ObjectProxy<T>(
+        return new ObjectProxy<>(
                 interfaceClass,
                 serviceVersion,
                 serviceGroup,
                 seriliazationType,
                 timeout,
-                RpcConsumer.getInstance(),
+                RpcConsumer.getInstance(this.heartbeatInterval, this.scanNotActiveChannelInterval),
                 async,
                 oneway,
                 registryService
         );
     }
 
-    public void shutdown(){
+    public void shutdown() {
         LOGGER.info("RpcClient#shutdown...");
-        RpcConsumer.getInstance().close();
+        RpcConsumer.getInstance(this.heartbeatInterval, this.scanNotActiveChannelInterval).close();
     }
 }

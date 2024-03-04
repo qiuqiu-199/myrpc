@@ -1,6 +1,7 @@
 package io.qrpc.proxy.api.object;
 
 import io.qrpc.protocol.RpcProtocol;
+import io.qrpc.protocol.enumeration.RpcType;
 import io.qrpc.protocol.header.RpcHeaderFactory;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.proxy.api.async.IAsyncObjectProxy;
@@ -85,7 +86,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
 
         //封装协议信息
         RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
-        protocol.setHeader(RpcHeaderFactory.getRequestHeader(serializationType));
+        protocol.setHeader(RpcHeaderFactory.getRequestHeader(serializationType, RpcType.REQUEST.getType()));
         RpcRequest requestBody = new RpcRequest();
         requestBody.setClassName(method.getDeclaringClass().getName());
         requestBody.setMethodName(method.getName());
@@ -148,7 +149,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     private RpcProtocol<RpcRequest> createRequest(String className, String funName, Object[] args) {
         LOGGER.info("ObjectProxy#createRequest...");
         RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
-        protocol.setHeader(RpcHeaderFactory.getRequestHeader(this.serializationType));
+        protocol.setHeader(RpcHeaderFactory.getRequestHeader(this.serializationType,RpcType.REQUEST.getType()));
         RpcRequest request = new RpcRequest();
         request.setClassName(className);
         request.setMethodName(funName);

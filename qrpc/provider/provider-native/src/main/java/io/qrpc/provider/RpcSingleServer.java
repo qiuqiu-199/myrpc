@@ -27,9 +27,9 @@ public class RpcSingleServer extends BaseServer {
      * @return: null
      * @description: 42章修改，增加负载均衡参数，用户需要指定
      */
-    public RpcSingleServer(String serverAddress, String scanPackage,String registryAddress,String registryType,String reflectType,String loadBalancer) {
+    public RpcSingleServer(String serverAddress, String scanPackage,String registryAddress,String registryType,String reflectType,String loadBalancer,int heartbeatInterval,int scanNotActiveChannelInterval) {
         //TODO 这里必须调用父类构造方法否则报错，原因不明
-        super(serverAddress,registryAddress,registryType,reflectType,loadBalancer);
+        super(serverAddress,registryAddress,registryType,reflectType,loadBalancer,heartbeatInterval,scanNotActiveChannelInterval);
 
         try {
             this.handlerMap = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService(scanPackage,this.host,this.port,this.registryService);

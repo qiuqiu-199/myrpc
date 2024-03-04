@@ -10,6 +10,7 @@ import io.qrpc.common.helper.RpcServiceHelper;
 import io.qrpc.common.threadPool.ClientThreadPool;
 import io.qrpc.common.utils.IpUtils;
 import io.qrpc.consumer.common.helper.RpcConsumerHandlerHelper;
+import io.qrpc.consumer.common.manager.ConsumerConnectionManager;
 import io.qrpc.loadBalancer.context.ConnectionsContext;
 import io.qrpc.protocol.meta.ServiceMeta;
 import io.qrpc.proxy.api.consumer.Consumer;
@@ -24,6 +25,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName: RpcConsumer
@@ -31,46 +35,70 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Date: 2024/1/19 17:37
  * @Description: 消费者启动端
  * 44章，增加源IP成员变量，构造时赋值
+ * 7节，增加三个用于发送ping消息的成员变量
  */
 
 //实现Consumer接口的sendRequest方法
 public class RpcConsumer implements Consumer {
     private final static Logger LOGGER = LoggerFactory.getLogger(RpcConsumer.class);
 
+    //连接Netty服务端用
     private final Bootstrap bootstrap;
     private final EventLoopGroup eventLoopGroup;
 
+    //单例
     private static volatile RpcConsumer instance;
+
+    //负载均衡-源IP哈希算法需要传入的参数，构造方法中赋值
     private final String localIp;
 
-    //缓存当前消费者与服务端的连接
-    //TODO 一个handler是一个连接吗
-    private static Map<String, RpcConsumerHandler> handlerMap = new ConcurrentHashMap<>();
+    //7节，用于定时发送ping消息给提供者
+    private ScheduledExecutorService executorService;
+    private int heartbeatInterval = 3000; //默认心跳间隔30秒
+    private int scanNotActiveChannelInterval = 6000; //默认扫描移除空闲连接间隔60秒
 
-    private RpcConsumer() {
+    /**
+     * @author: qiu
+     * @date: 2024/3/3 23:00
+     * @description: 7节增加构造参数，由用户配置心跳间隔时间和移除非活跃连接的间隔时间
+     */
+    private RpcConsumer(int heartbeatInterval,int scanNotActiveChannelInterval) {
+        //小于0则使用默认间隔时间
+        if (heartbeatInterval > 0)
+            this.heartbeatInterval = heartbeatInterval;
+        if (scanNotActiveChannelInterval > 0)
+            this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
+
         localIp = IpUtils.getLocalHostIp();
+
         bootstrap = new Bootstrap();
         eventLoopGroup = new NioEventLoopGroup(4);
         bootstrap.group(eventLoopGroup)
                 .channel(NioSocketChannel.class)
-                .handler(new RpcConsumerInitializer());
+                .handler(new RpcConsumerInitializer(heartbeatInterval));
+
+        //7节，开启心跳机制
+        this.startHeartBeat();
     }
 
-    public static RpcConsumer getInstance() {
+    /**
+     * @author: qiu
+     * @date: 2024/3/4 0:09
+     * @description: 单例获取方法
+     * 7节修改，增加参数
+     */
+    public static RpcConsumer getInstance(int heartbeatInterval,int scanNotActiveChannelInterval) {
         if (instance == null) {
             synchronized (RpcConsumer.class) {
-                if (instance == null) instance = new RpcConsumer();
+                if (instance == null) instance = new RpcConsumer(heartbeatInterval,scanNotActiveChannelInterval);
             }
         }
         return instance;
     }
 
-
     /**
      * @author: qiu
      * @date: 2024/2/25 13:46
-     * @param: null
-     * @return: null
      * @description: 发送请求，后面由代理类调用
      * 23章修改，引入注册中心，通过服务与发现接口根据请求参数获取服务元数据，根据服务元数据获取handler来发送请求
      */
@@ -108,8 +136,6 @@ public class RpcConsumer implements Consumer {
     /**
      * @author: qiu
      * @date: 2024/3/1 19:54
-     * @param: meta
-     * @return: io.qrpc.consumer.common.handler.RpcConsumerHandler
      * @description: 与Netty服务端建立连接，并返回handler
      * 6.5节修改，参数修改为ServiceMeta，连接成功后应将连接数的信息保存到ConnectionContext里
      */
@@ -133,13 +159,9 @@ public class RpcConsumer implements Consumer {
         return future.channel().pipeline().get(RpcConsumerHandler.class);
     }
 
-    //关闭消费者
-
     /**
      * @author: qiu
      * @date: 2024/2/25 13:56
-     * @param:
-     * @return: void
      * @description: 关闭消费者的Netty客户端连接
      * 3.5节新增，关闭线程池
      * 23章修改，关闭Handler
@@ -148,5 +170,16 @@ public class RpcConsumer implements Consumer {
         RpcConsumerHandlerHelper.closeRpcClientHandler();
         eventLoopGroup.shutdownGracefully();
         ClientThreadPool.shutdowm();
+    }
+
+    private void startHeartBeat(){
+        executorService = Executors.newScheduledThreadPool(2);
+
+        executorService.scheduleAtFixedRate(()->{
+            LOGGER.info("消费者{}正在扫描清理非活跃连接...",IpUtils.getLoacalInetAddress());
+            ConsumerConnectionManager.removeNotActiveChannel();
+        },10,this.scanNotActiveChannelInterval, TimeUnit.MILLISECONDS);
+
+        executorService.scheduleAtFixedRate(ConsumerConnectionManager::sendPingFromConsumer,3,this.heartbeatInterval,TimeUnit.MILLISECONDS);
     }
 }
