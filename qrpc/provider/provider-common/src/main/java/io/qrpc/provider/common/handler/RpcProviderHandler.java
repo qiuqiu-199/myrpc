@@ -135,7 +135,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
         if (msgType == RpcType.REQUEST.getType()) {
             responseProtocol = handleRequest(protocol);
         } else if (msgType == RpcType.HEARTBEAT_FROM_CONSUMER.getType()) {
-            responseProtocol = handleHeartBeatFromConsumer(protocol);
+            responseProtocol = handleHeartBeatFromConsumer(protocol,channel);
         } else if (msgType == RpcType.HEARTBEAT_TO_PROVIDER.getType()){
             handleHeartBeatToProvider(protocol,channel);
         }
@@ -225,7 +225,8 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      * @date: 2024/3/3 20:36
      * @description: 7节新增，处理心跳消息并返回pong消息
      */
-    private RpcProtocol<RpcResponse> handleHeartBeatFromConsumer(RpcProtocol<RpcRequest> protocol) {
+    private RpcProtocol<RpcResponse> handleHeartBeatFromConsumer(RpcProtocol<RpcRequest> protocol, Channel channel) {
+        LOGGER.info("接收到来自消费者{}发送的ping消息，消息内容为{}",channel.remoteAddress(),protocol.getBody().getParameters()[0]);
         RpcProtocol<RpcResponse> responseProtocol = new RpcProtocol<>();
 
         //消息头设置

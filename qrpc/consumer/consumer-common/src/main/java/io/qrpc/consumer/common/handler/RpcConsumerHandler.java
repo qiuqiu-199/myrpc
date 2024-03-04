@@ -70,12 +70,14 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
         this.remotePeer = this.channel.remoteAddress();
         ConsumerChannelCache.addChannel(channel);
     }
+
     //7节，连接注销后，连接缓存移除对应的连接
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
         super.channelUnregistered(ctx);
         ConsumerChannelCache.removeChannel(channel);
     }
+
     //7节，连接失效后，连接缓存移除对应的连接
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
@@ -89,7 +91,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
         LOGGER.info("RpcConsumerHandler#channelRead0...");
         if (protocol == null) return;
 
-        handleMessage(protocol,ctx.channel());
+        handleMessage(protocol, ctx.channel());
     }
 
     /**
@@ -99,7 +101,8 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
      */
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        if (evt instanceof IdleStateEvent){
+        if (evt instanceof IdleStateEvent) {
+            LOGGER.info("消费者{}触发超时事件，准备向提供者{}发送ping消息...",ctx.channel().localAddress(),ctx.channel().remoteAddress());
             RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
 
             RpcHeader header = RpcHeaderFactory.getRequestHeader(RpcConstants.SERIALIZATION_PROTOSTUFF, RpcType.HEARTBEAT_FROM_CONSUMER.getType());
@@ -111,9 +114,9 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
             protocol.setBody(request);
 
             ctx.writeAndFlush(protocol);
-        }else {
-            super.userEventTriggered(ctx, evt);
         }
+            super.userEventTriggered(ctx, evt);
+
     }
 
     /**
@@ -123,12 +126,12 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
      */
     private void handleMessage(RpcProtocol<RpcResponse> protocol, Channel channel) {
         byte msgType = protocol.getHeader().getMsgType();
-        if (msgType == RpcType.RESPONSE.getType()){
+        if (msgType == RpcType.RESPONSE.getType()) {
             handleResponse(protocol);
-        }else if (msgType == RpcType.HEARTBEAT_FROM_PROVIDER.getType()){
-            handleHeartBeatFromProvider(protocol,channel);
-        }else if (msgType == RpcType.HEARTBEAT_TO_CONSUMER.getType()){
-            handleHeartBeatToConsumer(protocol,channel);
+        } else if (msgType == RpcType.HEARTBEAT_FROM_PROVIDER.getType()) {
+            handleHeartBeatFromProvider(protocol, channel);
+        } else if (msgType == RpcType.HEARTBEAT_TO_CONSUMER.getType()) {
+            handleHeartBeatToConsumer(protocol, channel);
         }
     }
 
@@ -148,6 +151,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
             LOGGER.info("RpcConsumerHandler#channelRead0消费者接收到来自提供者的结果存入future中...");
         }
     }
+
     /**
      * @author: qiu
      * @date: 2024/3/3 21:21
@@ -171,18 +175,19 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
         //发送pong消息
         channel.writeAndFlush(requestProtocol);
     }
+
     /**
      * @author: qiu
      * @date: 2024/3/3 21:25
      * @description: 7节新增。收到提供者响应的pong消息就log
      */
     private void handleHeartBeatToConsumer(RpcProtocol<RpcResponse> protocol, Channel channel) {
-        LOGGER.info("接收到来自提供者{}的pong消息：{}",channel.remoteAddress(),protocol.getBody().getResult());
+        LOGGER.info("接收到来自提供者{}的pong消息：{}", channel.remoteAddress(), protocol.getBody().getResult());
     }
 
 
     //消费者向提供者发送数据
-    public RpcFuture sendRequst(RpcProtocol<RpcRequest> protocol,boolean isAsync, boolean isOneWay) {
+    public RpcFuture sendRequst(RpcProtocol<RpcRequest> protocol, boolean isAsync, boolean isOneWay) {
         LOGGER.info("RpcConsumerHandler#sendRequst...");
 
 //        channel.writeAndFlush(protocol);  注：3.4-3.5bug根源，见记录
@@ -192,13 +197,14 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     }
 
     //消费者向提供者发送数据，同步调用
-    private RpcFuture sendRequestSync(RpcProtocol<RpcRequest> protocol){
+    private RpcFuture sendRequestSync(RpcProtocol<RpcRequest> protocol) {
         LOGGER.info("RpcConsumerHandler#sendRequstSync同步调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
         //取消while循环获取响应结果，使用RpcFuture来存放响应结果
         RpcFuture rpcFuture = this.getRpcFuture(protocol);
         channel.writeAndFlush(protocol);
         return rpcFuture;
     }
+
     //消费者向提供者发送数据，异步调用
     private RpcFuture sendRequestAsync(RpcProtocol<RpcRequest> protocol) {
         LOGGER.info("RpcConsumerHandler#sendRequstAsync异步调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));
@@ -208,6 +214,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
         channel.writeAndFlush(protocol);
         return null;
     }
+
     //消费者向提供者发送数据，单向调用
     private RpcFuture sendRequestOneway(RpcProtocol<RpcRequest> protocol) {
         LOGGER.info("RpcConsumerHandler#sendRequstOneway单向调用中...消费者准备发送的数据：{}", JSONObject.toJSONString(protocol));

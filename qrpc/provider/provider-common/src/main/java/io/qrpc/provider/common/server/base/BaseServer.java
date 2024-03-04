@@ -80,8 +80,10 @@ public class BaseServer implements Server {
         this.registryService = getRegistryService(registryAddress, registryType, loadBalancer);
 
         //参数小于0，则使用默认值
-        if (heartbeatInterval > 0) this.heartbeatInterval = heartbeatInterval;
-        if (scanNotActiveChannelInterval > 0) this.scanNotActiveChannelInterval = heartbeatInterval;
+        if (heartbeatInterval > 0)
+            this.heartbeatInterval = heartbeatInterval;
+        if (scanNotActiveChannelInterval > 0)
+            this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
     }
 
     /**
@@ -125,7 +127,7 @@ public class BaseServer implements Server {
                             socketChannel.pipeline()
                                     .addLast(RpcConstants.CODEC_DEVODER, new RpcDecoder())
                                     .addLast(RpcConstants.CODEC_ENCODER, new RpcEncoder())
-                                    .addLast(RpcConstants.CODEC_SERVER_IDEL_HANDLER, new IdleStateHandler(0, 0, heartbeatInterval+1000, TimeUnit.MILLISECONDS))
+                                    .addLast(RpcConstants.CODEC_SERVER_IDEL_HANDLER, new IdleStateHandler(0, 0, heartbeatInterval+2000, TimeUnit.MILLISECONDS))
                                     //由我们自定义的处理器来处理数据
                                     .addLast(RpcConstants.CODEC_HANDLER, new RpcProviderHandler(handlerMap, reflectType));
                         }
