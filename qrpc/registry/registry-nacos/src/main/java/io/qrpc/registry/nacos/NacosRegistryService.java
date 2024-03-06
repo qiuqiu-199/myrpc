@@ -63,6 +63,7 @@ public class NacosRegistryService implements RegistryService {
         logger.info("NacosRegistryService#discovery 发现服务中...");
 
         List<Instance> instances = namingService.getAllInstances(serviceKey);
+        if (instances == null || instances.isEmpty()) return null;
 
         //这段stream用法的意思是，对instances列表的每个instance调用wrapInstance2ServiceMeta方法将instance转换为serviceMeta后形成新的列表
         List<ServiceMeta> servers = instances.stream().map(this::wrapInstance2ServiceMeta).collect(Collectors.toList());

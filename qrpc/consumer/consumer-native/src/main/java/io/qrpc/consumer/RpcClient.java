@@ -36,6 +36,9 @@ public class RpcClient {
     private int heartbeatInterval;
     private int scanNotActiveChannelInterval;
 
+    private int maxRetryTimes = 3; //最大重试次数
+    private int retryInterval = 1000;  //重试间隔时间
+
     public RpcClient(
             String registryAddress,
             String registryType,
@@ -48,7 +51,10 @@ public class RpcClient {
             boolean async,
             boolean oneway,
             int heartbeatInterval,
-            int scanNotActiveChannelInterval) {
+            int scanNotActiveChannelInterval,
+            int maxRetryTimes,
+            int retryInterval
+            ) {
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
         this.seriliazationType = seriliazationType;
@@ -57,8 +63,12 @@ public class RpcClient {
         this.async = async;
         this.oneway = oneway;
         this.registryService = this.getRegistryService(registryAddress, registryType, loadBalancer);
+
         this.heartbeatInterval = heartbeatInterval;
         this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
+
+        this.maxRetryTimes = maxRetryTimes;
+        this.retryInterval = retryInterval;
     }
 
     /**
@@ -107,7 +117,12 @@ public class RpcClient {
                         timeout,
                         async,
                         oneway,
-                        RpcConsumer.getInstance(this.heartbeatInterval, this.scanNotActiveChannelInterval),
+                        RpcConsumer.getInstance(
+                                this.heartbeatInterval,
+                                this.scanNotActiveChannelInterval,
+                                this.maxRetryTimes,
+                                this.retryInterval
+                        ),
                         registryService)
         );
         return proxyFactory.getProxy(interfaceClass);
@@ -128,7 +143,12 @@ public class RpcClient {
                 serviceGroup,
                 seriliazationType,
                 timeout,
-                RpcConsumer.getInstance(this.heartbeatInterval, this.scanNotActiveChannelInterval),
+                RpcConsumer.getInstance(
+                        this.heartbeatInterval,
+                        this.scanNotActiveChannelInterval,
+                        this.maxRetryTimes,
+                        this.retryInterval
+                ),
                 async,
                 oneway,
                 registryService
@@ -137,6 +157,11 @@ public class RpcClient {
 
     public void shutdown() {
         LOGGER.info("RpcClient#shutdown...");
-        RpcConsumer.getInstance(this.heartbeatInterval, this.scanNotActiveChannelInterval).close();
+        RpcConsumer.getInstance(
+                this.heartbeatInterval,
+                this.scanNotActiveChannelInterval,
+                this.maxRetryTimes,
+                this.retryInterval
+        ).close();
     }
 }

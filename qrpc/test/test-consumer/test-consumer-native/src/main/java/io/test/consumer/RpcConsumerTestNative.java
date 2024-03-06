@@ -43,7 +43,7 @@ public class RpcConsumerTestNative {
     private RpcClient rpcClient;
     @Before
     public void init(){
-        rpcClient = new RpcClient(RpcConstants.REGISTRY_TYPE_NACOS_ADDR, RpcConstants.REGISTRY_TYPE_NACOS, "1.0.0", "qiu", "protostuff", "cglib","random",3000, false, false,-1,-1);
+        rpcClient = new RpcClient(RpcConstants.REGISTRY_TYPE_NACOS_ADDR, RpcConstants.REGISTRY_TYPE_NACOS, "1.0.0", "qiu", "protostuff", "cglib","random",3000, false, false,-1,-1,-1,-1);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class RpcConsumerTestNative {
         DemoService demoService = rpcClient.create(DemoService.class);
         String hello = demoService.hello("23章test create...。。。");
         LOGGER.info("提供者返回的数据====》》》"+hello);
-        System.in.read();
+//        System.in.read();
         rpcClient.shutdown();
     }
     @Test

@@ -141,6 +141,7 @@ public class ZookeeperRegistryService implements RegistryService {
         //首先调用ServiceDiscovery#queryForInstance方法根据服务名获取ServiceInstance的集合，根据某种负载均衡策略从集合中选取一个ServiceInstance
         //接着将ServiceInstance中的服务员数据返回
         Collection<ServiceInstance<ServiceMeta>> serviceInstances = serviceDiscovery.queryForInstances(serviceKey);
+        if (serviceInstances == null || serviceInstances.isEmpty()) return null;
 
         //这里调用的select方法的第一个参数使用stream将ServiceInstance<ServiceMeta>列表转换成ServiceMeta列表。
         ServiceMeta meta = this.serviceLoadBalancer.select(
