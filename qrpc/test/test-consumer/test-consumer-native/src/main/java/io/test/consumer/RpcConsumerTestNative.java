@@ -41,24 +41,26 @@ public class RpcConsumerTestNative {
 
     //以下三个方法，整合RegistryService后的消费者端测试
     private RpcClient rpcClient;
+
     @Before
-    public void init(){
-        rpcClient = new RpcClient(RpcConstants.REGISTRY_TYPE_NACOS_ADDR, RpcConstants.REGISTRY_TYPE_NACOS, "1.0.0", "qiu", "protostuff", "cglib","random",3000, false, false,-1,-1,-1,-1);
+    public void init() {
+        rpcClient = new RpcClient("1.0.0", "qiu", RpcConstants.REGISTRY_TYPE_NACOS, RpcConstants.REGISTRY_TYPE_NACOS_ADDR, "random", "protostuff", "cglib", false, false, 3000, -1, -1, -1, -1);
     }
 
     @Test
     public void testInterfaceRpc() throws IOException {
         DemoService demoService = rpcClient.create(DemoService.class);
         String hello = demoService.hello("23章test create...。。。");
-        LOGGER.info("提供者返回的数据====》》》"+hello);
+        LOGGER.info("提供者返回的数据====》》》" + hello);
 //        System.in.read();
         rpcClient.shutdown();
     }
+
     @Test
     public void testAsyncInterfaceRpc() throws ExecutionException, InterruptedException {
         IAsyncObjectProxy proxy = rpcClient.createAsync(DemoService.class);
         RpcFuture future = proxy.call("hello", "23章test createAsync...");
-        LOGGER.info("提供者返回的数据====》》》"+future.get());
+        LOGGER.info("提供者返回的数据====》》》" + future.get());
         rpcClient.shutdown();
     }
 }

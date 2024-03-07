@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/annotation/annotation.iml" filepath="$PROJECT_DIR$/annotation/annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/codec/codec.iml" filepath="$PROJECT_DIR$/codec/codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/constants/constants.iml" filepath="$PROJECT_DIR$/constants/constants.iml" />
+      <module fileurl="file://$PROJECT_DIR$/consumer/consumer.iml" filepath="$PROJECT_DIR$/consumer/consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/consumer/consumer-common/consumer-common.iml" filepath="$PROJECT_DIR$/consumer/consumer-common/consumer-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/consumer/consumer-native/consumer-native.iml" filepath="$PROJECT_DIR$/consumer/consumer-native/consumer-native.iml" />
+      <module fileurl="file://$PROJECT_DIR$/consumer/consumer-spring/consumer-spring.iml" filepath="$PROJECT_DIR$/consumer/consumer-spring/consumer-spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo-api/demo-api.iml" filepath="$PROJECT_DIR$/demo/demo-api/demo-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo-native-consumer/demo-native-consumer.iml" filepath="$PROJECT_DIR$/demo/demo-native-consumer/demo-native-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo-native-provider/demo-native-provider.iml" filepath="$PROJECT_DIR$/demo/demo-native-provider/demo-native-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo-spring-annotation-consumer/demo-spring-annotation-consumer.iml" filepath="$PROJECT_DIR$/demo/demo-spring-annotation-consumer/demo-spring-annotation-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo-spring-annotation-provider/demo-spring-annotation-provider.iml" filepath="$PROJECT_DIR$/demo/demo-spring-annotation-provider/demo-spring-annotation-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo-spring-xml-consumer/demo-spring-xml-consumer.iml" filepath="$PROJECT_DIR$/demo/demo-spring-xml-consumer/demo-spring-xml-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo-spring-xml-provider/demo-spring-xml-provider.iml" filepath="$PROJECT_DIR$/demo/demo-spring-xml-provider/demo-spring-xml-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-api/loadBalancer-api.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-api/loadBalancer-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-consistentHash-zk/loadBalancer-consistentHash-zk.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-consistentHash-zk/loadBalancer-consistentHash-zk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-least-connections/loadBalancer-least-connections.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-least-connections/loadBalancer-least-connections.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-random/loadBalancer-random.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-random/loadBalancer-random.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-robin/loadBalancer-robin.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-robin/loadBalancer-robin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-sourceip-hash/loadBalancer-sourceip-hash.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-sourceip-hash/loadBalancer-sourceip-hash.iml" />
+      <module fileurl="file://$PROJECT_DIR$/protocol/protocol.iml" filepath="$PROJECT_DIR$/protocol/protocol.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider.iml" filepath="$PROJECT_DIR$/provider/provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-common/provider-common.iml" filepath="$PROJECT_DIR$/provider/provider-common/provider-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-native/provider-native.iml" filepath="$PROJECT_DIR$/provider/provider-native/provider-native.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-spring/provider-spring.iml" filepath="$PROJECT_DIR$/provider/provider-spring/provider-spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proxy/proxy.iml" filepath="$PROJECT_DIR$/proxy/proxy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proxy/proxy-api/proxy-api.iml" filepath="$PROJECT_DIR$/proxy/proxy-api/proxy-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proxy/proxy-cglib/proxy-cglib.iml" filepath="$PROJECT_DIR$/proxy/proxy-cglib/proxy-cglib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/proxy/proxy-jdk/proxy-jdk.iml" filepath="$PROJECT_DIR$/proxy/proxy-jdk/proxy-jdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/qrpc.iml" filepath="$PROJECT_DIR$/qrpc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reflect/reflect.iml" filepath="$PROJECT_DIR$/reflect/reflect.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reflect/reflect-api/reflect-api.iml" filepath="$PROJECT_DIR$/reflect/reflect-api/reflect-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reflect/reflect-cglib/reflect-cglib.iml" filepath="$PROJECT_DIR$/reflect/reflect-cglib/reflect-cglib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/reflect/reflect-jdk/reflect-jdk.iml" filepath="$PROJECT_DIR$/reflect/reflect-jdk/reflect-jdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/registry/registry.iml" filepath="$PROJECT_DIR$/registry/registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/registry/registry-api/registry-api.iml" filepath="$PROJECT_DIR$/registry/registry-api/registry-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/registry/registry-nacos/registry-nacos.iml" filepath="$PROJECT_DIR$/registry/registry-nacos/registry-nacos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/registry/registry-zookeeper/registry-zookeeper.iml" filepath="$PROJECT_DIR$/registry/registry-zookeeper/registry-zookeeper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/serialization/serialization.iml" filepath="$PROJECT_DIR$/serialization/serialization.iml" />
+      <module fileurl="file://$PROJECT_DIR$/serialization/serialization-api/serialization-api.iml" filepath="$PROJECT_DIR$/serialization/serialization-api/serialization-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/serialization/serialization-jdk/serialization-jdk.iml" filepath="$PROJECT_DIR$/serialization/serialization-jdk/serialization-jdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/serialization/serialization-json/serialization-json.iml" filepath="$PROJECT_DIR$/serialization/serialization-json/serialization-json.iml" />
+      <module fileurl="file://$PROJECT_DIR$/serialization/serialization-protostuff/serialization-protostuff.iml" filepath="$PROJECT_DIR$/serialization/serialization-protostuff/serialization-protostuff.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spi/spi.iml" filepath="$PROJECT_DIR$/spi/spi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test-api/test-api.iml" filepath="$PROJECT_DIR$/test/test-api/test-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test-consumer/test-consumer.iml" filepath="$PROJECT_DIR$/test/test-consumer/test-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test-consumer/test-consumer-codec/test-consumer-codec.iml" filepath="$PROJECT_DIR$/test/test-consumer/test-consumer-codec/test-consumer-codec.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test-consumer-handler/test-consumer-handler.iml" filepath="$PROJECT_DIR$/test/test-consumer-handler/test-consumer-handler.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test-consumer/test-consumer-native/test-consumer-native.iml" filepath="$PROJECT_DIR$/test/test-consumer/test-consumer-native/test-consumer-native.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test-provider/test-provider.iml" filepath="$PROJECT_DIR$/test/test-provider/test-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test-registry/test-registry.iml" filepath="$PROJECT_DIR$/test/test-registry/test-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test-scanner/test-scanner.iml" filepath="$PROJECT_DIR$/test/test-scanner/test-scanner.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test/test-spi/test-spi.iml" filepath="$PROJECT_DIR$/test/test-spi/test-spi.iml" />
+    </modules>
+  </component>
+</project>

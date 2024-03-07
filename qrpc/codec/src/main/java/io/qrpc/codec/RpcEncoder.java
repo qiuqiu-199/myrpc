@@ -43,7 +43,7 @@ public class RpcEncoder extends MessageToByteEncoder<RpcProtocol<Object>> implem
         String serailizationType = header.getSerailizationType();
         byteBuf.writeBytes(SerializationUtils.PaddingString(serailizationType).getBytes(StandardCharsets.UTF_8));
         //将消息体序列化并写入
-        Serialization serialization = getJdkSerialization(serailizationType);
+        Serialization serialization = getSerialization(serailizationType);
         byte[] bytes = serialization.serialize(msg.getBody());
         byteBuf.writeInt(bytes.length);
         byteBuf.writeBytes(bytes);

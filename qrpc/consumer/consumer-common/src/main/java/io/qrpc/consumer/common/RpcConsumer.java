@@ -54,7 +54,7 @@ public class RpcConsumer implements Consumer {
     //7节，用于定时发送ping消息给提供者
     private ScheduledExecutorService executorService;
     private int heartbeatInterval = 3000; //默认心跳间隔30秒
-    private int scanNotActiveChannelInterval = 6000; //默认扫描移除空闲连接间隔60秒
+    private int scanNotActiveChannelInterval = 60000; //默认扫描移除空闲连接间隔60秒
 
     //8节，引入重试机制
     private int maxRetryTimes = 3; //最大重试次数

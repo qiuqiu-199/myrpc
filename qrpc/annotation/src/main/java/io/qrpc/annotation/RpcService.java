@@ -15,8 +15,8 @@ import java.lang.annotation.Target;
  */
 
 @Target({ElementType.TYPE})  //表示当前自定义的这个注解只能标注到类上
-@Retention(RetentionPolicy.RUNTIME)
-@Component
+@Retention(RetentionPolicy.RUNTIME) //表示注解运行时会保留，从而可以通过反射获取注解信息
+@Component  //当前注解要标注到服务接口的实现类上，也意味着实现类会被注入容器
 public @interface RpcService {
     //接口的class和className二选一，前者指定类.class，后者指定类的全类名字符串
     /**
@@ -37,6 +37,7 @@ public @interface RpcService {
      * 接口的分组
      */
     String group() default "";
+
 
     /**
      * 服务权重，默认1

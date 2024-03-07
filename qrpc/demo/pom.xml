@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>qrpc</artifactId>
+        <groupId>com.qiu</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>demo</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>demo-api</module>
+        <module>demo-spring-xml-consumer</module>
+        <module>demo-spring-xml-provider</module>
+        <module>demo-native-provider</module>
+        <module>demo-native-consumer</module>
+        <module>demo-spring-annotation-provider</module>
+        <module>demo-spring-annotation-consumer</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.qiu</groupId>
+            <artifactId>constants</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qiu</groupId>
+            <artifactId>consumer-native</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.qiu</groupId>
+            <artifactId>proxy-api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>5.3.27</version>
+        </dependency>
+
+    </dependencies>
+
+
+</project>

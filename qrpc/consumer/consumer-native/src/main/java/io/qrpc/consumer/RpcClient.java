@@ -39,17 +39,18 @@ public class RpcClient {
     private int maxRetryTimes = 3; //最大重试次数
     private int retryInterval = 1000;  //重试间隔时间
 
+    //构造方法
     public RpcClient(
-            String registryAddress,
-            String registryType,
             String serviceVersion,
             String serviceGroup,
+            String registryType,
+            String registryAddress,
+            String registryLoadBalancer,
             String seriliazationType,
             String proxyType,
-            String loadBalancer,
-            long timeout,
             boolean async,
             boolean oneway,
+            long timeout,
             int heartbeatInterval,
             int scanNotActiveChannelInterval,
             int maxRetryTimes,
@@ -62,11 +63,9 @@ public class RpcClient {
         this.timeout = timeout;
         this.async = async;
         this.oneway = oneway;
-        this.registryService = this.getRegistryService(registryAddress, registryType, loadBalancer);
-
+        this.registryService = this.getRegistryService(registryAddress, registryType, registryLoadBalancer);
         this.heartbeatInterval = heartbeatInterval;
         this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
-
         this.maxRetryTimes = maxRetryTimes;
         this.retryInterval = retryInterval;
     }

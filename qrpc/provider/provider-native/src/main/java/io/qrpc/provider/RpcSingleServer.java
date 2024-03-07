@@ -9,7 +9,7 @@ import io.qrpc.provider.common.scanner.RpcServiceScanner;
  * @ClassName: RpcSingleServer
  * @Author: qiuzhiq
  * @Date: 2024/1/17 11:00
- * @Description: RpcSingleServer类作为使用Java方式，不依赖spring启动rpc框架的类
+ * @Description: RpcSingleServer类作为原生Java方式启动RPC框架，不依赖spring启动rpc框架的类
  */
 
 public class RpcSingleServer extends BaseServer {
@@ -18,18 +18,11 @@ public class RpcSingleServer extends BaseServer {
     /**
      * @author: qiu
      * @date: 2024/3/1 0:09
-     * @param: serverAddress
-     * @param: scanPackage
-     * @param: registryAddress
-     * @param: registryType
-     * @param: reflectType
-     * @param: loadBalancer
-     * @return: null
-     * @description: 42章修改，增加负载均衡参数，用户需要指定
+     * @description: 构造RpcServer，通过自定义扫描器扫描@RpcService注解通过反射生成对应的对象缓存在map中
      */
-    public RpcSingleServer(String serverAddress, String scanPackage,String registryAddress,String registryType,String reflectType,String loadBalancer,int heartbeatInterval,int scanNotActiveChannelInterval) {
+    public RpcSingleServer(String serverAddress, String scanPackage,String registryAddress,String registryType,String registryLoadBalancer,String reflectType,int heartbeatInterval,int scanNotActiveChannelInterval) {
         //TODO 这里必须调用父类构造方法否则报错，原因不明
-        super(serverAddress,registryAddress,registryType,reflectType,loadBalancer,heartbeatInterval,scanNotActiveChannelInterval);
+        super(serverAddress,registryAddress,registryType,registryLoadBalancer,reflectType,heartbeatInterval,scanNotActiveChannelInterval);
 
         try {
             this.handlerMap = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService(scanPackage,this.host,this.port,this.registryService);

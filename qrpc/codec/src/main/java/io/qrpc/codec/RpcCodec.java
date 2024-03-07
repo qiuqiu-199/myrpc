@@ -20,7 +20,7 @@ public interface RpcCodec {
      * @description: 序列化类型
      * 26章SPI扩展，给定的序列化类型参数通过SPI机制加载对应的扩展类
      */
-    default Serialization getJdkSerialization(String serializationType) {
+    default Serialization getSerialization(String serializationType) {
         return ExtensionLoader.getExtension(Serialization.class,serializationType);
     }
 }

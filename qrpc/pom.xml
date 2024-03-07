@@ -23,6 +23,7 @@
         <module>loadBalancer</module>
         <module>spi</module>
         <module>reflect</module>
+        <module>demo</module>
     </modules>
 
     <properties>

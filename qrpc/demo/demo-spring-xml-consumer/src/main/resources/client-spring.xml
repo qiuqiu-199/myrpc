@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--配置包扫描路径-->
+    <context:component-scan base-package="io.qrpc.demo"/>
+    <!--配置配置文件路径-->
+    <context:property-placeholder location="classpath:rpc.properties"/>
+
+    <!--注入RpcClient组件-->
+    <bean id="rpcClient" class="io.qrpc.consumer.RpcClient">
+        <constructor-arg name="serviceVersion" value="${version}"/>
+        <constructor-arg name="serviceGroup" value="${group}"/>
+        <constructor-arg name="registryType" value="${registry.type}"/>
+        <constructor-arg name="registryAddress" value="${registry.addr}"/>
+        <constructor-arg name="registryLoadBalancer" value="${registry.loadbalancer}"/>
+        <constructor-arg name="seriliazationType" value="${serializatoinType}"/>
+        <constructor-arg name="proxyType" value="${proxyType}"/>
+        <constructor-arg name="async" value="${async}"/>
+        <constructor-arg name="oneway" value="${oneway}"/>
+        <constructor-arg name="timeout" value="${timeout}"/>
+        <constructor-arg name="heartbeatInterval" value="${client.heartbeatInterval}"/>
+        <constructor-arg name="scanNotActiveChannelInterval" value="${client.scanNotActiveChannelInterval}"/>
+        <constructor-arg name="maxRetryTimes" value="${maxRetryTimes}"/>
+        <constructor-arg name="retryInterval" value="${retryInterval}"/>
+    </bean>
+
+</beans>

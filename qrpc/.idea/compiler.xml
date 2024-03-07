@@ -13,6 +13,14 @@
         <module name="constants" />
         <module name="consumer-common" />
         <module name="consumer-native" />
+        <module name="consumer-spring" />
+        <module name="demo-api" />
+        <module name="demo-native-consumer" />
+        <module name="demo-native-provider" />
+        <module name="demo-spring-annotation-consumer" />
+        <module name="demo-spring-annotation-provider" />
+        <module name="demo-spring-xml-consumer" />
+        <module name="demo-spring-xml-provider" />
         <module name="loadBalancer-api" />
         <module name="loadBalancer-consistentHash-zk" />
         <module name="loadBalancer-least-connections" />
@@ -22,6 +30,7 @@
         <module name="protocol" />
         <module name="provider-common" />
         <module name="provider-native" />
+        <module name="provider-spring" />
         <module name="proxy-api" />
         <module name="proxy-cglib" />
         <module name="proxy-jdk" />
@@ -44,8 +53,67 @@
         <module name="test-registry" />
         <module name="test-scanner" />
         <module name="test-spi" />
-        <module name="testscanner" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="annotation" target="1.8" />
+      <module name="codec" target="1.8" />
+      <module name="common" target="1.8" />
+      <module name="constants" target="1.8" />
+      <module name="consumer" target="1.8" />
+      <module name="consumer-common" target="1.8" />
+      <module name="consumer-native" target="1.8" />
+      <module name="consumer-spring" target="1.8" />
+      <module name="demo" target="1.8" />
+      <module name="demo-api" target="1.8" />
+      <module name="demo-native-consumer" target="1.8" />
+      <module name="demo-native-provider" target="1.8" />
+      <module name="demo-spring-annotation-consumer" target="1.8" />
+      <module name="demo-spring-annotation-provider" target="1.8" />
+      <module name="demo-spring-xml-consumer" target="1.8" />
+      <module name="demo-spring-xml-provider" target="1.8" />
+      <module name="demo-spring-xml-providerr" target="1.8" />
+      <module name="loadBalancer" target="1.8" />
+      <module name="loadBalancer-api" target="1.8" />
+      <module name="loadBalancer-consistentHash-zk" target="1.8" />
+      <module name="loadBalancer-least-connections" target="1.8" />
+      <module name="loadBalancer-random" target="1.8" />
+      <module name="loadBalancer-robin" target="1.8" />
+      <module name="loadBalancer-sourceip-hash" target="1.8" />
+      <module name="protocol" target="1.8" />
+      <module name="provider" target="1.8" />
+      <module name="provider-common" target="1.8" />
+      <module name="provider-native" target="1.8" />
+      <module name="provider-spring" target="1.8" />
+      <module name="proxy" target="1.8" />
+      <module name="proxy-api" target="1.8" />
+      <module name="proxy-cglib" target="1.8" />
+      <module name="proxy-jdk" target="1.8" />
+      <module name="qrpc" target="1.8" />
+      <module name="reflect" target="1.8" />
+      <module name="reflect-api" target="1.8" />
+      <module name="reflect-cglib" target="1.8" />
+      <module name="reflect-jdk" target="1.8" />
+      <module name="registry" target="1.8" />
+      <module name="registry-api" target="1.8" />
+      <module name="registry-nacos" target="1.8" />
+      <module name="registry-zookeeper" target="1.8" />
+      <module name="serialization" target="1.8" />
+      <module name="serialization-api" target="1.8" />
+      <module name="serialization-jdk" target="1.8" />
+      <module name="serialization-json" target="1.8" />
+      <module name="serialization-protostuff" target="1.8" />
+      <module name="spi" target="1.8" />
+      <module name="test" target="1.8" />
+      <module name="test-api" target="1.8" />
+      <module name="test-consumer" target="1.8" />
+      <module name="test-consumer-codec" target="1.8" />
+      <module name="test-consumer-handler" target="1.8" />
+      <module name="test-consumer-native" target="1.8" />
+      <module name="test-provider" target="1.8" />
+      <module name="test-registry" target="1.8" />
+      <module name="test-scanner" target="1.8" />
+      <module name="test-spi" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
