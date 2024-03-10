@@ -1,0 +1,160 @@
+{
+  "groups": [
+    {
+      "name": "qrpc.consumer",
+      "type": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "sourceType": "io.qrpc.spring.boot.consumer.starter.ConsumerAutoConfiguration",
+      "sourceMethod": "consumerConfig()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "qrpc.consumer.aync",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.aync",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "defaultValue": false
+    },
+    {
+      "name": "qrpc.consumer.group",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.group",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.heartbeat-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.heartbeat-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.consumer.max-retry-times",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.max-retry-times",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.consumer.oneway",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.oneway",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "defaultValue": false
+    },
+    {
+      "name": "qrpc.consumer.proxy-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.proxy-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.registry-addr",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.registry-addr",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.registry-load-balancer",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.registry-load-balancer",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.registry-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.registry-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.retry-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.retry-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.consumer.scan-not-active-channel-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.scan-not-active-channel-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.consumer.serialization-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.serialization-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.timeout",
+      "type": "java.lang.Long",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.timeout",
+      "type": "java.lang.Long",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.consumer.version",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.version",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    }
+  ],
+  "hints": []
+}

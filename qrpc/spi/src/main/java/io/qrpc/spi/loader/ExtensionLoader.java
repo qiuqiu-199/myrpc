@@ -72,9 +72,6 @@ public class ExtensionLoader<T> {
     /**
      * @author: qiu
      * @date: 2024/2/28 0:17
-     * @param: clazz
-     * @param: name
-     * @return: T
      * @description: 25章新增，对外提供。根据入参Class对象和实现类标识从扩展配置文件中加载实现类，返回实现类对象。
      * 如果没有提供实现类标识，那么返回默认实现类的对象，否则返回指定的实现类的对象。
      */
@@ -91,8 +88,6 @@ public class ExtensionLoader<T> {
     /**
      * @author: qiu
      * @date: 2024/2/28 0:22
-     * @param: clazz
-     * @return: io.qrpc.spi.loader.ExtensionLoader<T>
      * @description: 25章新增，对外提供。获取接口的扩展类加载器。
      * 根据入参Class对象返回对应的ExtensionLoader。
      * 实际上调用的是重载方法<T> ExtensionLoader<T> getExtensionLoader(Class<T> clazz, ClassLoader cl)
@@ -104,8 +99,6 @@ public class ExtensionLoader<T> {
     /**
      * @author: qiu
      * @date: 2024/2/27 15:38
-     * @param: clazz
-     * @param: cl
      * @return: io.qrpc.spi.loader.ExtensionLoader<T>
      * @description: 25章新增，对外提供。获取接口的扩展类加载器。
      * 根据入参Class对象和类加载器（实际上就是ExtensionLoader的类加载器）为每一个属于接口并标记了SPI注解的接口的Class对象创建对应的扩展类加载器ExtensionLoader。
@@ -136,8 +129,6 @@ public class ExtensionLoader<T> {
     /**
      * @author: qiu
      * @date: 2024/2/27 15:44
-     * @param:
-     * @return: T
      * @description: 25章新增，创建扩展类加载器后才能调用。获取接口的默认实现类对象。
      * 先调用getExtensionClasses方法加载扩展配置文件解析实现类标识和实现类Class对象的键值对，解析过程中会另外配置好默认实现类名cachedDefaultName，如果不为空，调用getSpiClassInstance方法获取并返回默认实现类的对象？ TODO
      */
@@ -154,8 +145,6 @@ public class ExtensionLoader<T> {
     /**
      * @author: qiu
      * @date: 2024/2/28 0:36
-     * @param: name
-     * @return: T
      * @description: 25章新增，创建扩展类加载器后才能调用。根据实现类标识获取实现类对象
      * 先从cachedInstances里获取Holder，如果没有就创建，并通过双重检查锁调用createExtension方法根据实现类标识创建实现类对象
      */

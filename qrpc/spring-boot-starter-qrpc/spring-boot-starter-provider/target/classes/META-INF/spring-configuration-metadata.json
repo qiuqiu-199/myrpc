@@ -1,0 +1,50 @@
+{
+  "groups": [
+    {
+      "name": "qrpc.provider",
+      "type": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "sourceType": "io.qrpc.spring.boot.provider.starter.ProviderAutoConfiguration",
+      "sourceMethod": "providerConfig()"
+    }
+  ],
+  "properties": [
+    {
+      "name": "qrpc.provider.heartbeat-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.provider.reflect-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
+    },
+    {
+      "name": "qrpc.provider.registry-addr",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
+    },
+    {
+      "name": "qrpc.provider.registry-load-balance-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
+    },
+    {
+      "name": "qrpc.provider.registry-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
+    },
+    {
+      "name": "qrpc.provider.scan-not-active-channel-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.provider.server-addr",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
+    }
+  ],
+  "hints": []
+}

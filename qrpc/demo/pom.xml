@@ -19,6 +19,8 @@
         <module>demo-native-consumer</module>
         <module>demo-spring-annotation-provider</module>
         <module>demo-spring-annotation-consumer</module>
+        <module>demo-springboot-starter-provider</module>
+        <module>demo-springboot-starter-consumer</module>
     </modules>
 
     <dependencies>

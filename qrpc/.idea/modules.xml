@@ -18,6 +18,8 @@
       <module fileurl="file://$PROJECT_DIR$/demo/demo-spring-annotation-provider/demo-spring-annotation-provider.iml" filepath="$PROJECT_DIR$/demo/demo-spring-annotation-provider/demo-spring-annotation-provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo-spring-xml-consumer/demo-spring-xml-consumer.iml" filepath="$PROJECT_DIR$/demo/demo-spring-xml-consumer/demo-spring-xml-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo-spring-xml-provider/demo-spring-xml-provider.iml" filepath="$PROJECT_DIR$/demo/demo-spring-xml-provider/demo-spring-xml-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo-springboot-starter-consumer/demo-springboot-starter-consumer.iml" filepath="$PROJECT_DIR$/demo/demo-springboot-starter-consumer/demo-springboot-starter-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo-springboot-starter-provider/demo-springboot-starter-provider.iml" filepath="$PROJECT_DIR$/demo/demo-springboot-starter-provider/demo-springboot-starter-provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer.iml" />
       <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-api/loadBalancer-api.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-api/loadBalancer-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-consistentHash-zk/loadBalancer-consistentHash-zk.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-consistentHash-zk/loadBalancer-consistentHash-zk.iml" />
@@ -49,6 +51,9 @@
       <module fileurl="file://$PROJECT_DIR$/serialization/serialization-json/serialization-json.iml" filepath="$PROJECT_DIR$/serialization/serialization-json/serialization-json.iml" />
       <module fileurl="file://$PROJECT_DIR$/serialization/serialization-protostuff/serialization-protostuff.iml" filepath="$PROJECT_DIR$/serialization/serialization-protostuff/serialization-protostuff.iml" />
       <module fileurl="file://$PROJECT_DIR$/spi/spi.iml" filepath="$PROJECT_DIR$/spi/spi.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-starter-qrpc/spring-boot-starter-consumer/spring-boot-starter-consumer.iml" filepath="$PROJECT_DIR$/spring-boot-starter-qrpc/spring-boot-starter-consumer/spring-boot-starter-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-starter-qrpc/spring-boot-starter-provider/spring-boot-starter-provider.iml" filepath="$PROJECT_DIR$/spring-boot-starter-qrpc/spring-boot-starter-provider/spring-boot-starter-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spring-boot-starter-qrpc/spring-boot-starter-qrpc.iml" filepath="$PROJECT_DIR$/spring-boot-starter-qrpc/spring-boot-starter-qrpc.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/test.iml" filepath="$PROJECT_DIR$/test/test.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/test-api/test-api.iml" filepath="$PROJECT_DIR$/test/test-api/test-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/test/test-consumer/test-consumer.iml" filepath="$PROJECT_DIR$/test/test-consumer/test-consumer.iml" />

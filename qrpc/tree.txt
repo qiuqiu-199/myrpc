@@ -1,0 +1,148 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] qrpc                                                               [pom]
+[INFO] annotation                                                         [jar]
+[INFO] common                                                             [jar]
+[INFO] constants                                                          [jar]
+[INFO] spi                                                                [jar]
+[INFO] serialization                                                      [pom]
+[INFO] serialization-api                                                  [jar]
+[INFO] serialization-jdk                                                  [jar]
+[INFO] protocol                                                           [jar]
+[INFO] serialization-json                                                 [jar]
+[INFO] serialization-protostuff                                           [jar]
+[INFO] codec                                                              [jar]
+[INFO] loadBalancer                                                       [pom]
+[INFO] loadBalancer-api                                                   [jar]
+[INFO] loadBalancer-random                                                [jar]
+[INFO] loadBalancer-robin                                                 [jar]
+[INFO] loadBalancer-sourceip-hash                                         [jar]
+[INFO] loadBalancer-consistentHash-zk                                     [jar]
+[INFO] loadBalancer-least-connections                                     [jar]
+[INFO] registry                                                           [pom]
+[INFO] registry-api                                                       [jar]
+[INFO] proxy                                                              [pom]
+[INFO] proxy-api                                                          [jar]
+[INFO] registry-zookeeper                                                 [jar]
+[INFO] registry-nacos                                                     [jar]
+[INFO] proxy-jdk                                                          [jar]
+[INFO] proxy-cglib                                                        [jar]
+[INFO] consumer                                                           [pom]
+[INFO] consumer-common                                                    [jar]
+[INFO] consumer-native                                                    [jar]
+[INFO] reflect                                                            [pom]
+[INFO] reflect-api                                                        [jar]
+[INFO] reflect-jdk                                                        [jar]
+[INFO] reflect-cglib                                                      [jar]
+[INFO] provider                                                           [pom]
+[INFO] provider-common                                                    [jar]
+[INFO] test                                                               [pom]
+[INFO] test-scanner                                                       [jar]
+[INFO] provider-native                                                    [jar]
+[INFO] test-api                                                           [jar]
+[INFO] test-provider                                                      [jar]
+[INFO] test-consumer                                                      [pom]
+[INFO] test-consumer-codec                                                [jar]
+[INFO] test-consumer-native                                               [jar]
+[INFO] test-consumer-handler                                              [jar]
+[INFO] test-registry                                                      [jar]
+[INFO] test-spi                                                           [jar]
+[INFO] provider-spring                                                    [jar]
+[INFO] consumer-spring                                                    [jar]
+[INFO] demo                                                               [pom]
+[INFO] demo-api                                                           [jar]
+[INFO] demo-spring-xml-consumer                                           [jar]
+[INFO] demo-spring-xml-provider                                           [jar]
+[INFO] demo-native-provider                                               [jar]
+[INFO] demo-native-consumer                                               [jar]
+[INFO] demo-spring-annotation-provider                                    [jar]
+[INFO] demo-spring-annotation-consumer                                    [jar]
+[INFO] spring-boot-starter-qrpc                                           [pom]
+[INFO] spring-boot-starter-provider                                       [jar]
+[INFO] demo-springboot-starter-provider                                   [jar]
+[INFO] demo-springboot-starter-consumer                                   [jar]
+[INFO] spring-boot-starter-consumer                                       [jar]
+[INFO] 
+[INFO] ----------------------------< com.qiu:qrpc >----------------------------
+[INFO] Building qrpc 1.0-SNAPSHOT                                        [1/62]
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary:
+[INFO] 
+[INFO] qrpc 1.0-SNAPSHOT .................................. FAILURE [  0.006 s]
+[INFO] annotation ......................................... SKIPPED
+[INFO] common ............................................. SKIPPED
+[INFO] constants .......................................... SKIPPED
+[INFO] spi ................................................ SKIPPED
+[INFO] serialization ...................................... SKIPPED
+[INFO] serialization-api .................................. SKIPPED
+[INFO] serialization-jdk .................................. SKIPPED
+[INFO] protocol ........................................... SKIPPED
+[INFO] serialization-json ................................. SKIPPED
+[INFO] serialization-protostuff ........................... SKIPPED
+[INFO] codec .............................................. SKIPPED
+[INFO] loadBalancer ....................................... SKIPPED
+[INFO] loadBalancer-api ................................... SKIPPED
+[INFO] loadBalancer-random ................................ SKIPPED
+[INFO] loadBalancer-robin ................................. SKIPPED
+[INFO] loadBalancer-sourceip-hash ......................... SKIPPED
+[INFO] loadBalancer-consistentHash-zk ..................... SKIPPED
+[INFO] loadBalancer-least-connections ..................... SKIPPED
+[INFO] registry ........................................... SKIPPED
+[INFO] registry-api ....................................... SKIPPED
+[INFO] proxy .............................................. SKIPPED
+[INFO] proxy-api .......................................... SKIPPED
+[INFO] registry-zookeeper ................................. SKIPPED
+[INFO] registry-nacos ..................................... SKIPPED
+[INFO] proxy-jdk .......................................... SKIPPED
+[INFO] proxy-cglib ........................................ SKIPPED
+[INFO] consumer ........................................... SKIPPED
+[INFO] consumer-common .................................... SKIPPED
+[INFO] consumer-native .................................... SKIPPED
+[INFO] reflect ............................................ SKIPPED
+[INFO] reflect-api ........................................ SKIPPED
+[INFO] reflect-jdk ........................................ SKIPPED
+[INFO] reflect-cglib ...................................... SKIPPED
+[INFO] provider ........................................... SKIPPED
+[INFO] provider-common .................................... SKIPPED
+[INFO] test ............................................... SKIPPED
+[INFO] test-scanner ....................................... SKIPPED
+[INFO] provider-native .................................... SKIPPED
+[INFO] test-api ........................................... SKIPPED
+[INFO] test-provider ...................................... SKIPPED
+[INFO] test-consumer ...................................... SKIPPED
+[INFO] test-consumer-codec ................................ SKIPPED
+[INFO] test-consumer-native ............................... SKIPPED
+[INFO] test-consumer-handler .............................. SKIPPED
+[INFO] test-registry ...................................... SKIPPED
+[INFO] test-spi ........................................... SKIPPED
+[INFO] provider-spring .................................... SKIPPED
+[INFO] consumer-spring .................................... SKIPPED
+[INFO] demo ............................................... SKIPPED
+[INFO] demo-api ........................................... SKIPPED
+[INFO] demo-spring-xml-consumer ........................... SKIPPED
+[INFO] demo-spring-xml-provider ........................... SKIPPED
+[INFO] demo-native-provider ............................... SKIPPED
+[INFO] demo-native-consumer ............................... SKIPPED
+[INFO] demo-spring-annotation-provider .................... SKIPPED
+[INFO] demo-spring-annotation-consumer .................... SKIPPED
+[INFO] spring-boot-starter-qrpc ........................... SKIPPED
+[INFO] spring-boot-starter-provider ....................... SKIPPED
+[INFO] demo-springboot-starter-provider ................... SKIPPED
+[INFO] demo-springboot-starter-consumer ................... SKIPPED
+[INFO] spring-boot-starter-consumer 1.0-SNAPSHOT .......... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 0.794 s
+[INFO] Finished at: 2024-03-09T17:32:45+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Unknown lifecycle phase "dependency". You must specify a valid lifecycle phase or a goal in the format <plugin-prefix>:<goal> or <plugin-group-id>:<plugin-artifact-id>[:<plugin-version>]:<goal>. Available lifecycle phases are: validate, initialize, generate-sources, process-sources, generate-resources, process-resources, compile, process-classes, generate-test-sources, process-test-sources, generate-test-resources, process-test-resources, test-compile, process-test-classes, test, prepare-package, package, pre-integration-test, integration-test, post-integration-test, verify, install, deploy, pre-clean, clean, post-clean, pre-site, site, post-site, site-deploy. -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/LifecyclePhaseNotFoundException

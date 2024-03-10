@@ -25,7 +25,7 @@ import java.util.Map;
  * @ClassName: RpcConsumerPostProcessor
  * @Author: qiuzhiq
  * @Date: 2024/3/6 12:57
- * @Description: 消费者端的后置处理器，主要为@RpcReference注解标注的字段创建bean
+ * @Description: 消费者端的后置处理器，主要为@RpcReference注解标注的字段创建bean，也就是代理对象
  */
 @Component
 public class RpcConsumerPostProcessor implements ApplicationContextAware, BeanClassLoaderAware, BeanFactoryPostProcessor {

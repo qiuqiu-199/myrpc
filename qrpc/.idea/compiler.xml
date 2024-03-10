@@ -21,6 +21,8 @@
         <module name="demo-spring-annotation-provider" />
         <module name="demo-spring-xml-consumer" />
         <module name="demo-spring-xml-provider" />
+        <module name="demo-springboot-starter-consumer" />
+        <module name="demo-springboot-starter-provider" />
         <module name="loadBalancer-api" />
         <module name="loadBalancer-consistentHash-zk" />
         <module name="loadBalancer-least-connections" />
@@ -45,6 +47,8 @@
         <module name="serialization-json" />
         <module name="serialization-protostuff" />
         <module name="spi" />
+        <module name="spring-boot-starter-consumer" />
+        <module name="spring-boot-starter-provider" />
         <module name="test-api" />
         <module name="test-consumer-codec" />
         <module name="test-consumer-handler" />
@@ -73,6 +77,8 @@
       <module name="demo-spring-xml-consumer" target="1.8" />
       <module name="demo-spring-xml-provider" target="1.8" />
       <module name="demo-spring-xml-providerr" target="1.8" />
+      <module name="demo-springboot-starter-consumer" target="1.8" />
+      <module name="demo-springboot-starter-provider" target="1.8" />
       <module name="loadBalancer" target="1.8" />
       <module name="loadBalancer-api" target="1.8" />
       <module name="loadBalancer-consistentHash-zk" target="1.8" />
@@ -104,6 +110,9 @@
       <module name="serialization-json" target="1.8" />
       <module name="serialization-protostuff" target="1.8" />
       <module name="spi" target="1.8" />
+      <module name="spring-boot-starter-consumer" target="1.8" />
+      <module name="spring-boot-starter-provider" target="1.8" />
+      <module name="spring-boot-starter-qrpc" target="1.8" />
       <module name="test" target="1.8" />
       <module name="test-api" target="1.8" />
       <module name="test-consumer" target="1.8" />

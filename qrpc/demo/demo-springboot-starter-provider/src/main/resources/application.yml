@@ -1,0 +1,9 @@
+qrpc:
+  provider:
+    serverAddr: 127.0.0.1:27880
+    registryType: nacos
+    registryAddr: 127.0.0.1:8848
+    registryLoadBalanceType: random
+    reflectType: cglib
+    heartbeatInterval: -1
+    scanNotActiveChannelInterval: -1

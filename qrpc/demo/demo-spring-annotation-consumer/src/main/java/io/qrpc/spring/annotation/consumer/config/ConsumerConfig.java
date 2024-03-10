@@ -12,5 +12,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(value = "io.qrpc.*")
+//@ComponentScan(value = "io.qrpc.demo")不可行，因为RpcConsumerPostProcessor也要注入容器，否则DemoService注入失败
 public class ConsumerConfig {
 }

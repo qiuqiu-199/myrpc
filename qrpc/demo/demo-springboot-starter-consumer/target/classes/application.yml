@@ -1,0 +1,16 @@
+qrpc:
+  consumer:
+    version: 1.0.0
+    group: qiu
+    registry-type: nacos
+    registry-addr: 127.0.0.1:8848
+    registry-load-balancer: random
+    serialization-type: protostuff
+    proxy-type: cglib
+    aync: false
+    oneway: false
+    timeout: 3000
+    heartbeat-interval: 3000
+    scan-not-active-channel-interval: 60000
+    max-retry-times: 3
+    retry-interval: 2000
