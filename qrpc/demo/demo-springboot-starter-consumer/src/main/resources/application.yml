@@ -14,3 +14,5 @@ qrpc:
     scan-not-active-channel-interval: 60000
     max-retry-times: 3
     retry-interval: 2000
+    cache-result-expire: 6000
+    enable-cahe-result: true

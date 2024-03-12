@@ -28,4 +28,7 @@ public class ProxyConfig<T> implements Serializable {
     private boolean oneway;
     private Consumer consumer;
     private RegistryService registryService;
+
+    private boolean enableCacheResult;
+    private int cacheResultExpire;
 }

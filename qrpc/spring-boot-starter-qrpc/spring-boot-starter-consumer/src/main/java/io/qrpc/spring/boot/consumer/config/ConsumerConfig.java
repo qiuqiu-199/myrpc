@@ -30,7 +30,10 @@ public class ConsumerConfig {
     private int maxRetryTimes;
     private int retryInterval;
 
-    public ConsumerConfig(String version, String group, String registryType, String registryAddr, String registryLoadBalancer, String serializationType, String proxyType, boolean aync, boolean oneway, long timeout, int heartbeatInterval, int scanNotActiveChannelInterval, int maxRetryTimes, int retryInterval) {
+    private boolean enableCacheResult;
+    private int cacheResultExpire;
+
+    public ConsumerConfig(String version, String group, String registryType, String registryAddr, String registryLoadBalancer, String serializationType, String proxyType, boolean aync, boolean oneway, long timeout, int heartbeatInterval, int scanNotActiveChannelInterval, int maxRetryTimes, int retryInterval,boolean enableCaheResult,int cacheResultExpire) {
         this.version = version;
         this.group = group;
         this.registryType = registryType;
@@ -46,5 +49,7 @@ public class ConsumerConfig {
         this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
         this.maxRetryTimes = maxRetryTimes;
         this.retryInterval = retryInterval;
+        this.enableCacheResult = enableCaheResult;
+        this.cacheResultExpire = cacheResultExpire;
     }
 }

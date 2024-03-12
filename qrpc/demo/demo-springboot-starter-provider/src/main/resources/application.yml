@@ -7,3 +7,5 @@ qrpc:
     reflectType: cglib
     heartbeatInterval: -1
     scanNotActiveChannelInterval: -1
+    enableCacheResult: true
+    cacheResultExpire: 600000

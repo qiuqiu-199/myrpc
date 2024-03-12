@@ -7,9 +7,6 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
-import io.netty.handler.timeout.IdleStateHandler;
 import io.qrpc.codec.RpcDecoder;
 import io.qrpc.codec.RpcEncoder;
 import io.qrpc.constants.RpcConstants;
@@ -18,7 +15,6 @@ import io.qrpc.provider.common.manager.ProviderConnectionManager;
 import io.qrpc.provider.common.server.api.Server;
 import io.qrpc.registry.api.RegistryService;
 import io.qrpc.registry.api.config.RegistryConfig;
-import io.qrpc.registry.zookeeper.ZookeeperRegistryService;
 import io.qrpc.spi.loader.ExtensionLoader;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -26,7 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -50,12 +45,17 @@ public class BaseServer implements Server {
     //保存扫描到的服务接口实现类的Class对象
     protected Map<String, Object> handlerMap = new HashMap<>();
 
+    //注册中心
     protected RegistryService registryService;
 
     //7节，用于提供者定时发送心跳信息和移除连接缓存中的非活跃连接
-    protected ScheduledExecutorService executorService;
-    protected int heartbeatInterval = 3000;
-    protected int scanNotActiveChannelInterval = 6000;
+    private ScheduledExecutorService executorService;
+    private int heartbeatInterval = 3000;
+    private int scanNotActiveChannelInterval = 6000;
+
+    //结果缓存相关变量
+    private boolean enableCacheResult;
+    private int cacheResultExpire = 5000;
 
     /**
      * @author: qiu
@@ -70,7 +70,9 @@ public class BaseServer implements Server {
             String registryLoadbalancer,
             String reflectType,
             int heartbeatInterval,
-            int scanNotActiveChannelInterval
+            int scanNotActiveChannelInterval,
+            boolean enableCacheResult,
+            int cacheResultExpire
     ) {
         if (!StringUtils.isEmpty(serverAddress)) {
             this.host = serverAddress.split(":")[0];
@@ -84,6 +86,10 @@ public class BaseServer implements Server {
             this.heartbeatInterval = heartbeatInterval;
         if (scanNotActiveChannelInterval > 0)
             this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
+
+        if (cacheResultExpire > 0)
+            this.cacheResultExpire = cacheResultExpire;
+        this.enableCacheResult = enableCacheResult;
     }
 
     /**
@@ -112,7 +118,8 @@ public class BaseServer implements Server {
      */
     @Override
     public void startNettyServer() {
-        //服务端启动后，开启心跳机制
+        //服务端启动后，开启自定义的心跳机制
+        //有了Netty的心跳，不开
 //        this.startHeartbeat();
 
         //创建Netty服务端
@@ -127,9 +134,9 @@ public class BaseServer implements Server {
                             socketChannel.pipeline()
                                     .addLast(RpcConstants.CODEC_DEVODER, new RpcDecoder())
                                     .addLast(RpcConstants.CODEC_ENCODER, new RpcEncoder())
-                                    .addLast(RpcConstants.CODEC_SERVER_IDEL_HANDLER, new IdleStateHandler(0, 0, heartbeatInterval + 2000, TimeUnit.MILLISECONDS))
+//                                    .addLast(RpcConstants.CODEC_SERVER_IDEL_HANDLER, new IdleStateHandler(0, 0, heartbeatInterval + 2000, TimeUnit.MILLISECONDS))
                                     //由我们自定义的处理器来处理数据
-                                    .addLast(RpcConstants.CODEC_HANDLER, new RpcProviderHandler(handlerMap, reflectType));
+                                    .addLast(RpcConstants.CODEC_HANDLER, new RpcProviderHandler(handlerMap, reflectType, enableCacheResult,cacheResultExpire));
                         }
                     })
                     //下面的设置对应tcp/ip协议, listen函数中的 backlog 参数，用来初始化服务端可连接队列。

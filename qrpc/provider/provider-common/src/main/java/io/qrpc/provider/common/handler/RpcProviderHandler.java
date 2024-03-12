@@ -3,6 +3,8 @@ package io.qrpc.provider.common.handler;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.handler.timeout.IdleStateEvent;
+import io.qrpc.cache.result.CacheResultKey;
+import io.qrpc.cache.result.CacheResultManager;
 import io.qrpc.common.helper.RpcServiceHelper;
 import io.qrpc.common.threadPool.ServerThreadPool;
 import io.qrpc.constants.RpcConstants;
@@ -15,13 +17,9 @@ import io.qrpc.protocol.response.RpcResponse;
 import io.qrpc.provider.common.cache.ProviderConnectionCache;
 import io.qrpc.reflect.api.ReflectInvoker;
 import io.qrpc.spi.loader.ExtensionLoader;
-import net.sf.cglib.reflect.FastClass;
-import net.sf.cglib.reflect.FastMethod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.Map;
 
 /**
@@ -34,22 +32,30 @@ import java.util.Map;
 public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcRequest>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcProviderHandler.class);
 
+    //用来存储扫描标注了@RpcService注解的类的对象
     private final Map<String, Object> handlerMap;
 
-    //反射扩展接口，创建当前类对象时加载对应的反射方式
+    //反射扩展接口，创建当前类对象时通过SPI加载对应的反射方式
     private final ReflectInvoker reflectInvoker;
+
+    //结果缓存相关成员变量
+    private final boolean enableCacheResult;
+    private final CacheResultManager<RpcProtocol<RpcResponse>> cacheResultManager;
 
     /**
      * @author: qiu
      * @date: 2024/2/29 22:44
-     * @param: handlerMap
-     * @param: reflectType
-     * @return: null
      * @description: 37章修改。构造方法由传递过来的反射类型加载对应的反射方式
+     * 11节，增加结果缓存相关变量
      */
-    public RpcProviderHandler(Map<String, Object> handlerMap, String reflectType) {
+    public RpcProviderHandler(Map<String, Object> handlerMap, String reflectType,boolean enableCacheResult,int cacheResultExpire) {
         this.handlerMap = handlerMap;
         reflectInvoker = ExtensionLoader.getExtension(ReflectInvoker.class, reflectType);
+
+        this.enableCacheResult = enableCacheResult;
+        if (cacheResultExpire <= 0)
+            cacheResultExpire = RpcConstants.CACHERESULT_SCAN_EXPIRE;
+        this.cacheResultManager = CacheResultManager.getInstance(enableCacheResult,cacheResultExpire);
     }
 
     /**
@@ -104,7 +110,11 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
         super.userEventTriggered(ctx, evt);
     }
 
-    //第8章模拟接收消费者的数据的临时处理，接收到数据后构造处理完毕后的数据回送给消费者
+    /**
+     * @author: qiu
+     * @date: 2024/3/12 15:13
+     * @description: 服务端接收到客户端发来的请求消息后解析请求并处理，生成响应报文并返回
+     */
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcProtocol<RpcRequest> protocol) {
         ServerThreadPool.submit(() -> {
@@ -133,7 +143,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
         byte msgType = protocol.getHeader().getMsgType();
 
         if (msgType == RpcType.REQUEST.getType()) {
-            responseProtocol = handleRequest(protocol);
+            responseProtocol = handleRequestWithCache(protocol);
         } else if (msgType == RpcType.HEARTBEAT_FROM_CONSUMER.getType()) {
             responseProtocol = handleHeartBeatFromConsumer(protocol,channel);
         } else if (msgType == RpcType.HEARTBEAT_TO_PROVIDER.getType()){
@@ -145,16 +155,43 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
     /**
      * @author: qiu
-     * @date: 2024/3/3 20:33
-     * @description: 7节新增。处理请求消息并返回响应消息
+     * @date: 2024/3/12 15:41
+     * @description: 11节，增加缓存层，优先从缓存中获取之前处理过同一个请求的响应报文，没有缓存再去处理请求，
      */
-    private RpcProtocol<RpcResponse> handleRequest(RpcProtocol<RpcRequest> protocol) {
-        RpcProtocol<RpcResponse> responseProtocol = new RpcProtocol<>();
-
+    private RpcProtocol<RpcResponse> handleRequestWithCache(RpcProtocol<RpcRequest> protocol){
+        RpcProtocol<RpcResponse> responseProtocol;
         //设置消息类型为响应类型
         RpcHeader header = protocol.getHeader();
         header.setMsgType((byte) RpcType.RESPONSE.getType());
-        LOGGER.debug("接收到请求的请求id：{}", header.getRequestId());
+        LOGGER.info("接收到请求的请求id：{}", header.getRequestId());
+
+        if (this.enableCacheResult){
+            LOGGER.info("从缓存中获取响应中...");
+            RpcRequest body = protocol.getBody();
+            CacheResultKey cacheResultKey = new CacheResultKey(body.getClassName(), body.getMethodName(), body.getParameterTypes(), body.getParameters(), body.getVersion(), body.getGroup());
+            responseProtocol = cacheResultManager.get(cacheResultKey);
+            if (responseProtocol == null){
+                LOGGER.info("未缓存响应，处理请求中...");
+                responseProtocol = handleRequest(protocol,header);
+                cacheResultKey.setCacheTimeStamp(System.currentTimeMillis());
+                cacheResultManager.put(cacheResultKey,responseProtocol);
+            }
+            responseProtocol.setHeader(protocol.getHeader());
+        }else{
+            responseProtocol = handleRequest(protocol, header);
+        }
+
+        responseProtocol.setHeader(header);
+        return responseProtocol;
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/3 20:33
+     * @description: 7节新增。处理请求消息并生成响应报文
+     */
+    private RpcProtocol<RpcResponse> handleRequest(RpcProtocol<RpcRequest> protocol, RpcHeader header) {
+        RpcProtocol<RpcResponse> responseProtocol = new RpcProtocol<>();
 
         //调用真实方法，根据结果构建响应体
         RpcResponse responseBody = new RpcResponse();
@@ -171,7 +208,6 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
             LOGGER.error("服务调用过程出错:" + t);
         }
 
-        responseProtocol.setHeader(header);
         responseProtocol.setBody(responseBody);
 
         return responseProtocol;
@@ -180,7 +216,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
     /**
      * @author: qiu
      * @date: 2024/2/29 22:45
-     * @description: 解析请求体，预备通过反射调用真实方法，返回真实方法处理结果
+     * @description: 解析请求体，预备通过反射调用真实方法，返回真实方法处理结果。
      * 37章修改，引入SPI机制动态加载反射方式
      */
     private Object handle(RpcRequest requestBody) throws Throwable {

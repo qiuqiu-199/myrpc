@@ -18,7 +18,7 @@ import org.springframework.context.annotation.Configuration;
 public class ProviderAutoConfiguration {
 
     @Bean
-    @ConfigurationProperties(prefix = "qrpc.provider")//从配置文件中获取参数，value是前缀
+    @ConfigurationProperties(prefix = "qrpc.provider")//从配置文件中获取参数，prefix是前缀
     public ProviderConfig providerConfig(){
         return new ProviderConfig();
     }
@@ -32,7 +32,9 @@ public class ProviderAutoConfiguration {
                 config.getRegistryLoadBalanceType(),
                 config.getReflectType(),
                 config.getHeartbeatInterval(),
-                config.getScanNotActiveChannelInterval()
-                );
+                config.getScanNotActiveChannelInterval(),
+                config.isEnableCacheResult(),
+                config.getCacheResultExpire()
+        );
     }
 }

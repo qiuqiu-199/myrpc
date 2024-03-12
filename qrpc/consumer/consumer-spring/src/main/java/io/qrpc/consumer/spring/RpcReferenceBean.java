@@ -38,6 +38,9 @@ public class RpcReferenceBean implements FactoryBean {
     //重试机制相关，重试次数、重试间隔时间
     private int maxRetryTimes = 3;
     private int retryInterval = 3000;
+    //缓存相关
+    private boolean enableCacheResult;
+    private int cacheResultExpire;
 
     //重写BeanFactory的两个方法
     @Override
@@ -52,7 +55,7 @@ public class RpcReferenceBean implements FactoryBean {
 
     //用来生成当前类的BeanDefinition和bean
     public void init() {
-        RpcClient rpcClient = new RpcClient(version, group, registryType, registryAddr, registryLoadbalanceType, serializationType, proxyType, async, oneway, timeout, heartbeatInterval, scanNotActiveChannelInterval, maxRetryTimes, retryInterval);
+        RpcClient rpcClient = new RpcClient(version, group, registryType, registryAddr, registryLoadbalanceType, serializationType, proxyType, async, oneway, timeout, heartbeatInterval, scanNotActiveChannelInterval, maxRetryTimes, retryInterval,enableCacheResult,cacheResultExpire);
         this.proxyObject = rpcClient.create(interfaceClass);
     }
 

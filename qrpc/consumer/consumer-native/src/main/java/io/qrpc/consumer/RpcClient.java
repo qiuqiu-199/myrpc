@@ -8,7 +8,6 @@ import io.qrpc.proxy.api.config.ProxyConfig;
 import io.qrpc.proxy.api.object.ObjectProxy;
 import io.qrpc.registry.api.RegistryService;
 import io.qrpc.registry.api.config.RegistryConfig;
-import io.qrpc.registry.zookeeper.ZookeeperRegistryService;
 import io.qrpc.spi.loader.ExtensionLoader;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -39,6 +38,10 @@ public class RpcClient {
     private int maxRetryTimes = 3; //最大重试次数
     private int retryInterval = 1000;  //重试间隔时间
 
+    //缓存相关变量
+    private boolean enableCacheResult;
+    private int cacheResultExpire;
+
     //构造方法
     public RpcClient(
             String serviceVersion,
@@ -54,7 +57,9 @@ public class RpcClient {
             int heartbeatInterval,
             int scanNotActiveChannelInterval,
             int maxRetryTimes,
-            int retryInterval
+            int retryInterval,
+            boolean enableCacheResult,
+            int cacheResultExpire
             ) {
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
@@ -68,6 +73,8 @@ public class RpcClient {
         this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
         this.maxRetryTimes = maxRetryTimes;
         this.retryInterval = retryInterval;
+        this.enableCacheResult = enableCacheResult;
+        this.cacheResultExpire = cacheResultExpire;
     }
 
     /**
@@ -122,7 +129,10 @@ public class RpcClient {
                                 this.maxRetryTimes,
                                 this.retryInterval
                         ),
-                        registryService)
+                        registryService,
+                        enableCacheResult,
+                        cacheResultExpire
+                )
         );
         return proxyFactory.getProxy(interfaceClass);
     }
@@ -150,7 +160,9 @@ public class RpcClient {
                 ),
                 async,
                 oneway,
-                registryService
+                registryService,
+                enableCacheResult,
+                cacheResultExpire
         );
     }
 

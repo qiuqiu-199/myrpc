@@ -38,7 +38,9 @@ public class ConsumerAutoConfiguration {
                 config.getHeartbeatInterval(),
                 config.getScanNotActiveChannelInterval(),
                 config.getMaxRetryTimes(),
-                config.getRetryInterval()
+                config.getRetryInterval(),
+                config.isEnableCacheResult(),
+                config.getCacheResultExpire()
         );
     }
 }

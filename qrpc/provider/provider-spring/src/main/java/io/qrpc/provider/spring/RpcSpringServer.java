@@ -31,8 +31,8 @@ public class RpcSpringServer extends BaseServer implements ApplicationContextAwa
      * @description: 22章修改，构造方法根据传入的注册中心地址和注册中心类型引入注册中心
      * 42章，构造方法增加负载均衡参数
      */
-    public RpcSpringServer(String serverAddress, String registryType, String registryAddress, String registryLoadBalancer, String reflectType, int heartbeatInterval, int scanNotActiveChannelInterval) {
-        super(serverAddress, registryType, registryAddress, registryLoadBalancer, reflectType, heartbeatInterval, scanNotActiveChannelInterval);
+    public RpcSpringServer(String serverAddress, String registryType, String registryAddress, String registryLoadBalancer, String reflectType, int heartbeatInterval, int scanNotActiveChannelInterval,boolean enableCacheResult, int cacheResultExpire) {
+        super(serverAddress, registryType, registryAddress, registryLoadBalancer, reflectType, heartbeatInterval, scanNotActiveChannelInterval,enableCacheResult,cacheResultExpire);
     }
 
     /**

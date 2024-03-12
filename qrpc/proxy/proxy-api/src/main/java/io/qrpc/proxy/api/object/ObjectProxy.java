@@ -1,5 +1,7 @@
 package io.qrpc.proxy.api.object;
 
+import io.qrpc.cache.result.CacheResultKey;
+import io.qrpc.cache.result.CacheResultManager;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.enumeration.RpcType;
 import io.qrpc.protocol.header.RpcHeaderFactory;
@@ -34,6 +36,8 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     private boolean async;
     private boolean oneway;
     private RegistryService registryService;
+    private boolean enableCacheResult;
+    private CacheResultManager<Object> cacheResultManager;
 
     //2种构造方法
     //构造方法1：17章暂未用到
@@ -42,7 +46,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     }
 
     //构造方法2：全参构造
-    public ObjectProxy(Class<T> clazz, String serviceVersion, String serviceGroup, String serializationType, long timeout, Consumer consumer, boolean async, boolean oneway,RegistryService registryService) {
+    public ObjectProxy(Class<T> clazz, String serviceVersion, String serviceGroup, String serializationType, long timeout, Consumer consumer, boolean async, boolean oneway,RegistryService registryService,boolean enableCacheResult,int cacheResultExpire) {
         this.clazz = clazz;
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
@@ -52,22 +56,21 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         this.async = async;
         this.oneway = oneway;
         this.registryService = registryService;
+
+        this.enableCacheResult = enableCacheResult;
+        this.cacheResultManager = CacheResultManager.getInstance(enableCacheResult,cacheResultExpire);
     }
 
     /**
      * @author: qiu
      * @date: 2024/2/26 9:45
-     * @param: objectProxy
-     * @param: method
-     * @param: args
-     * @return: java.lang.Object
      * @description: 代理方法，封装请求协议对象并发送请求、接收结果
      * 23章，调用sendRequest增加参数RegistryService
+     * 11节，增加缓存层
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         LOGGER.info("ObjectProxy#invoke动态代理的同步调用...");
-        //TODO 待进一步理解
         //invoke方法里对三种方法做一个通用的特殊处理，
         // equals方法直接返回proxy和args[0]的比较结果，
         // hashcode方法返回proxy的哈希值，
@@ -84,9 +87,42 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
             }
         }
 
+        //如果开启了缓存，先从缓存获取响应
+        if (enableCacheResult) return invokeSendRequestMethodCache(method,args);
+        return  invokeSendRequestMethod(method,args);
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/12 16:25
+     * @description: 从缓存中获取响应，如果没有直接发送请求
+     */
+    private Object invokeSendRequestMethodCache(Method method, Object[] args) throws Exception {
+        LOGGER.info("从缓存中获取响应中...");
+        CacheResultKey cacheResultKey = new CacheResultKey(method.getDeclaringClass().getName(), method.getName(), method.getParameterTypes(), args, serviceVersion, serviceGroup);
+        Object obj = this.cacheResultManager.get(cacheResultKey);
+        if (obj == null){
+            LOGGER.info("未缓存响应，发送请求中...");
+            obj = invokeSendRequestMethod(method,args);
+            if (obj != null){
+                cacheResultKey.setCacheTimeStamp(System.currentTimeMillis());
+                this.cacheResultManager.put(cacheResultKey,obj);
+            }
+        }
+        return obj;
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/12 16:26
+     * @description: 发送请求的方法
+     */
+    private Object invokeSendRequestMethod(Method method, Object[] args) throws Exception {
         //封装协议信息
         RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
+        //协议头
         protocol.setHeader(RpcHeaderFactory.getRequestHeader(serializationType, RpcType.REQUEST.getType()));
+        //协议体
         RpcRequest requestBody = new RpcRequest();
         requestBody.setClassName(method.getDeclaringClass().getName());
         requestBody.setMethodName(method.getName());
@@ -98,7 +134,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         requestBody.setOneway(this.oneway);
         protocol.setBody(requestBody);
 
-        //协议信息输出
+        //信息输出
         LOGGER.info("代理信息======start");
         LOGGER.info("invoke。。。代理方法所在类：{}", method.getDeclaringClass().getName());
         LOGGER.info("invoke。。。代理方法名：{}", method.getName());
@@ -115,12 +151,10 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         return future == null ? null : timeout > 0 ? future.get(timeout, TimeUnit.MILLISECONDS) : future.get();
     }
 
+
     /**
      * @author: qiu
      * @date: 2024/2/21 16:38
-     * @param: funName
-     * @param: args
-     * @return: io.qrpc.objectProxy.api.future.RpcFuture
      * @description: 19章，由异步化调用对象调用，根据传入方法名及参数调用远程方法
      * 23章，调用sendRequest增加参数RegistryService
      */
@@ -140,10 +174,6 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     /**
      * @author: qiu
      * @date: 2024/2/21 16:38
-     * @param: className
-     * @param: funName
-     * @param: args
-     * @return: io.qrpc.protocol.RpcProtocol<io.qrpc.protocol.request.RpcRequest>
      * @description: 19章，根据接口名、方法名及方法参数创建请求协议对象
      */
     private RpcProtocol<RpcRequest> createRequest(String className, String funName, Object[] args) {
@@ -171,8 +201,6 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     /**
      * @author: qiu
      * @date: 2024/2/21 16:38
-     * @param: arg
-     * @return: java.lang.Class
      * @description: 19章，根据传入的参数，返回参数对应的Class对象
      */
     private Class getClassType(Object arg) {

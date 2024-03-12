@@ -25,7 +25,7 @@ public abstract class BaseProxyFactory<T> implements ProxyFactory {
      */
     @Override
     public <T> void init(ProxyConfig<T> config) {
-        LOGGER.info("BaseProxyFactory#init 代理工厂初始化中，创建ObjectProxy...");
+        LOGGER.info("BaseProxyFactory#init 代理工厂初始化，创建ObjectProxy...");
         this.objectProxy = new ObjectProxy(
                 config.getClazz(),
                 config.getServiceVersion(),
@@ -35,7 +35,9 @@ public abstract class BaseProxyFactory<T> implements ProxyFactory {
                 config.getConsumer(),
                 config.isAsync(),
                 config.isOneway(),
-                config.getRegistryService()
+                config.getRegistryService(),
+                config.isEnableCacheResult(),
+                config.getCacheResultExpire()
                 );
     }
 }

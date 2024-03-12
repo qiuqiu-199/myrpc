@@ -20,5 +20,7 @@
         <constructor-arg name="reflectType" value="${reflect.type}"/>
         <constructor-arg name="heartbeatInterval" value="${server.heartbeatInterval}"/>
         <constructor-arg name="scanNotActiveChannelInterval" value="${server.scanNotActiveChannelInterval}"/>
+        <constructor-arg name="enableCacheResult" value="${cacheResult.enable}"/>
+        <constructor-arg name="cacheResultExpire" value="${cacheResult.expire}"/>
     </bean>
 </beans>

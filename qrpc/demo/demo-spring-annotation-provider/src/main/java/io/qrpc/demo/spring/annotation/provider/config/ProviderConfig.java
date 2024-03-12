@@ -36,8 +36,13 @@ public class ProviderConfig {
     @Value("${server.scanNotActiveChannelInterval}")
     private int scanNotActiveChannelInterval;
 
+    @Value("${cacheResult.enable}")
+    private boolean enableCacheResult;
+    @Value("${cacheResult.expire}")
+    private int cacheResultExpire;
+
     @Bean
     public RpcSpringServer rpcSpringServer(){
-        return new RpcSpringServer(serverAddr,registryType,registryAddr,registryLoadbalance,reflectType,heatbeatInterval,scanNotActiveChannelInterval);
+        return new RpcSpringServer(serverAddr,registryType,registryAddr,registryLoadbalance,reflectType,heatbeatInterval,scanNotActiveChannelInterval,enableCacheResult,cacheResultExpire);
     }
 }

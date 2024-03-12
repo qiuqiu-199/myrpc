@@ -13,7 +13,7 @@ import org.junit.Test;
 public class RpcSingleServerTest {
     @Test
     public void startRpcProvider(){
-        RpcSingleServer server = new RpcSingleServer("127.0.0.1:27880","io.qrpc.test","127.0.0.1:8848","nacos","random","jdk",-1,-1);
+        RpcSingleServer server = new RpcSingleServer("127.0.0.1:27880","io.qrpc.test","127.0.0.1:8848","nacos","random","jdk",-1,-1,true,6000);
         server.startNettyServer();
     }
 }

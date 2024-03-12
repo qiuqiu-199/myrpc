@@ -29,7 +29,9 @@ public class ConsumerDemoServiceImpl implements ConsumerDemoService {
             heartbeatInterval = 3000,
             scanNotActiveChannelInterval = 60000,
             maxRetryTimes = 3,
-            retryInterval = 3000
+            retryInterval = 3000,
+            enableCacheResult = true,
+            cacheResultExpire = 6000
     )
     private DemoService demoService;  //这里的红波浪线不用管
     @Override

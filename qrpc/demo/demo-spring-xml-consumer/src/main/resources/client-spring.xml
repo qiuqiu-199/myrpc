@@ -25,6 +25,8 @@
         <constructor-arg name="scanNotActiveChannelInterval" value="${client.scanNotActiveChannelInterval}"/>
         <constructor-arg name="maxRetryTimes" value="${maxRetryTimes}"/>
         <constructor-arg name="retryInterval" value="${retryInterval}"/>
+        <constructor-arg name="enableCacheResult" value="${cacheResult.enable}"/>
+        <constructor-arg name="cacheResultExpire" value="${cacheResult.expire}"/>
     </bean>
 
 </beans>

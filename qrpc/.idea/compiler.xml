@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="annotation" />
+        <module name="cache" />
         <module name="codec" />
         <module name="common" />
         <module name="constants" />
@@ -61,6 +62,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="annotation" target="1.8" />
+      <module name="cache" target="1.8" />
       <module name="codec" target="1.8" />
       <module name="common" target="1.8" />
       <module name="constants" target="1.8" />

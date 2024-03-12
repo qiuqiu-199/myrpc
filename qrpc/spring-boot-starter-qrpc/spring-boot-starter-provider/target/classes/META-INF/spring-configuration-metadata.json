@@ -9,6 +9,18 @@
   ],
   "properties": [
     {
+      "name": "qrpc.provider.cache-result-expire",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.provider.enable-cache-result",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": false
+    },
+    {
       "name": "qrpc.provider.heartbeat-interval",
       "type": "java.lang.Integer",
       "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",

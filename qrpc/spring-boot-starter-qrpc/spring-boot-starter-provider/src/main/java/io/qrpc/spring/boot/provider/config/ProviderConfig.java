@@ -24,7 +24,10 @@ public class ProviderConfig {
     private int heartbeatInterval;
     private int scanNotActiveChannelInterval;
 
-    public ProviderConfig(String serverAddr, String registryType, String registryAddr, String registryLoadBalanceType, String reflectType, int heartbeatInterval, int scanNotActiveChannelInterval) {
+    private boolean enableCacheResult;
+    private int cacheResultExpire;
+
+    public ProviderConfig(String serverAddr, String registryType, String registryAddr, String registryLoadBalanceType, String reflectType, int heartbeatInterval, int scanNotActiveChannelInterval,boolean enableCacheResult,int cacheResultExpire) {
         this.serverAddr = serverAddr;
 
         this.registryType = registryType;
@@ -36,5 +39,9 @@ public class ProviderConfig {
         if (heartbeatInterval > 0)
             this.heartbeatInterval = heartbeatInterval;
         this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
+
+        if (cacheResultExpire > 0)
+            this.cacheResultExpire = cacheResultExpire;
+        this.enableCacheResult = enableCacheResult;
     }
 }

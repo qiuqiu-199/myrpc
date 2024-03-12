@@ -49,4 +49,9 @@ public class RpcConstants {
     public static final String CODEC_HANDLER = "handle";
     public static final String CODEC_SERVER_IDEL_HANDLER = "server-idle-handler";
     public static final String CODEC_CLIENT_IDLE_HANDLER = "client-idle-handler";
+
+    //笔记11章，结果缓存相关key
+    public static final int CACHERESULT_SCAN_INTERNAL = 5000; //定期清理过期缓存间隔时间
+    public static final int CACHERESULT_SCAN_EXPIRE = 5000; //缓存时间
+
 }

@@ -21,13 +21,13 @@ public class ZookeeperRegistryTest {
     @Before
     public void init() throws Exception {
         //创建注册配置类RegistryConfig，ZookeeperRegistryService的初始化需要配置类
-        RegistryConfig config = new RegistryConfig("127.0.0.1:2181", "zookeeper");
+        RegistryConfig config = new RegistryConfig("127.0.0.1:2181", "zookeeper","random");
         this.registryService = new ZookeeperRegistryService();
         //根据配置类初始化
         this.registryService.init(config);
 
         //服务元数据
-        this.serviceMeta = new ServiceMeta(ZookeeperRegistryTest.class.getName(), "1.0.0", "qiu", "127.0.0.1", 8080);
+        this.serviceMeta = new ServiceMeta(ZookeeperRegistryTest.class.getName(), "1.0.0", "qiu", "127.0.0.1", 8080,3);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class ZookeeperRegistryTest {
 
     @Test
     public void testDiscovery() throws Exception {
-        ServiceMeta meta = registryService.discovery(ZookeeperRegistryTest.class.getName(), "qiu".hashCode());
+        ServiceMeta meta = registryService.discovery(ZookeeperRegistryTest.class.getName(), "qiu".hashCode(),"127.0.0.1");
         System.out.println(meta.toString());
     }
 

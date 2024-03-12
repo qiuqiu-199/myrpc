@@ -1,9 +1,7 @@
 package io.qrpc.test.consumer.handler;
 
-import io.qrpc.consumer.common.RpcConsumer;
-import io.qrpc.proxy.api.callback.AsyncRpcCallback;
-import io.qrpc.proxy.api.future.RpcFuture;
 import io.qrpc.protocol.RpcProtocol;
+import io.qrpc.protocol.enumeration.RpcType;
 import io.qrpc.protocol.header.RpcHeaderFactory;
 import io.qrpc.protocol.request.RpcRequest;
 import org.slf4j.Logger;
@@ -53,7 +51,7 @@ public class RpcConsumerHandlerTest {
     private static RpcProtocol<RpcRequest> getProtocol() {
         LOGGER.info("=============模拟消费者发送数据：");
         RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
-        protocol.setHeader(RpcHeaderFactory.getRequestHeader("jdk"));
+        protocol.setHeader(RpcHeaderFactory.getRequestHeader("jdk", RpcType.REQUEST.getType()));
         RpcRequest requst = new RpcRequest();
         requst.setClassName("io.qrpc.test.api.DemoService");
         requst.setVersion("1.0.0");

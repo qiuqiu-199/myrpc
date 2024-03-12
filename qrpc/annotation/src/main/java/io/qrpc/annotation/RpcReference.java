@@ -51,5 +51,8 @@ public @interface RpcReference {
     int maxRetryTimes() default 3;
     int retryInterval() default 3000;
 
+    //缓存层，默认开启缓存，缓存有效时间5秒
+    boolean enableCacheResult() default true;
+    int cacheResultExpire() default 5000;
 
 }
