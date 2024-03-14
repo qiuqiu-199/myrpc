@@ -2,10 +2,11 @@ package io.qrpc.proxy.api.future;
 
 
 import io.qrpc.common.threadPool.ClientThreadPool;
-import io.qrpc.proxy.api.callback.AsyncRpcCallback;
 import io.qrpc.protocol.RpcProtocol;
+import io.qrpc.protocol.enumeration.RpcStatus;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.protocol.response.RpcResponse;
+import io.qrpc.proxy.api.callback.AsyncRpcCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +59,7 @@ public class RpcFuture extends CompletableFuture<Object> {
 
         sync.acquire(-1); //TODO 待进一步理解
 
-        return this.responseRpcProtocol != null ? this.responseRpcProtocol.getBody().getResult() : null;
+        return this.getResult(this.responseRpcProtocol);
     }
 
     //超时阻塞获取响应协议对象中的结果
@@ -67,12 +68,29 @@ public class RpcFuture extends CompletableFuture<Object> {
         //17章之前下面这一行存在错误，responseTimeThreshold应修改为timeout
         boolean success = sync.tryAcquireNanos(-1, unit.toNanos(timeout));
         if (success) {
-            return this.responseRpcProtocol != null ? this.responseRpcProtocol.getBody().getResult() : null;
+            return this.getResult(this.responseRpcProtocol);
         } else {
             LOGGER.error("超时时间设定为：===" + timeout);
             throw new RuntimeException("超时异常！请求id为" + this.requestRpcProtocol.getHeader().getRequestId() + ". 请求类名为：" + this.requestRpcProtocol.getBody().getClassName() + ". 请求方法名为：" + this.requestRpcProtocol.getBody().getMethodName());
         }
     }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/14 15:48
+     * @description: 13节，根据调用结果不同返回不同结果，调用成功返回响应体，否则抛异常，由容错层处理
+     */
+    private Object getResult(RpcProtocol<RpcResponse> responseProtocol) {
+        if (responseProtocol == null)
+            return null;
+
+        if (responseProtocol.getHeader().getStatus() == RpcStatus.FAIL.getCode()){
+            throw new RuntimeException("提供者调用失败，抛出异常！"+responseProtocol.getBody().getError());
+        }
+
+        return responseProtocol.getBody().getResult();
+    }
+
 
     //暂时不支持，13章
     @Override

@@ -40,7 +40,10 @@ public class ConsumerAutoConfiguration {
                 config.getMaxRetryTimes(),
                 config.getRetryInterval(),
                 config.isEnableCacheResult(),
-                config.getCacheResultExpire()
+                config.getCacheResultExpire(),
+                config.getReflectType(),
+                config.getFallbackClassName(),
+                config.getFallbackClass()
         );
     }
 }

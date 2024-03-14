@@ -41,6 +41,10 @@ public class RpcReferenceBean implements FactoryBean {
     //缓存相关
     private boolean enableCacheResult;
     private int cacheResultExpire;
+    //容错层
+    private String reflectType;
+    private String fallbackClassName;
+    private Class<?> fallbackClass;
 
     //重写BeanFactory的两个方法
     @Override
@@ -55,7 +59,27 @@ public class RpcReferenceBean implements FactoryBean {
 
     //用来生成当前类的BeanDefinition和bean
     public void init() {
-        RpcClient rpcClient = new RpcClient(version, group, registryType, registryAddr, registryLoadbalanceType, serializationType, proxyType, async, oneway, timeout, heartbeatInterval, scanNotActiveChannelInterval, maxRetryTimes, retryInterval,enableCacheResult,cacheResultExpire);
+        RpcClient rpcClient = new RpcClient(
+                version,
+                group,
+                registryType,
+                registryAddr,
+                registryLoadbalanceType,
+                serializationType,
+                proxyType,
+                async,
+                oneway,
+                timeout,
+                heartbeatInterval,
+                scanNotActiveChannelInterval,
+                maxRetryTimes,
+                retryInterval,
+                enableCacheResult,
+                cacheResultExpire,
+                reflectType,
+                fallbackClassName,
+                fallbackClass
+        );
         this.proxyObject = rpcClient.create(interfaceClass);
     }
 
@@ -134,5 +158,28 @@ public class RpcReferenceBean implements FactoryBean {
 
     public void setCacheResultExpire(int cacheResultExpire) {
         this.cacheResultExpire = cacheResultExpire;
+    }
+    public String getReflectType() {
+        return reflectType;
+    }
+
+    public void setReflectType(String reflectType) {
+        this.reflectType = reflectType;
+    }
+
+    public String getFallbackClassName() {
+        return fallbackClassName;
+    }
+
+    public void setFallbackClassName(String fallbackClassName) {
+        this.fallbackClassName = fallbackClassName;
+    }
+
+    public Class<?> getFallbackClass() {
+        return fallbackClass;
+    }
+
+    public void setFallbackClass(Class<?> fallbackClass) {
+        this.fallbackClass = fallbackClass;
     }
 }

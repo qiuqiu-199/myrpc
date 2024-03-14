@@ -43,13 +43,14 @@ public class ConsumerNativeStarter {
 
     @Before
     public void init() {
-        rpcClient = new RpcClient("1.0.0", "qiu", RpcConstants.REGISTRY_TYPE_NACOS, RpcConstants.REGISTRY_TYPE_NACOS_ADDR, "random", "protostuff", "cglib", false, false, 30000, -1, -1, -1, -1,true,6000);
+        rpcClient = new RpcClient("1.0.0", "qiu", RpcConstants.REGISTRY_TYPE_NACOS, RpcConstants.REGISTRY_TYPE_NACOS_ADDR, "random", "protostuff", "cglib", false, false, 30000, -1, -1, -1, -1,true,6000,"jdk","io.qrpc.consumer.FallbackDemoServiceImpl",FallbackDemoServiceImpl.class);
     }
 
     @Test
     public void testInterfaceRpc() throws IOException {
         DemoService demoService = rpcClient.create(DemoService.class);
-        String hello = demoService.sayHello("23章test create...。。。");
+//        String hello = demoService.sayHello("23章test create...。。。");
+        String hello = demoService.sayHello("fallback");
         LOGGER.info("提供者返回的数据====》》》" + hello);
 //        System.in.read();
         rpcClient.shutdown();

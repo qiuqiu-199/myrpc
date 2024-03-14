@@ -55,4 +55,9 @@ public @interface RpcReference {
     boolean enableCacheResult() default true;
     int cacheResultExpire() default 5000;
 
+    //容错层
+    String reflectType() default "jdk";
+    String fallbackClassName() default "void.class";
+    Class<?> fallbackClass() default void.class;
+
 }

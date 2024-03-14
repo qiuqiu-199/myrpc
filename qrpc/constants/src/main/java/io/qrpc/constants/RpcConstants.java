@@ -62,4 +62,7 @@ public class RpcConstants {
     public static final String CONNECTION_DISUSE_STRATEGY_LRU = "lru";
     public static final String CONNECTION_DISUSE_STRATEGY_REFUSE = "refuse";
 
+    //容错层相关
+    //默认的容错处理类
+    public static final Class<?> FALLBACK_CLASS_DEFAULT = void.class;
 }

@@ -31,4 +31,8 @@ public class ProxyConfig<T> implements Serializable {
 
     private boolean enableCacheResult;
     private int cacheResultExpire;
+
+    private String reflectType;
+    private String fallbackClassName;
+    private Class<?> fallbackClass;
 }

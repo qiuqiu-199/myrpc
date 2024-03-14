@@ -113,6 +113,10 @@ public class RpcConsumerPostProcessor implements ApplicationContextAware, BeanCl
             builder.addPropertyValue("retryInterval",anno.retryInterval());
             builder.addPropertyValue("enableCacheResult",anno.enableCacheResult());
             builder.addPropertyValue("cacheResultExpire",anno.cacheResultExpire());
+            builder.addPropertyValue("reflectType",anno.reflectType());
+            builder.addPropertyValue("fallbackClassName",anno.fallbackClassName());
+            builder.addPropertyValue("fallbackClass",anno.fallbackClass());
+
 
             //缓存起来，<字段全类名，其BeanDefinition>
             this.rpcRefBeanDefinitoins.put(field.getName(),builder.getBeanDefinition());

@@ -14,7 +14,7 @@ public class ProviderNativeStarter {
     public void startRpcProvider_native(){
         RpcSingleServer server = new RpcSingleServer(
                 "127.0.0.1:27880",
-                "io.qrpc.demo",
+                "io.qrpc.provider.impl",
                 "nacos",
                 "127.0.0.1:8848",
                 "random",

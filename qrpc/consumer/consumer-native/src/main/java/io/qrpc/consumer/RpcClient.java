@@ -42,6 +42,11 @@ public class RpcClient {
     private boolean enableCacheResult;
     private int cacheResultExpire;
 
+    //容错层
+    private String reflectType;
+    private String fallbackClassName;
+    private Class<?> fallbackClass;
+
     //构造方法
     public RpcClient(
             String serviceVersion,
@@ -59,7 +64,10 @@ public class RpcClient {
             int maxRetryTimes,
             int retryInterval,
             boolean enableCacheResult,
-            int cacheResultExpire
+            int cacheResultExpire,
+            String reflectType,
+            String fallbackClassName,
+            Class<?> fallbackClass
             ) {
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
@@ -68,32 +76,33 @@ public class RpcClient {
         this.timeout = timeout;
         this.async = async;
         this.oneway = oneway;
-        this.registryService = this.getRegistryService(registryAddress, registryType, registryLoadBalancer);
+        this.registryService = this.getRegistryService(registryType, registryAddress, registryLoadBalancer);
         this.heartbeatInterval = heartbeatInterval;
         this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
         this.maxRetryTimes = maxRetryTimes;
         this.retryInterval = retryInterval;
         this.enableCacheResult = enableCacheResult;
         this.cacheResultExpire = cacheResultExpire;
+
+        this.reflectType = reflectType;
+        this.fallbackClassName = fallbackClassName;
+        this.fallbackClass = fallbackClass;
     }
 
     /**
      * @author: qiu
      * @date: 2024/2/25 14:28
-     * @param: registryAddr
-     * @param: registryType
-     * @return: io.qrpc.registry.api.RegistryService
-     * @description:
+     * @description: 根据服务中心地址、服务中心类型、负载均衡类型获取对应的服务中心
      */
-    private RegistryService getRegistryService(String registryAddress, String registryType, String loadBalancer) {
-        if (StringUtils.isEmpty(registryType)) throw new IllegalArgumentException("未指定registryType！！");
-        //23章，后续使用SPI扩展，目前先使用zookeeper
-        //6.5SPI扩展
+    private RegistryService getRegistryService(String registryType, String registryAddress, String loadBalancer) {
+        if (StringUtils.isEmpty(registryType))
+            throw new IllegalArgumentException("未指定注册中心类型registryType！！！");
+
         RegistryService registryService = ExtensionLoader.getExtension(RegistryService.class, registryType);
         try {
             registryService.init(new RegistryConfig(registryAddress, registryType, loadBalancer));
         } catch (Exception e) {
-            LOGGER.error("RpcClient初始化registryService失败：{}", e);
+            LOGGER.error("注册中心初始化registryService失败：{}", e);
             throw new RegistryException(e.getMessage(), e);
         }
         return registryService;
@@ -102,9 +111,8 @@ public class RpcClient {
     /**
      * @author: qiu
      * @date: 2024/2/21 23:26
-     * @param: null
-     * @return: null
-     * @description: 20章优化，通过ProxyFactory接收基于jdk实现的动态代理工厂对象，并初始化代理工厂对象，然后返回代理工厂对象创建的代理对象
+     * @description: 根据接口创建代理对象
+     * 20章优化，通过ProxyFactory接收基于jdk实现的动态代理工厂对象，并初始化代理工厂对象，然后返回代理工厂对象创建的代理对象
      * 32章修改，使用SPI机制获取代理工厂接口的扩展类对象
      */
     public <T> T create(Class<T> interfaceClass) {
@@ -131,7 +139,10 @@ public class RpcClient {
                         ),
                         registryService,
                         enableCacheResult,
-                        cacheResultExpire
+                        cacheResultExpire,
+                        reflectType,
+                        fallbackClassName,
+                        fallbackClass
                 )
         );
         return proxyFactory.getProxy(interfaceClass);
@@ -140,9 +151,7 @@ public class RpcClient {
     /**
      * @author: qiu
      * @date: 2024/2/21 16:42
-     * @param: interfaceClass
-     * @return: io.qrpc.objectProxy.api.async.IAsyncObjectProxy
-     * @description: 19章，构建异步化调用对象
+     * @description: 19章，构建异步化调用代理对象
      */
     public <T> IAsyncObjectProxy createAsync(Class<T> interfaceClass) {
         LOGGER.info("RpcClient#createAsync RPC客户端创建异步化代理对象...");
@@ -162,7 +171,10 @@ public class RpcClient {
                 oneway,
                 registryService,
                 enableCacheResult,
-                cacheResultExpire
+                cacheResultExpire,
+                reflectType,
+                fallbackClassName,
+                fallbackClass
         );
     }
 

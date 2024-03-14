@@ -3,6 +3,7 @@ package io.qrpc.spring.annotation.consumer.Impl;
 import io.qrpc.annotation.RpcReference;
 import io.qrpc.demo.api.DemoService;
 import io.qrpc.spring.annotation.consumer.ConsumerDemoService;
+import io.qrpc.spring.annotation.consumer.fallback.FallbackDemoServiceImpl;
 import org.springframework.stereotype.Service;
 
 /**
@@ -32,7 +33,10 @@ public class ConsumerDemoServiceImpl implements ConsumerDemoService {
             maxRetryTimes = 3,
             retryInterval = 3000,
             enableCacheResult = true,
-            cacheResultExpire = 6000
+            cacheResultExpire = 6000,
+            reflectType = "jdk",
+            fallbackClassName = "io.qrpc.spring.annotation.consumer.fallback.FallbackDemoServiceImpl",
+            fallbackClass = FallbackDemoServiceImpl.class
     )
     private DemoService demoService;
 

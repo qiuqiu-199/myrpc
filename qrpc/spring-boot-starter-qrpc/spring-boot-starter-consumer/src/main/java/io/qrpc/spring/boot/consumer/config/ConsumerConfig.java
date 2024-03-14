@@ -33,7 +33,31 @@ public class ConsumerConfig {
     private boolean enableCacheResult;
     private int cacheResultExpire;
 
-    public ConsumerConfig(String version, String group, String registryType, String registryAddr, String registryLoadBalancer, String serializationType, String proxyType, boolean aync, boolean oneway, long timeout, int heartbeatInterval, int scanNotActiveChannelInterval, int maxRetryTimes, int retryInterval,boolean enableCaheResult,int cacheResultExpire) {
+    //容错层
+    private String reflectType;
+    private String fallbackClassName;
+    private Class<?> fallbackClass;
+
+    public ConsumerConfig(
+            String version,
+            String group,
+            String registryType,
+            String registryAddr,
+            String registryLoadBalancer,
+            String serializationType,
+            String proxyType,
+            boolean aync,
+            boolean oneway,
+            long timeout,
+            int heartbeatInterval,
+            int scanNotActiveChannelInterval,
+            int maxRetryTimes,
+            int retryInterval,
+            boolean enableCacheResult,
+            int cacheResultExpire,
+            String reflectType,
+            String fallbackClassName,
+            Class<?> fallbackClass) {
         this.version = version;
         this.group = group;
         this.registryType = registryType;
@@ -49,7 +73,11 @@ public class ConsumerConfig {
         this.scanNotActiveChannelInterval = scanNotActiveChannelInterval;
         this.maxRetryTimes = maxRetryTimes;
         this.retryInterval = retryInterval;
-        this.enableCacheResult = enableCaheResult;
+        this.enableCacheResult = enableCacheResult;
         this.cacheResultExpire = cacheResultExpire;
+
+        this.reflectType = reflectType;
+        this.fallbackClassName = fallbackClassName;
+        this.fallbackClass = fallbackClass;
     }
 }

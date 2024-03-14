@@ -38,6 +38,7 @@
     <orderEntry type="module" module-name="proxy-api" />
     <orderEntry type="module" module-name="registry-api" />
     <orderEntry type="module" module-name="cache" />
+    <orderEntry type="module" module-name="reflect-api" />
     <orderEntry type="module" module-name="spi" />
     <orderEntry type="module" module-name="registry-zookeeper" />
     <orderEntry type="library" name="Maven: org.apache.curator:curator-framework:2.12.0" level="project" />

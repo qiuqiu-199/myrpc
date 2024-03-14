@@ -41,6 +41,7 @@
     <orderEntry type="module" module-name="loadBalancer-least-connections" />
     <orderEntry type="module" module-name="cache" />
     <orderEntry type="module" module-name="spi" />
+    <orderEntry type="module" module-name="reflect-api" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />

@@ -85,7 +85,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      */
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
-        LOGGER.warn("与消费者【】断开连接中,unregistry...",ctx.channel().remoteAddress());
+        LOGGER.warn("与消费者【{}】断开连接中,unregistry...",ctx.channel().remoteAddress());
         super.channelUnregistered(ctx);
         ProviderConnectionCache.removeChannel(ctx.channel());
         connectionManager.remove(ctx.channel());
@@ -98,7 +98,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        LOGGER.warn("与消费者【】断开连接中,inactive...",ctx.channel().remoteAddress());
+        LOGGER.warn("与消费者【{}】断开连接中,inactive...",ctx.channel().remoteAddress());
         super.channelInactive(ctx);
         ProviderConnectionCache.removeChannel(ctx.channel());
         connectionManager.remove(ctx.channel());

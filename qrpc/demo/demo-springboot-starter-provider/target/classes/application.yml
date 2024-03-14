@@ -10,4 +10,4 @@ qrpc:
     enableCacheResult: true
     cacheResultExpire: 600000
     maxConnectionCount: 1
-    disuseStrategy: strategy_default
+    disuseStrategyType: strategy_default

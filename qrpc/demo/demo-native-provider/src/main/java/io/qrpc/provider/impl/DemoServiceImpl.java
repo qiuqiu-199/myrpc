@@ -1,16 +1,15 @@
-package io.qrpc.demo.springboot.provider.impl;
+package io.qrpc.provider.impl;
 
 import io.qrpc.annotation.RpcService;
 import io.qrpc.common.exception.RpcException;
 import io.qrpc.demo.api.DemoService;
 
 /**
- * @ClassName: ProviderDemoServideImpl
+ * @ClassName: DemoServiceImpl
  * @Author: qiuzhiq
- * @Date: 2024/3/9 16:53
+ * @Date: 2024/3/14 15:03
  * @Description:
  */
-
 @RpcService(
         interfaceClass = DemoService.class,
         interfaceClassName = "io.qrpc.demo.api.DemoService",
@@ -18,13 +17,12 @@ import io.qrpc.demo.api.DemoService;
         group = "qiu",
         weight = 2
 )
-public class ProviderDemoServideImpl implements DemoService {
+public class DemoServiceImpl implements DemoService {
     @Override
     public String sayHello(String name) {
-        //测试容错层
         if ("fallback".equals(name)){
             throw new RpcException("触发异常关键词!");
         }
-        return "hello, " + name;
+        return "hello" + name;
     }
 }
