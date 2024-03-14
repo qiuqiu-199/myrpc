@@ -20,9 +20,34 @@ public class RpcSingleServer extends BaseServer {
      * @date: 2024/3/1 0:09
      * @description: 构造RpcServer，通过自定义扫描器扫描@RpcService注解通过反射生成对应的对象缓存在map中
      */
-    public RpcSingleServer(String serverAddress, String scanPackage,String registryAddress,String registryType,String registryLoadBalancer,String reflectType,int heartbeatInterval,int scanNotActiveChannelInterval,boolean enableCacheResult, int cacheResultExpire) {
+    public RpcSingleServer(
+            String serverAddr,
+            String scanPackage,
+            String registryType,
+            String registryAddr,
+            String registryLoadBalanceType,
+            String reflectType,
+            int heartbeatInterval,
+            int scanNotActiveChannelInterval,
+            boolean enableCacheResult,
+            int cacheResultExpire,
+            int maxConnectionCount,
+            String disuseStrategyType
+    ) {
         //TODO 这里必须调用父类构造方法否则报错，原因不明
-        super(serverAddress,registryAddress,registryType,registryLoadBalancer,reflectType,heartbeatInterval,scanNotActiveChannelInterval,enableCacheResult,cacheResultExpire);
+        super(
+                serverAddr,
+                registryType,
+                registryAddr,
+                registryLoadBalanceType,
+                reflectType,
+                heartbeatInterval,
+                scanNotActiveChannelInterval,
+                enableCacheResult,
+                cacheResultExpire,
+                maxConnectionCount,
+                disuseStrategyType
+        );
 
         try {
             this.handlerMap = RpcServiceScanner.doScannerWithRpcServiceAnnotationFilterAndRegistryService(scanPackage,this.host,this.port,this.registryService);

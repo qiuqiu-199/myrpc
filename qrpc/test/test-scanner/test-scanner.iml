@@ -4,15 +4,6 @@
     <facet type="Spring" name="Spring">
       <configuration />
     </facet>
-    <facet type="web" name="Web">
-      <configuration>
-        <webroots />
-        <sourceRoots>
-          <root url="file://$MODULE_DIR$/src/main/java" />
-          <root url="file://$MODULE_DIR$/src/main/resources" />
-        </sourceRoots>
-      </configuration>
-    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -86,6 +77,14 @@
     <orderEntry type="module" module-name="reflect-api" />
     <orderEntry type="module" module-name="reflect-jdk" />
     <orderEntry type="module" module-name="reflect-cglib" />
+    <orderEntry type="module" module-name="connection" />
+    <orderEntry type="module" module-name="disuse-api" />
+    <orderEntry type="module" module-name="disuse-default" />
+    <orderEntry type="module" module-name="disuse-first" />
+    <orderEntry type="module" module-name="disuse-lfu" />
+    <orderEntry type="module" module-name="disuse-lru" />
+    <orderEntry type="module" module-name="disuse-refuse" />
+    <orderEntry type="module" module-name="disuse-random" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />

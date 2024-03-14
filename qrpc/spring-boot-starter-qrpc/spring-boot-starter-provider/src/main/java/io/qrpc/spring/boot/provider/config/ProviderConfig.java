@@ -27,11 +27,24 @@ public class ProviderConfig {
     private boolean enableCacheResult;
     private int cacheResultExpire;
 
-    public ProviderConfig(String serverAddr, String registryType, String registryAddr, String registryLoadBalanceType, String reflectType, int heartbeatInterval, int scanNotActiveChannelInterval,boolean enableCacheResult,int cacheResultExpire) {
-        this.serverAddr = serverAddr;
+    private int maxConnectionCount;
+    private String disuseStrategyType;
+
+    public ProviderConfig(String serverAddress,
+                          String registryType,
+                          String registryAddress,
+                          String registryLoadBalanceType,
+                          String reflectType,
+                          int heartbeatInterval,
+                          int scanNotActiveChannelInterval,
+                          boolean enableCacheResult,
+                          int cacheResultExpire,
+                          int maxConnectionCount,
+                          String disuseStrategyType) {
+        this.serverAddr = serverAddress;
 
         this.registryType = registryType;
-        this.registryAddr = registryAddr;
+        this.registryAddr = registryAddress;
         this.registryLoadBalanceType = registryLoadBalanceType;
 
         this.reflectType = reflectType;
@@ -43,5 +56,8 @@ public class ProviderConfig {
         if (cacheResultExpire > 0)
             this.cacheResultExpire = cacheResultExpire;
         this.enableCacheResult = enableCacheResult;
+
+        this.maxConnectionCount = maxConnectionCount;
+        this.disuseStrategyType = disuseStrategyType;
     }
 }

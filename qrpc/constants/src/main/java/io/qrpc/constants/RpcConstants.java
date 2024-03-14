@@ -54,4 +54,12 @@ public class RpcConstants {
     public static final int CACHERESULT_SCAN_INTERNAL = 5000; //定期清理过期缓存间隔时间
     public static final int CACHERESULT_SCAN_EXPIRE = 5000; //缓存时间
 
+    //连接管理-连接淘汰策略
+    public static final String CONNECTION_DISUSE_STRATEGY_DEFAULT = "strategy_default";
+    public static final String CONNECTION_DISUSE_STRATEGY_RANDOM = "random";
+    public static final String CONNECTION_DISUSE_STRATEGY_FIRST = "first";
+    public static final String CONNECTION_DISUSE_STRATEGY_LFU = "lfu";
+    public static final String CONNECTION_DISUSE_STRATEGY_LRU = "lru";
+    public static final String CONNECTION_DISUSE_STRATEGY_REFUSE = "refuse";
+
 }

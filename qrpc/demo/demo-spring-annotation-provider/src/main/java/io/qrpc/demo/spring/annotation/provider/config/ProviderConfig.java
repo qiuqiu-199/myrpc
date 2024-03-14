@@ -22,17 +22,17 @@ public class ProviderConfig {
     @Value("${registry.type}")
     private String registryType;
     @Value("${registry.address}")
-    private String registryAddr;
+    private String registryAddress;
     @Value("${registry.loadbalance.type}")
-    private String registryLoadbalance;
+    private String registryLoadBalanceType;
 
     @Value("${server.address}")
-    private String serverAddr;
+    private String serverAddress;
     @Value("${reflect.type}")
     private String reflectType;
 
     @Value("${server.heartbeatInterval}")
-    private int heatbeatInterval;
+    private int heartbeatInterval;
     @Value("${server.scanNotActiveChannelInterval}")
     private int scanNotActiveChannelInterval;
 
@@ -40,9 +40,25 @@ public class ProviderConfig {
     private boolean enableCacheResult;
     @Value("${cacheResult.expire}")
     private int cacheResultExpire;
+    @Value("${connectionManage.maxConnectionCount}")
+    private int maxConnectionCount;
+    @Value("${connectionManage.disuseStrategy}")
+    private String disuseStrategyType;
 
     @Bean
     public RpcSpringServer rpcSpringServer(){
-        return new RpcSpringServer(serverAddr,registryType,registryAddr,registryLoadbalance,reflectType,heatbeatInterval,scanNotActiveChannelInterval,enableCacheResult,cacheResultExpire);
+        return new RpcSpringServer(
+                serverAddress,
+                registryType,
+                registryAddress,
+                registryLoadBalanceType,
+                reflectType,
+                heartbeatInterval,
+                scanNotActiveChannelInterval,
+                enableCacheResult,
+                cacheResultExpire,
+                maxConnectionCount,
+                disuseStrategyType
+        );
     }
 }

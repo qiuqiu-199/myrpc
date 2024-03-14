@@ -15,6 +15,11 @@
       "defaultValue": 0
     },
     {
+      "name": "qrpc.provider.disuse-strategy-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
+    },
+    {
       "name": "qrpc.provider.enable-cache-result",
       "type": "java.lang.Boolean",
       "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
@@ -22,6 +27,12 @@
     },
     {
       "name": "qrpc.provider.heartbeat-interval",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.provider.max-connection-count",
       "type": "java.lang.Integer",
       "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
       "defaultValue": 0

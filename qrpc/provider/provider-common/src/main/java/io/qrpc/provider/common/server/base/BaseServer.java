@@ -7,6 +7,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.qrpc.codec.RpcDecoder;
 import io.qrpc.codec.RpcEncoder;
 import io.qrpc.constants.RpcConstants;
@@ -57,6 +58,10 @@ public class BaseServer implements Server {
     private boolean enableCacheResult;
     private int cacheResultExpire = 5000;
 
+    //连接管理相关变量
+    private int maxConnectionCount;
+    private String disuseStrategyType;
+
     /**
      * @author: qiu
      * @date: 2024/2/24 16:59
@@ -64,22 +69,24 @@ public class BaseServer implements Server {
      * 42章，构造方法增加负载均衡参数
      */
     public BaseServer(
-            String serverAddress,
+            String serverAddr,
             String registryType,
-            String registryAddress,
-            String registryLoadbalancer,
+            String registryAddr,
+            String registryLoadBalanceType,
             String reflectType,
             int heartbeatInterval,
             int scanNotActiveChannelInterval,
             boolean enableCacheResult,
-            int cacheResultExpire
+            int cacheResultExpire,
+            int maxConnectionCount,
+            String disuseStrategyType
     ) {
-        if (!StringUtils.isEmpty(serverAddress)) {
-            this.host = serverAddress.split(":")[0];
-            this.port = Integer.parseInt(serverAddress.split(":")[1]);
+        if (!StringUtils.isEmpty(serverAddr)) {
+            this.host = serverAddr.split(":")[0];
+            this.port = Integer.parseInt(serverAddr.split(":")[1]);
         }
         this.reflectType = reflectType;
-        this.registryService = getRegistryService(registryAddress, registryType, registryLoadbalancer);
+        this.registryService = getRegistryService(registryAddr, registryType, registryLoadBalanceType);
 
         //参数小于0，则使用默认值
         if (heartbeatInterval > 0)
@@ -90,6 +97,9 @@ public class BaseServer implements Server {
         if (cacheResultExpire > 0)
             this.cacheResultExpire = cacheResultExpire;
         this.enableCacheResult = enableCacheResult;
+
+        this.maxConnectionCount = maxConnectionCount;
+        this.disuseStrategyType = disuseStrategyType;
     }
 
     /**
@@ -134,9 +144,9 @@ public class BaseServer implements Server {
                             socketChannel.pipeline()
                                     .addLast(RpcConstants.CODEC_DEVODER, new RpcDecoder())
                                     .addLast(RpcConstants.CODEC_ENCODER, new RpcEncoder())
-//                                    .addLast(RpcConstants.CODEC_SERVER_IDEL_HANDLER, new IdleStateHandler(0, 0, heartbeatInterval + 2000, TimeUnit.MILLISECONDS))
+                                    .addLast(RpcConstants.CODEC_SERVER_IDEL_HANDLER, new IdleStateHandler(0, 0, heartbeatInterval + 2000, TimeUnit.MILLISECONDS))
                                     //由我们自定义的处理器来处理数据
-                                    .addLast(RpcConstants.CODEC_HANDLER, new RpcProviderHandler(handlerMap, reflectType, enableCacheResult,cacheResultExpire));
+                                    .addLast(RpcConstants.CODEC_HANDLER, new RpcProviderHandler(handlerMap, reflectType, enableCacheResult,cacheResultExpire,maxConnectionCount,disuseStrategyType));
                         }
                     })
                     //下面的设置对应tcp/ip协议, listen函数中的 backlog 参数，用来初始化服务端可连接队列。

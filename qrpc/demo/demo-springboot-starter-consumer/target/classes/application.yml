@@ -9,10 +9,10 @@ qrpc:
     proxy-type: cglib
     aync: false
     oneway: false
-    timeout: 3000
+    timeout: 3000000
     heartbeat-interval: 3000
     scan-not-active-channel-interval: 60000
     max-retry-times: 3
     retry-interval: 2000
     cache-result-expire: 6000
-    enable-cahe-result: true
+    enable-cache-result: true

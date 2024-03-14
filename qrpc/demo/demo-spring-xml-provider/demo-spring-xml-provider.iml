@@ -4,11 +4,6 @@
     <facet type="Spring" name="Spring">
       <configuration />
     </facet>
-    <facet type="web" name="Web">
-      <configuration>
-        <webroots />
-      </configuration>
-    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -74,6 +69,14 @@
     <orderEntry type="library" name="Maven: io.prometheus:simpleclient_tracer_common:0.15.0" level="project" />
     <orderEntry type="library" name="Maven: io.prometheus:simpleclient_tracer_otel_agent:0.15.0" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:2.0" level="project" />
+    <orderEntry type="module" module-name="connection" />
+    <orderEntry type="module" module-name="disuse-api" />
+    <orderEntry type="module" module-name="disuse-default" />
+    <orderEntry type="module" module-name="disuse-first" />
+    <orderEntry type="module" module-name="disuse-lfu" />
+    <orderEntry type="module" module-name="disuse-lru" />
+    <orderEntry type="module" module-name="disuse-refuse" />
+    <orderEntry type="module" module-name="disuse-random" />
     <orderEntry type="module" module-name="constants" />
     <orderEntry type="module" module-name="consumer-native" />
     <orderEntry type="module" module-name="consumer-common" />

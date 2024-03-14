@@ -45,7 +45,7 @@ public class ReferenceScanner extends ClassScanner {
                         LOGGER.info("version===>>> " + rpcReference.version());
                         LOGGER.info("group===>>> " + rpcReference.group());
                         LOGGER.info("registryType===>>> " + rpcReference.registryType());
-                        LOGGER.info("registryAddress===>>> " + rpcReference.registryAddress());
+                        LOGGER.info("registryAddr===>>> " + rpcReference.registryAddress());
 
                     }
                 }));

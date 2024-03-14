@@ -74,6 +74,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     //7节，连接注销后，连接缓存移除对应的连接
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+        LOGGER.warn("与提供者【】断开连接中,unregistry...",ctx.channel().remoteAddress());
         super.channelUnregistered(ctx);
         ConsumerChannelCache.removeChannel(channel);
     }
@@ -81,6 +82,7 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
     //7节，连接失效后，连接缓存移除对应的连接
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        LOGGER.warn("与提供者【】断开连接中,inactive...",ctx.channel().remoteAddress());
         super.channelInactive(ctx);
         ConsumerChannelCache.removeChannel(channel);
     }
@@ -116,7 +118,6 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
             ctx.writeAndFlush(protocol);
         }
             super.userEventTriggered(ctx, evt);
-
     }
 
     /**

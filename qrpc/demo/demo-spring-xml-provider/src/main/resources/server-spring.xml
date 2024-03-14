@@ -13,14 +13,16 @@
 
     <!--注册bean-->
     <bean id="rpcServer" class="io.qrpc.provider.spring.RpcSpringServer">
-        <constructor-arg name="serverAddress" value="${server.address}"/>
-        <constructor-arg name="registryAddress" value="${registry.address}"/>
+        <constructor-arg name="serverAddr" value="${server.address}"/>
         <constructor-arg name="registryType" value="${registry.type}"/>
-        <constructor-arg name="registryLoadBalancer" value="${registry.loadbanlance.type}"/>
+        <constructor-arg name="registryAddr" value="${registry.address}"/>
+        <constructor-arg name="registryLoadBalanceType" value="${registry.loadbanlance.type}"/>
         <constructor-arg name="reflectType" value="${reflect.type}"/>
         <constructor-arg name="heartbeatInterval" value="${server.heartbeatInterval}"/>
         <constructor-arg name="scanNotActiveChannelInterval" value="${server.scanNotActiveChannelInterval}"/>
         <constructor-arg name="enableCacheResult" value="${cacheResult.enable}"/>
         <constructor-arg name="cacheResultExpire" value="${cacheResult.expire}"/>
+        <constructor-arg name="maxConnectionCount" value="${connectionManage.maxConnectionCount}"/>
+        <constructor-arg name="disuseStrategyType" value="${connectionManage.disuseStrategy}"/>
     </bean>
 </beans>

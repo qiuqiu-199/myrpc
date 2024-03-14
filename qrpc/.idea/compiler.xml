@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
+    <excludeFromCompile>
+      <directory url="file://$PROJECT_DIR$/test" includeSubdirectories="true" />
+    </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
@@ -11,6 +14,7 @@
         <module name="cache" />
         <module name="codec" />
         <module name="common" />
+        <module name="connection" />
         <module name="constants" />
         <module name="consumer-common" />
         <module name="consumer-native" />
@@ -24,6 +28,13 @@
         <module name="demo-spring-xml-provider" />
         <module name="demo-springboot-starter-consumer" />
         <module name="demo-springboot-starter-provider" />
+        <module name="disuse-api" />
+        <module name="disuse-default" />
+        <module name="disuse-first" />
+        <module name="disuse-lfu" />
+        <module name="disuse-lru" />
+        <module name="disuse-random" />
+        <module name="disuse-refuse" />
         <module name="loadBalancer-api" />
         <module name="loadBalancer-consistentHash-zk" />
         <module name="loadBalancer-least-connections" />
@@ -65,6 +76,8 @@
       <module name="cache" target="1.8" />
       <module name="codec" target="1.8" />
       <module name="common" target="1.8" />
+      <module name="connection" target="1.8" />
+      <module name="connection-disuse" target="1.8" />
       <module name="constants" target="1.8" />
       <module name="consumer" target="1.8" />
       <module name="consumer-common" target="1.8" />
@@ -78,9 +91,15 @@
       <module name="demo-spring-annotation-provider" target="1.8" />
       <module name="demo-spring-xml-consumer" target="1.8" />
       <module name="demo-spring-xml-provider" target="1.8" />
-      <module name="demo-spring-xml-providerr" target="1.8" />
       <module name="demo-springboot-starter-consumer" target="1.8" />
       <module name="demo-springboot-starter-provider" target="1.8" />
+      <module name="disuse-api" target="1.8" />
+      <module name="disuse-default" target="1.8" />
+      <module name="disuse-first" target="1.8" />
+      <module name="disuse-lfu" target="1.8" />
+      <module name="disuse-lru" target="1.8" />
+      <module name="disuse-random" target="1.8" />
+      <module name="disuse-refuse" target="1.8" />
       <module name="loadBalancer" target="1.8" />
       <module name="loadBalancer-api" target="1.8" />
       <module name="loadBalancer-consistentHash-zk" target="1.8" />

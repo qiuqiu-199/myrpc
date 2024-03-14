@@ -7,6 +7,7 @@ import io.qrpc.cache.result.CacheResultKey;
 import io.qrpc.cache.result.CacheResultManager;
 import io.qrpc.common.helper.RpcServiceHelper;
 import io.qrpc.common.threadPool.ServerThreadPool;
+import io.qrpc.connection.manager.ConnectionManager;
 import io.qrpc.constants.RpcConstants;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.enumeration.RpcStatus;
@@ -38,17 +39,22 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
     //反射扩展接口，创建当前类对象时通过SPI加载对应的反射方式
     private final ReflectInvoker reflectInvoker;
 
-    //结果缓存相关成员变量
+    //结果缓存管理相关成员变量
     private final boolean enableCacheResult;
     private final CacheResultManager<RpcProtocol<RpcResponse>> cacheResultManager;
+
+    //连接管理相关
+    private final ConnectionManager connectionManager;
+
 
     /**
      * @author: qiu
      * @date: 2024/2/29 22:44
      * @description: 37章修改。构造方法由传递过来的反射类型加载对应的反射方式
      * 11节，增加结果缓存相关变量
+     * 12节，增加连接管理相关变量
      */
-    public RpcProviderHandler(Map<String, Object> handlerMap, String reflectType,boolean enableCacheResult,int cacheResultExpire) {
+    public RpcProviderHandler(Map<String, Object> handlerMap, String reflectType,boolean enableCacheResult,int cacheResultExpire,int maxConnectionCount,String disuseStartegyType) {
         this.handlerMap = handlerMap;
         reflectInvoker = ExtensionLoader.getExtension(ReflectInvoker.class, reflectType);
 
@@ -56,6 +62,8 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
         if (cacheResultExpire <= 0)
             cacheResultExpire = RpcConstants.CACHERESULT_SCAN_EXPIRE;
         this.cacheResultManager = CacheResultManager.getInstance(enableCacheResult,cacheResultExpire);
+
+        this.connectionManager = ConnectionManager.getInstance(maxConnectionCount,disuseStartegyType);
     }
 
     /**
@@ -67,6 +75,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
         ProviderConnectionCache.addChannel(ctx.channel());
+        connectionManager.add(ctx.channel());
     }
 
     /**
@@ -76,8 +85,10 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      */
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
+        LOGGER.warn("与消费者【】断开连接中,unregistry...",ctx.channel().remoteAddress());
         super.channelUnregistered(ctx);
         ProviderConnectionCache.removeChannel(ctx.channel());
+        connectionManager.remove(ctx.channel());
     }
 
     /**
@@ -87,8 +98,10 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        LOGGER.warn("与消费者【】断开连接中,inactive...",ctx.channel().remoteAddress());
         super.channelInactive(ctx);
         ProviderConnectionCache.removeChannel(ctx.channel());
+        connectionManager.remove(ctx.channel());
     }
 
     /**
@@ -102,6 +115,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
             Channel channel = ctx.channel();
             try {
                 LOGGER.info("在提供者的netty服务端触发超时事件，准备关闭channel：{}",channel);
+                connectionManager.remove(channel);
                 channel.close();
             }finally {
                 channel.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
@@ -118,6 +132,8 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcProtocol<RpcRequest> protocol) {
         ServerThreadPool.submit(() -> {
+            connectionManager.update(ctx.channel());
+
             //处理消息并得到处理结果，包装到协议对象中
             RpcProtocol<RpcResponse> responseProtocol = handleMessage(protocol,ctx.channel());
 
@@ -126,7 +142,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
             ctx.writeAndFlush(responseProtocol).addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture channelFuture) {
-                    LOGGER.debug("已发送对id为 {} 的响应。", responseProtocol.getHeader().getRequestId());
+                    LOGGER.info("已发送对id为 {} 的响应。", responseProtocol.getHeader().getRequestId());
                 }
             });
         });
@@ -208,6 +224,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
             LOGGER.error("服务调用过程出错:" + t);
         }
 
+        responseProtocol.setHeader(header);
         responseProtocol.setBody(responseBody);
 
         return responseProtocol;
@@ -277,7 +294,6 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
 
         responseProtocol.setHeader(header);
         responseProtocol.setBody(responseBody);
-
         return responseProtocol;
     }
 
@@ -299,6 +315,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         super.exceptionCaught(ctx, cause);
         ProviderConnectionCache.removeChannel(ctx.channel());
+        connectionManager.remove(ctx.channel());
         ctx.channel().close();
     }
 }

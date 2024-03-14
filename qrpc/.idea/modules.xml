@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/cache/cache.iml" filepath="$PROJECT_DIR$/cache/cache.iml" />
       <module fileurl="file://$PROJECT_DIR$/codec/codec.iml" filepath="$PROJECT_DIR$/codec/codec.iml" />
       <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connection/connection.iml" filepath="$PROJECT_DIR$/connection/connection.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connection-disuse/connection-disuse.iml" filepath="$PROJECT_DIR$/connection-disuse/connection-disuse.iml" />
       <module fileurl="file://$PROJECT_DIR$/constants/constants.iml" filepath="$PROJECT_DIR$/constants/constants.iml" />
       <module fileurl="file://$PROJECT_DIR$/consumer/consumer.iml" filepath="$PROJECT_DIR$/consumer/consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/consumer/consumer-common/consumer-common.iml" filepath="$PROJECT_DIR$/consumer/consumer-common/consumer-common.iml" />
@@ -21,6 +23,13 @@
       <module fileurl="file://$PROJECT_DIR$/demo/demo-spring-xml-provider/demo-spring-xml-provider.iml" filepath="$PROJECT_DIR$/demo/demo-spring-xml-provider/demo-spring-xml-provider.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo-springboot-starter-consumer/demo-springboot-starter-consumer.iml" filepath="$PROJECT_DIR$/demo/demo-springboot-starter-consumer/demo-springboot-starter-consumer.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo-springboot-starter-provider/demo-springboot-starter-provider.iml" filepath="$PROJECT_DIR$/demo/demo-springboot-starter-provider/demo-springboot-starter-provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connection-disuse/disuse-api/disuse-api.iml" filepath="$PROJECT_DIR$/connection-disuse/disuse-api/disuse-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connection-disuse/disuse-default/disuse-default.iml" filepath="$PROJECT_DIR$/connection-disuse/disuse-default/disuse-default.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connection-disuse/disuse-first/disuse-first.iml" filepath="$PROJECT_DIR$/connection-disuse/disuse-first/disuse-first.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connection-disuse/disuse-lfu/disuse-lfu.iml" filepath="$PROJECT_DIR$/connection-disuse/disuse-lfu/disuse-lfu.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connection-disuse/disuse-lru/disuse-lru.iml" filepath="$PROJECT_DIR$/connection-disuse/disuse-lru/disuse-lru.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connection-disuse/disuse-random/disuse-random.iml" filepath="$PROJECT_DIR$/connection-disuse/disuse-random/disuse-random.iml" />
+      <module fileurl="file://$PROJECT_DIR$/connection-disuse/disuse-refuse/disuse-refuse.iml" filepath="$PROJECT_DIR$/connection-disuse/disuse-refuse/disuse-refuse.iml" />
       <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer.iml" />
       <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-api/loadBalancer-api.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-api/loadBalancer-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-consistentHash-zk/loadBalancer-consistentHash-zk.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-consistentHash-zk/loadBalancer-consistentHash-zk.iml" />
@@ -37,7 +46,7 @@
       <module fileurl="file://$PROJECT_DIR$/proxy/proxy-api/proxy-api.iml" filepath="$PROJECT_DIR$/proxy/proxy-api/proxy-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/proxy/proxy-cglib/proxy-cglib.iml" filepath="$PROJECT_DIR$/proxy/proxy-cglib/proxy-cglib.iml" />
       <module fileurl="file://$PROJECT_DIR$/proxy/proxy-jdk/proxy-jdk.iml" filepath="$PROJECT_DIR$/proxy/proxy-jdk/proxy-jdk.iml" />
-      <module fileurl="file://$PROJECT_DIR$/qrpc.iml" filepath="$PROJECT_DIR$/qrpc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/qrpc.iml" filepath="$PROJECT_DIR$/.idea/qrpc.iml" />
       <module fileurl="file://$PROJECT_DIR$/reflect/reflect.iml" filepath="$PROJECT_DIR$/reflect/reflect.iml" />
       <module fileurl="file://$PROJECT_DIR$/reflect/reflect-api/reflect-api.iml" filepath="$PROJECT_DIR$/reflect/reflect-api/reflect-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/reflect/reflect-cglib/reflect-cglib.iml" filepath="$PROJECT_DIR$/reflect/reflect-cglib/reflect-cglib.iml" />

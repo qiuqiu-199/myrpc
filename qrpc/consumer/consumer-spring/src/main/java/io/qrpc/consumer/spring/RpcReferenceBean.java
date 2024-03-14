@@ -119,4 +119,20 @@ public class RpcReferenceBean implements FactoryBean {
     public void setRetryInterval(int retryInterval) {
         this.retryInterval = retryInterval;
     }
+
+    public boolean isEnableCacheResult() {
+        return enableCacheResult;
+    }
+
+    public void setEnableCacheResult(boolean enableCacheResult) {
+        this.enableCacheResult = enableCacheResult;
+    }
+
+    public int getCacheResultExpire() {
+        return cacheResultExpire;
+    }
+
+    public void setCacheResultExpire(int cacheResultExpire) {
+        this.cacheResultExpire = cacheResultExpire;
+    }
 }

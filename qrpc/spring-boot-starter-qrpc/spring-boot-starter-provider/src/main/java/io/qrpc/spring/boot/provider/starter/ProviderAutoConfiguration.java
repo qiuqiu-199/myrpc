@@ -34,7 +34,9 @@ public class ProviderAutoConfiguration {
                 config.getHeartbeatInterval(),
                 config.getScanNotActiveChannelInterval(),
                 config.isEnableCacheResult(),
-                config.getCacheResultExpire()
+                config.getCacheResultExpire(),
+                config.getMaxConnectionCount(),
+                config.getDisuseStrategyType()
         );
     }
 }

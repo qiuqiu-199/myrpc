@@ -25,7 +25,7 @@ public class ConsumerDemoServiceImpl implements ConsumerDemoService {
             proxyType = "cglib",
             async = false,
             oneway = false,
-            timeout = 5000,
+            timeout = 500000,
             heartbeatInterval = 3000,
             scanNotActiveChannelInterval = 60000,
             maxRetryTimes = 3,

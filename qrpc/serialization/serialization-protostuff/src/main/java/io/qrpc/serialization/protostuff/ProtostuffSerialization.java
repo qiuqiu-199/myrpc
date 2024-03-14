@@ -50,8 +50,9 @@ public class ProtostuffSerialization implements Serialization {
     @SuppressWarnings("unchecked") //忽略警告
     @Override
     public <T> byte[] serialize(T obj) {
-        log.info("execute protostuff deSerialize...");
-        if (obj == null) throw new SerializationException("serialize objetc is null !");
+        log.info("execute protostuff serialize...");
+        if (obj == null)
+            throw new SerializationException("serialize objetc is null !");
 
         Class<T> aClass = (Class<T>) obj.getClass();
         LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
@@ -67,8 +68,9 @@ public class ProtostuffSerialization implements Serialization {
 
     @Override
     public <T> T desrialize(byte[] data, Class<T> aClass) {
-        log.info("execute protostuff serialize...");
-        if (data == null) throw new SerializationException("deSeriaze data is null !");
+        log.info("execute protostuff DeSerialize...");
+        if (data == null)
+            throw new SerializationException("deSeriaze data is null !");
 
         try {
             T message = objenesis.newInstance(aClass);

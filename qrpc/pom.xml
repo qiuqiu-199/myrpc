@@ -26,6 +26,8 @@
         <module>demo</module>
         <module>spring-boot-starter-qrpc</module>
         <module>cache</module>
+        <module>connection</module>
+        <module>connection-disuse</module>
     </modules>
 
     <properties>

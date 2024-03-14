@@ -80,7 +80,7 @@ public class RpcClient {
     /**
      * @author: qiu
      * @date: 2024/2/25 14:28
-     * @param: registryAddress
+     * @param: registryAddr
      * @param: registryType
      * @return: io.qrpc.registry.api.RegistryService
      * @description:
