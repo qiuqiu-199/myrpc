@@ -1,6 +1,8 @@
 package io.qrpc.consumer.spring;
 
 import io.qrpc.consumer.RpcClient;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.FactoryBean;
 
 /**
@@ -14,6 +16,10 @@ import org.springframework.beans.factory.FactoryBean;
  */
 
 public class RpcReferenceBean implements FactoryBean {
+    @Getter
+    @Setter
+    private RpcClient rpcClient;
+
     //要调用的远程接口的信息：接口类、服务版本、服务分组
     private Class<?> interfaceClass;
     private String version;
@@ -41,10 +47,16 @@ public class RpcReferenceBean implements FactoryBean {
     //缓存相关
     private boolean enableCacheResult;
     private int cacheResultExpire;
-    //容错层
+    //服务容错-服务降级
     private String reflectType;
     private String fallbackClassName;
     private Class<?> fallbackClass;
+    //服务容错-服务限流
+    private boolean enableRateLimiter;
+    private String rateLimiterType;
+    private int permits;
+    private int milliSeconds;
+    private String rateLimiterFailStrategy;
 
     //重写BeanFactory的两个方法
     @Override
@@ -59,7 +71,7 @@ public class RpcReferenceBean implements FactoryBean {
 
     //用来生成当前类的BeanDefinition和bean
     public void init() {
-        RpcClient rpcClient = new RpcClient(
+        rpcClient = new RpcClient(
                 version,
                 group,
                 registryType,
@@ -78,8 +90,13 @@ public class RpcReferenceBean implements FactoryBean {
                 cacheResultExpire,
                 reflectType,
                 fallbackClassName,
-                fallbackClass
+                enableRateLimiter,
+                rateLimiterType,
+                permits,
+                milliSeconds,
+                rateLimiterFailStrategy
         );
+        rpcClient.setFallbackClass(fallbackClass);
         this.proxyObject = rpcClient.create(interfaceClass);
     }
 
@@ -181,5 +198,43 @@ public class RpcReferenceBean implements FactoryBean {
 
     public void setFallbackClass(Class<?> fallbackClass) {
         this.fallbackClass = fallbackClass;
+    }
+    public boolean isEnableRateLimiter() {
+        return enableRateLimiter;
+    }
+
+    public void setEnableRateLimiter(boolean enableRateLimiter) {
+        this.enableRateLimiter = enableRateLimiter;
+    }
+
+    public String getRateLimiterType() {
+        return rateLimiterType;
+    }
+
+    public void setRateLimiterType(String rateLimiterType) {
+        this.rateLimiterType = rateLimiterType;
+    }
+
+    public int getPermits() {
+        return permits;
+    }
+
+    public void setPermits(int permits) {
+        this.permits = permits;
+    }
+
+    public int getMilliSeconds() {
+        return milliSeconds;
+    }
+
+    public void setMilliSeconds(int milliSeconds) {
+        this.milliSeconds = milliSeconds;
+    }
+    public String getRateLimiterFailStrategy() {
+        return rateLimiterFailStrategy;
+    }
+
+    public void setRateLimiterFailStrategy(String rateLimiterFailStrategy) {
+        this.rateLimiterFailStrategy = rateLimiterFailStrategy;
     }
 }

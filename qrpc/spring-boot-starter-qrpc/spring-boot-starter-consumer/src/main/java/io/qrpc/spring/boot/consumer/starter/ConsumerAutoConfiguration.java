@@ -43,7 +43,11 @@ public class ConsumerAutoConfiguration {
                 config.getCacheResultExpire(),
                 config.getReflectType(),
                 config.getFallbackClassName(),
-                config.getFallbackClass()
+                config.isEnableRateLimiter(),
+                config.getRateLimiterType(),
+                config.getPermits(),
+                config.getMilliSeconds(),
+                config.getRateLimiterFailStrategy()
         );
     }
 }

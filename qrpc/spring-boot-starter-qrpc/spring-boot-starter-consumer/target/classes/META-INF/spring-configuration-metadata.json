@@ -27,6 +27,22 @@
       "defaultValue": false
     },
     {
+      "name": "qrpc.consumer.enable-rate-limiter",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "defaultValue": false
+    },
+    {
+      "name": "qrpc.consumer.fallback-class",
+      "type": "java.lang.Class<?>",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.fallback-class-name",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
       "name": "qrpc.consumer.group",
       "type": "java.lang.String",
       "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
@@ -44,13 +60,35 @@
       "defaultValue": 0
     },
     {
+      "name": "qrpc.consumer.milli-seconds",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "defaultValue": 0
+    },
+    {
       "name": "qrpc.consumer.oneway",
       "type": "java.lang.Boolean",
       "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
       "defaultValue": false
     },
     {
+      "name": "qrpc.consumer.permits",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig",
+      "defaultValue": 0
+    },
+    {
       "name": "qrpc.consumer.proxy-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.rate-limiter-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
+    },
+    {
+      "name": "qrpc.consumer.reflect-type",
       "type": "java.lang.String",
       "sourceType": "io.qrpc.spring.boot.consumer.config.ConsumerConfig"
     },

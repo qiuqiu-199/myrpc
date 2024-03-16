@@ -24,7 +24,12 @@ public class ProviderNativeStarter {
                 true,
                 6000,
                 1,
-                "strategy_default"
+                "strategy_default",
+                true,
+                "counter",
+                100,
+                1000,
+                "exception"
         );
         server.startNettyServer();
     }

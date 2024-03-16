@@ -1,0 +1,1 @@
+semaphore=io.qrpc.ratelimietr.semephore.SemaphoreRateLimiterInvoker

@@ -36,7 +36,12 @@ public class ProviderAutoConfiguration {
                 config.isEnableCacheResult(),
                 config.getCacheResultExpire(),
                 config.getMaxConnectionCount(),
-                config.getDisuseStrategyType()
+                config.getDisuseStrategyType(),
+                config.isEnableRateLimiter(),
+                config.getRateLimiterType(),
+                config.getPermits(),
+                config.getMilliSeconds(),
+                config.getRateLimiterFailStrategy()
         );
     }
 }

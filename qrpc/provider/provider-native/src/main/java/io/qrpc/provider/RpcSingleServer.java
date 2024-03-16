@@ -32,7 +32,12 @@ public class RpcSingleServer extends BaseServer {
             boolean enableCacheResult,
             int cacheResultExpire,
             int maxConnectionCount,
-            String disuseStrategyType
+            String disuseStrategyType,
+            boolean enableRateLimiter,
+            String rateLimiterType,
+            int permits,
+            int milliSeconds,
+            String rateLimiterFailStrategy
     ) {
         //TODO 这里必须调用父类构造方法否则报错，原因不明
         super(
@@ -46,7 +51,12 @@ public class RpcSingleServer extends BaseServer {
                 enableCacheResult,
                 cacheResultExpire,
                 maxConnectionCount,
-                disuseStrategyType
+                disuseStrategyType,
+                enableRateLimiter,
+                rateLimiterType,
+                permits,
+                milliSeconds,
+                rateLimiterFailStrategy
         );
 
         try {

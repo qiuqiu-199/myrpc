@@ -28,6 +28,7 @@
         <module>cache</module>
         <module>connection</module>
         <module>connection-disuse</module>
+        <module>ratelimiter</module>
     </modules>
 
     <properties>

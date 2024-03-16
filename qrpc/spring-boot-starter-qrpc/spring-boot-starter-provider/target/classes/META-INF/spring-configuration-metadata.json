@@ -26,6 +26,12 @@
       "defaultValue": false
     },
     {
+      "name": "qrpc.provider.enable-rate-limiter",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": false
+    },
+    {
       "name": "qrpc.provider.heartbeat-interval",
       "type": "java.lang.Integer",
       "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
@@ -36,6 +42,28 @@
       "type": "java.lang.Integer",
       "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
       "defaultValue": 0
+    },
+    {
+      "name": "qrpc.provider.milli-seconds",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.provider.permits",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.provider.rate-limiter-fail-strategy",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
+    },
+    {
+      "name": "qrpc.provider.rate-limiter-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
     },
     {
       "name": "qrpc.provider.reflect-type",

@@ -55,9 +55,16 @@ public @interface RpcReference {
     boolean enableCacheResult() default true;
     int cacheResultExpire() default 5000;
 
-    //容错层
+    //服务容错-服务降级
     String reflectType() default "jdk";
     String fallbackClassName() default "void.class";
     Class<?> fallbackClass() default void.class;
+
+    //服务容错-服务限流
+    boolean enableRateLimiter() default true;
+    String rateLimiterType() default "counter";
+    int permits() default 100;
+    int milliSeconds() default 1000;
+    String rateLimiterFailStrategy() default "exception";
 
 }

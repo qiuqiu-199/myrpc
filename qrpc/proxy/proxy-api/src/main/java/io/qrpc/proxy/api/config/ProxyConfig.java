@@ -35,4 +35,11 @@ public class ProxyConfig<T> implements Serializable {
     private String reflectType;
     private String fallbackClassName;
     private Class<?> fallbackClass;
+
+    //服务容错-服务限流
+    private boolean enableRateLimiter;
+    private String rateLimiterType;
+    private int permits;
+    private int milliSeconds;
+    private String rateLimiterFailStrategy;
 }

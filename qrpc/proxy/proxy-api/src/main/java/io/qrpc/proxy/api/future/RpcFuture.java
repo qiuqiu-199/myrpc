@@ -85,7 +85,7 @@ public class RpcFuture extends CompletableFuture<Object> {
             return null;
 
         if (responseProtocol.getHeader().getStatus() == RpcStatus.FAIL.getCode()){
-            throw new RuntimeException("提供者调用失败，抛出异常！"+responseProtocol.getBody().getError());
+            throw new RuntimeException("服务调用失败，异常信息："+responseProtocol.getBody().getError());
         }
 
         return responseProtocol.getBody().getResult();

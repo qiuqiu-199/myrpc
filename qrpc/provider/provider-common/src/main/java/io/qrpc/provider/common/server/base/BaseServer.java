@@ -7,7 +7,6 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.timeout.IdleStateHandler;
 import io.qrpc.codec.RpcDecoder;
 import io.qrpc.codec.RpcEncoder;
 import io.qrpc.constants.RpcConstants;
@@ -62,6 +61,13 @@ public class BaseServer implements Server {
     private int maxConnectionCount;
     private String disuseStrategyType;
 
+    //服务容错-服务限流
+    private boolean enableRateLimiter;
+    private String rateLimiterType;
+    private int permits;
+    private int milliSeconds;
+    private String rateLimiterFailStrategy;
+
     /**
      * @author: qiu
      * @date: 2024/2/24 16:59
@@ -79,7 +85,12 @@ public class BaseServer implements Server {
             boolean enableCacheResult,
             int cacheResultExpire,
             int maxConnectionCount,
-            String disuseStrategyType
+            String disuseStrategyType,
+            boolean enableRateLimiter,
+            String rateLimiterType,
+            int permits,
+            int milliSeconds,
+            String rateLimiterFailStrategy
     ) {
         if (!StringUtils.isEmpty(serverAddr)) {
             this.host = serverAddr.split(":")[0];
@@ -100,6 +111,12 @@ public class BaseServer implements Server {
 
         this.maxConnectionCount = maxConnectionCount;
         this.disuseStrategyType = disuseStrategyType;
+
+        this.enableRateLimiter = enableRateLimiter;
+        this.rateLimiterType = rateLimiterType;
+        this.permits = permits;
+        this.milliSeconds = milliSeconds;
+        this.rateLimiterFailStrategy = rateLimiterFailStrategy;
     }
 
     /**
@@ -144,9 +161,21 @@ public class BaseServer implements Server {
                             socketChannel.pipeline()
                                     .addLast(RpcConstants.CODEC_DEVODER, new RpcDecoder())
                                     .addLast(RpcConstants.CODEC_ENCODER, new RpcEncoder())
-                                    .addLast(RpcConstants.CODEC_SERVER_IDEL_HANDLER, new IdleStateHandler(0, 0, heartbeatInterval + 2000, TimeUnit.MILLISECONDS))
+//                                    .addLast(RpcConstants.CODEC_SERVER_IDEL_HANDLER, new IdleStateHandler(0, 0, heartbeatInterval + 2000, TimeUnit.MILLISECONDS))
                                     //由我们自定义的处理器来处理数据
-                                    .addLast(RpcConstants.CODEC_HANDLER, new RpcProviderHandler(handlerMap, reflectType, enableCacheResult,cacheResultExpire,maxConnectionCount,disuseStrategyType));
+                                    .addLast(RpcConstants.CODEC_HANDLER, new RpcProviderHandler(
+                                            handlerMap,
+                                            reflectType,
+                                            enableCacheResult,
+                                            cacheResultExpire,
+                                            maxConnectionCount,
+                                            disuseStrategyType,
+                                            enableRateLimiter,
+                                            rateLimiterType,
+                                            permits,
+                                            milliSeconds,
+                                            rateLimiterFailStrategy
+                                    ));
                         }
                     })
                     //下面的设置对应tcp/ip协议, listen函数中的 backlog 参数，用来初始化服务端可连接队列。

@@ -6,18 +6,16 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
-import io.netty.handler.timeout.IdleStateEvent;
 import io.qrpc.constants.RpcConstants;
 import io.qrpc.consumer.common.cache.ConsumerChannelCache;
 import io.qrpc.consumer.common.context.RpcContext;
+import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.enumeration.RpcStatus;
 import io.qrpc.protocol.enumeration.RpcType;
 import io.qrpc.protocol.header.RpcHeader;
-import io.qrpc.protocol.header.RpcHeaderFactory;
-import io.qrpc.proxy.api.future.RpcFuture;
-import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.protocol.response.RpcResponse;
+import io.qrpc.proxy.api.future.RpcFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -103,20 +101,20 @@ public class RpcConsumerHandler extends SimpleChannelInboundHandler<RpcProtocol<
      */
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        if (evt instanceof IdleStateEvent) {
-            LOGGER.info("消费者{}触发超时事件，准备向提供者{}发送ping消息...",ctx.channel().localAddress(),ctx.channel().remoteAddress());
-            RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
-
-            RpcHeader header = RpcHeaderFactory.getRequestHeader(RpcConstants.SERIALIZATION_PROTOSTUFF, RpcType.HEARTBEAT_FROM_CONSUMER.getType());
-
-            RpcRequest request = new RpcRequest();
-            request.setParameters(new Object[]{RpcConstants.HEARTBEAT_PING});
-
-            protocol.setHeader(header);
-            protocol.setBody(request);
-
-            ctx.writeAndFlush(protocol);
-        }
+//        if (evt instanceof IdleStateEvent) {
+//            LOGGER.info("消费者{}触发超时事件，准备向提供者{}发送ping消息...",ctx.channel().localAddress(),ctx.channel().remoteAddress());
+//            RpcProtocol<RpcRequest> protocol = new RpcProtocol<>();
+//
+//            RpcHeader header = RpcHeaderFactory.getRequestHeader(RpcConstants.SERIALIZATION_PROTOSTUFF, RpcType.HEARTBEAT_FROM_CONSUMER.getType());
+//
+//            RpcRequest request = new RpcRequest();
+//            request.setParameters(new Object[]{RpcConstants.HEARTBEAT_PING});
+//
+//            protocol.setHeader(header);
+//            protocol.setBody(request);
+//
+//            ctx.writeAndFlush(protocol);
+//        }
             super.userEventTriggered(ctx, evt);
     }
 

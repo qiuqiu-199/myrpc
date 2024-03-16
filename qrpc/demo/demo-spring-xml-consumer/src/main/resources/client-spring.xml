@@ -27,6 +27,13 @@
         <constructor-arg name="retryInterval" value="${retryInterval}"/>
         <constructor-arg name="enableCacheResult" value="${cacheResult.enable}"/>
         <constructor-arg name="cacheResultExpire" value="${cacheResult.expire}"/>
+        <constructor-arg name="reflectType" value="${fallback.reflectType}"/>
+        <constructor-arg name="fallbackClassName" value="${fallback.fallbackClassName}"/>
+        <constructor-arg name="enableRateLimiter" value="${rateLimiter.enableRateLimiter}"/>
+        <constructor-arg name="rateLimiterType" value="${rateLimiter.rateLimiterType}"/>
+        <constructor-arg name="permits" value="${rateLimiter.permits}"/>
+        <constructor-arg name="milliSeconds" value="${rateLimiter.milliSeconds}"/>
+        <constructor-arg name="rateLimiterFailStrategy" value="${rateLimiter.failStrategy}"/>
     </bean>
 
 </beans>

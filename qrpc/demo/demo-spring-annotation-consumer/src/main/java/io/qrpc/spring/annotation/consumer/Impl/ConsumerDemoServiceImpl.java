@@ -36,7 +36,12 @@ public class ConsumerDemoServiceImpl implements ConsumerDemoService {
             cacheResultExpire = 6000,
             reflectType = "jdk",
             fallbackClassName = "io.qrpc.spring.annotation.consumer.fallback.FallbackDemoServiceImpl",
-            fallbackClass = FallbackDemoServiceImpl.class
+            fallbackClass = FallbackDemoServiceImpl.class,
+            enableRateLimiter = true,
+            rateLimiterType = "counter",
+            permits = 100,
+            milliSeconds = 1000,
+            rateLimiterFailStrategy = "exception"
     )
     private DemoService demoService;
 

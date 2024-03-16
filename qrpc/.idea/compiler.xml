@@ -48,6 +48,10 @@
         <module name="proxy-api" />
         <module name="proxy-cglib" />
         <module name="proxy-jdk" />
+        <module name="ratelimiter-api" />
+        <module name="ratelimiter-counter" />
+        <module name="ratelimiter-guava" />
+        <module name="rateLimiter-semaphore" />
         <module name="reflect-api" />
         <module name="reflect-cglib" />
         <module name="reflect-jdk" />
@@ -117,6 +121,11 @@
       <module name="proxy-cglib" target="1.8" />
       <module name="proxy-jdk" target="1.8" />
       <module name="qrpc" target="1.8" />
+      <module name="ratelimiter" target="1.8" />
+      <module name="ratelimiter-api" target="1.8" />
+      <module name="ratelimiter-counter" target="1.8" />
+      <module name="ratelimiter-guava" target="1.8" />
+      <module name="rateLimiter-semaphore" target="1.8" />
       <module name="reflect" target="1.8" />
       <module name="reflect-api" target="1.8" />
       <module name="reflect-cglib" target="1.8" />

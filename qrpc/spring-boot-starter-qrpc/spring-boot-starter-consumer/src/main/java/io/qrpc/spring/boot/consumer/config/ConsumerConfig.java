@@ -33,10 +33,17 @@ public class ConsumerConfig {
     private boolean enableCacheResult;
     private int cacheResultExpire;
 
-    //容错层
+    //服务容错-服务降级
     private String reflectType;
     private String fallbackClassName;
     private Class<?> fallbackClass;
+
+    //服务容错-服务限流
+    private boolean enableRateLimiter;
+    private String rateLimiterType;
+    private int permits;
+    private int milliSeconds;
+    private String rateLimiterFailStrategy;
 
     public ConsumerConfig(
             String version,
@@ -57,7 +64,13 @@ public class ConsumerConfig {
             int cacheResultExpire,
             String reflectType,
             String fallbackClassName,
-            Class<?> fallbackClass) {
+            Class<?> fallbackClass,
+            boolean enableRateLimiter,
+            String rateLimiterType,
+            int permits,
+            int milliSeconds,
+            String rateLimiterFailStrategy
+    ) {
         this.version = version;
         this.group = group;
         this.registryType = registryType;
@@ -79,5 +92,11 @@ public class ConsumerConfig {
         this.reflectType = reflectType;
         this.fallbackClassName = fallbackClassName;
         this.fallbackClass = fallbackClass;
+
+        this.enableRateLimiter = enableRateLimiter;
+        this.rateLimiterType = rateLimiterType;
+        this.permits = permits;
+        this.milliSeconds = milliSeconds;
+        this.rateLimiterFailStrategy = rateLimiterFailStrategy;
     }
 }

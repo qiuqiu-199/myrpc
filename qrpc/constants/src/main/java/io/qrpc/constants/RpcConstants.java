@@ -51,7 +51,7 @@ public class RpcConstants {
     public static final String CODEC_CLIENT_IDLE_HANDLER = "client-idle-handler";
 
     //笔记11章，结果缓存相关key
-    public static final int CACHERESULT_SCAN_INTERNAL = 5000; //定期清理过期缓存间隔时间
+    public static final int CACHERESULT_SCAN_INTERNAL = 500000; //定期清理过期缓存间隔时间
     public static final int CACHERESULT_SCAN_EXPIRE = 5000; //缓存时间
 
     //连接管理-连接淘汰策略
@@ -63,6 +63,11 @@ public class RpcConstants {
     public static final String CONNECTION_DISUSE_STRATEGY_REFUSE = "refuse";
 
     //容错层相关
-    //默认的容错处理类
+    //服务降级-默认的容错处理类
     public static final Class<?> FALLBACK_CLASS_DEFAULT = void.class;
+    //服务限流-默认限流策略：计数器
+    public static final String RATE_LIMITER_DEFAULT = "counter";
+    public static final String RATE_LIMITER_FAIL_STRATEGY_EXCEPTION = "exception";
+    public static final String RATE_LIMITER_FAIL_STRATEGY_FALLBACK = "fallback";
+    public static final String RATE_LIMITER_FAIL_STRATEGY_DIRECT = "direct";
 }

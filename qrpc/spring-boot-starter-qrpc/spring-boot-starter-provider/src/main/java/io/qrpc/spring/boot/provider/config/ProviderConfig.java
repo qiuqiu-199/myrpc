@@ -30,6 +30,13 @@ public class ProviderConfig {
     private int maxConnectionCount;
     private String disuseStrategyType;
 
+    //服务容错-服务限流
+    private boolean enableRateLimiter;
+    private String rateLimiterType;
+    private int permits;
+    private int milliSeconds;
+    private String rateLimiterFailStrategy;
+
     public ProviderConfig(String serverAddress,
                           String registryType,
                           String registryAddress,
@@ -40,7 +47,13 @@ public class ProviderConfig {
                           boolean enableCacheResult,
                           int cacheResultExpire,
                           int maxConnectionCount,
-                          String disuseStrategyType) {
+                          String disuseStrategyType,
+                          boolean enableRateLimiter,
+                          String rateLimiterType,
+                          int permits,
+                          int milliSeconds,
+                           String rateLimiterFailStrategy
+    ) {
         this.serverAddr = serverAddress;
 
         this.registryType = registryType;
@@ -59,5 +72,11 @@ public class ProviderConfig {
 
         this.maxConnectionCount = maxConnectionCount;
         this.disuseStrategyType = disuseStrategyType;
+
+        this.enableRateLimiter = enableRateLimiter;
+        this.rateLimiterType = rateLimiterType;
+        this.permits = permits;
+        this.milliSeconds = milliSeconds;
+        this.rateLimiterFailStrategy = rateLimiterFailStrategy;
     }
 }

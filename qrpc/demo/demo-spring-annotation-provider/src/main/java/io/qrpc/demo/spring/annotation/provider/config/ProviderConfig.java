@@ -45,8 +45,19 @@ public class ProviderConfig {
     @Value("${connectionManage.disuseStrategy}")
     private String disuseStrategyType;
 
+    @Value("${rateLimiter.enableRateLimiter}")
+    private boolean enableRateLimiter;
+    @Value("${rateLimiter.rateLimiterType}")
+    private String rateLimiterType;
+    @Value("${rateLimiter.permits}")
+    private int permits;
+    @Value("${rateLimiter.milliSeconds}")
+    private int milliSeconds;
+    @Value("${rateLimiter.failStrategy}")
+    private String rateLimiterStrategy;
+
     @Bean
-    public RpcSpringServer rpcSpringServer(){
+    public RpcSpringServer rpcSpringServer() {
         return new RpcSpringServer(
                 serverAddress,
                 registryType,
@@ -58,7 +69,12 @@ public class ProviderConfig {
                 enableCacheResult,
                 cacheResultExpire,
                 maxConnectionCount,
-                disuseStrategyType
+                disuseStrategyType,
+                enableRateLimiter,
+                rateLimiterType,
+                permits,
+                milliSeconds,
+                rateLimiterStrategy
         );
     }
 }

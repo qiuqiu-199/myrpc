@@ -1,6 +1,8 @@
 package io.qrpc.cache.result;
 
 import io.qrpc.constants.RpcConstants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -20,6 +22,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  */
 
 public class CacheResultManager<T> {
+    private static final Logger log = LoggerFactory.getLogger(CacheResultManager.class);
     //缓存容器
     private final Map<CacheResultKey, T> cacheResultMap = new ConcurrentHashMap<>();
     //定时任务线程池，用于定时删除过期缓存
@@ -68,6 +71,7 @@ public class CacheResultManager<T> {
      * @description: 定时删除缓存中过期的响应
      */
     private void scheduledRemoveCacheTask() {
+        log.warn("清除缓存中的过期响应中");
         pool.scheduleAtFixedRate(() -> {
             if (cacheResultMap.size() > 0) {
                 writeLock.lock();
@@ -76,8 +80,10 @@ public class CacheResultManager<T> {
                     while (iterator.hasNext()) {
                         Map.Entry<CacheResultKey, T> entry = iterator.next();
                         CacheResultKey key = entry.getKey();
-                        if (System.currentTimeMillis() - key.getCacheTimeStamp() > cacheResultExpire)
+                        if (System.currentTimeMillis() - key.getCacheTimeStamp() > cacheResultExpire){
                             cacheResultMap.remove(key);
+                            log.warn("已清除key为【{}】的响应... ",key);
+                        }
                     }
                 } finally {
                     writeLock.unlock();

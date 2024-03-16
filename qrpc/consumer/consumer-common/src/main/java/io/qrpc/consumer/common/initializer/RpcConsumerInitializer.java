@@ -2,13 +2,10 @@ package io.qrpc.consumer.common.initializer;
 
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.handler.timeout.IdleStateHandler;
 import io.qrpc.codec.RpcDecoder;
 import io.qrpc.codec.RpcEncoder;
 import io.qrpc.constants.RpcConstants;
 import io.qrpc.consumer.common.handler.RpcConsumerHandler;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @ClassName: RpcConsumerInitializer
@@ -39,7 +36,7 @@ public class RpcConsumerInitializer extends ChannelInitializer<SocketChannel> {
     protected void initChannel(SocketChannel socketChannel) {
         socketChannel.pipeline().addLast(RpcConstants.CODEC_ENCODER,new RpcEncoder())
                                 .addLast(RpcConstants.CODEC_DEVODER,new RpcDecoder())
-                                .addLast(RpcConstants.CODEC_CLIENT_IDLE_HANDLER,new IdleStateHandler(0,0,heartbeatInterval, TimeUnit.MILLISECONDS))
+//                                .addLast(RpcConstants.CODEC_CLIENT_IDLE_HANDLER,new IdleStateHandler(0,0,heartbeatInterval, TimeUnit.MILLISECONDS))
                                 .addLast(RpcConstants.CODEC_HANDLER,new RpcConsumerHandler());
     }
 }

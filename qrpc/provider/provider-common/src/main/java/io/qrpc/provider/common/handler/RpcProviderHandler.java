@@ -1,8 +1,6 @@
 package io.qrpc.provider.common.handler;
 
-import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
-import io.netty.handler.timeout.IdleStateEvent;
 import io.qrpc.cache.result.CacheResultKey;
 import io.qrpc.cache.result.CacheResultManager;
 import io.qrpc.common.helper.RpcServiceHelper;
@@ -16,8 +14,11 @@ import io.qrpc.protocol.header.RpcHeader;
 import io.qrpc.protocol.request.RpcRequest;
 import io.qrpc.protocol.response.RpcResponse;
 import io.qrpc.provider.common.cache.ProviderConnectionCache;
+import io.qrpc.ratelimiter.api.RateLimiterInvoker;
 import io.qrpc.reflect.api.ReflectInvoker;
 import io.qrpc.spi.loader.ExtensionLoader;
+import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +33,8 @@ import java.util.Map;
 
 public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<RpcRequest>> {
     private static final Logger LOGGER = LoggerFactory.getLogger(RpcProviderHandler.class);
+    @Getter
+    private Channel channel;
 
     //用来存储扫描标注了@RpcService注解的类的对象
     private final Map<String, Object> handlerMap;
@@ -46,6 +49,11 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
     //连接管理相关
     private final ConnectionManager connectionManager;
 
+    //服务容错-服务限流相关
+    private final boolean enableRateLimiter;
+    private RateLimiterInvoker rateLimiterInvoker;
+    private String rateLimiterFailStrategy;
+
 
     /**
      * @author: qiu
@@ -54,16 +62,46 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      * 11节，增加结果缓存相关变量
      * 12节，增加连接管理相关变量
      */
-    public RpcProviderHandler(Map<String, Object> handlerMap, String reflectType,boolean enableCacheResult,int cacheResultExpire,int maxConnectionCount,String disuseStartegyType) {
+    public RpcProviderHandler(
+            Map<String, Object> handlerMap,
+            String reflectType,
+            boolean enableCacheResult,
+            int cacheResultExpire,
+            int maxConnectionCount,
+            String disuseStartegyType,
+            boolean enableRateLimiter,
+            String rateLimiterType,
+            int permits,
+            int milliSeconds,
+            String rateLimiterFailStrategy
+    ) {
         this.handlerMap = handlerMap;
         reflectInvoker = ExtensionLoader.getExtension(ReflectInvoker.class, reflectType);
 
         this.enableCacheResult = enableCacheResult;
         if (cacheResultExpire <= 0)
             cacheResultExpire = RpcConstants.CACHERESULT_SCAN_EXPIRE;
-        this.cacheResultManager = CacheResultManager.getInstance(enableCacheResult,cacheResultExpire);
+        this.cacheResultManager = CacheResultManager.getInstance(enableCacheResult, cacheResultExpire);
 
-        this.connectionManager = ConnectionManager.getInstance(maxConnectionCount,disuseStartegyType);
+        this.connectionManager = ConnectionManager.getInstance(maxConnectionCount, disuseStartegyType);
+
+        this.enableRateLimiter = enableRateLimiter;
+        this.initRateLimiter(rateLimiterType, permits, milliSeconds);
+        this.rateLimiterFailStrategy = rateLimiterFailStrategy;
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/14 22:53
+     * @description: 初始化限流器
+     */
+    private void initRateLimiter(String rateLimiterType, int permits, int milliSeconds) {
+        LOGGER.warn("初始化限流器...");
+        if (enableRateLimiter) {
+            rateLimiterType = StringUtils.isEmpty(rateLimiterType) ? RpcConstants.RATE_LIMITER_DEFAULT : rateLimiterType;
+            this.rateLimiterInvoker = ExtensionLoader.getExtension(RateLimiterInvoker.class, rateLimiterType);
+            this.rateLimiterInvoker.init(permits, milliSeconds);
+        }
     }
 
     /**
@@ -76,6 +114,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
         super.channelActive(ctx);
         ProviderConnectionCache.addChannel(ctx.channel());
         connectionManager.add(ctx.channel());
+        this.channel = ctx.channel();
     }
 
     /**
@@ -85,7 +124,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      */
     @Override
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
-        LOGGER.warn("与消费者【{}】断开连接中,unregistry...",ctx.channel().remoteAddress());
+        LOGGER.warn("与消费者【{}】断开连接中,unregistry...", ctx.channel().remoteAddress());
         super.channelUnregistered(ctx);
         ProviderConnectionCache.removeChannel(ctx.channel());
         connectionManager.remove(ctx.channel());
@@ -98,7 +137,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-        LOGGER.warn("与消费者【{}】断开连接中,inactive...",ctx.channel().remoteAddress());
+        LOGGER.warn("与消费者【{}】断开连接中,inactive...", ctx.channel().remoteAddress());
         super.channelInactive(ctx);
         ProviderConnectionCache.removeChannel(ctx.channel());
         connectionManager.remove(ctx.channel());
@@ -111,16 +150,16 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      */
     @Override
     public void userEventTriggered(ChannelHandlerContext ctx, Object evt) throws Exception {
-        if (evt instanceof IdleStateEvent){
-            Channel channel = ctx.channel();
-            try {
-                LOGGER.info("在提供者的netty服务端触发超时事件，准备关闭channel：{}",channel);
-                connectionManager.remove(channel);
-                channel.close();
-            }finally {
-                channel.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
-            }
-        }
+//        if (evt instanceof IdleStateEvent) {
+//            Channel channel = ctx.channel();
+//            try {
+//                LOGGER.info("在提供者的netty服务端触发超时事件，准备关闭channel：{}", channel);
+//                connectionManager.remove(channel);
+//                channel.close();
+//            } finally {
+//                channel.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
+//            }
+//        }
         super.userEventTriggered(ctx, evt);
     }
 
@@ -135,7 +174,8 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
             connectionManager.update(ctx.channel());
 
             //处理消息并得到处理结果，包装到协议对象中
-            RpcProtocol<RpcResponse> responseProtocol = handleMessage(protocol,ctx.channel());
+            RpcProtocol<RpcResponse> responseProtocol = handleMessage(protocol, ctx.channel());
+
 
             //发送响应报文
             //增加监听器，如果报文发送成功就log一下
@@ -153,18 +193,88 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      * @date: 2024/3/3 20:34
      * @description: 7节新增，根据消息类型调用不同处理方法并返回处理结果。
      */
-    private RpcProtocol<RpcResponse> handleMessage(RpcProtocol<RpcRequest> protocol,Channel channel) {
+    private RpcProtocol<RpcResponse> handleMessage(RpcProtocol<RpcRequest> protocol, Channel channel) {
         RpcProtocol<RpcResponse> responseProtocol = null;
 
         byte msgType = protocol.getHeader().getMsgType();
 
         if (msgType == RpcType.REQUEST.getType()) {
-            responseProtocol = handleRequestWithCache(protocol);
+            responseProtocol = handleRequestWithRateLimiter(protocol);
         } else if (msgType == RpcType.HEARTBEAT_FROM_CONSUMER.getType()) {
-            responseProtocol = handleHeartBeatFromConsumer(protocol,channel);
-        } else if (msgType == RpcType.HEARTBEAT_TO_PROVIDER.getType()){
-            handleHeartBeatToProvider(protocol,channel);
+            responseProtocol = handleHeartBeatFromConsumer(protocol, channel);
+        } else if (msgType == RpcType.HEARTBEAT_TO_PROVIDER.getType()) {
+            handleHeartBeatToProvider(protocol, channel);
         }
+
+
+        return responseProtocol;
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/14 22:59
+     * @description: 13节，容错层-服务限流
+     */
+    private RpcProtocol<RpcResponse> handleRequestWithRateLimiter(RpcProtocol<RpcRequest> protocol) {
+        RpcProtocol<RpcResponse> responseProtocol = null;
+        if (enableRateLimiter) {
+            if (rateLimiterInvoker.tryAcquire()) {
+                LOGGER.warn("请求资源获取成功！");
+                try {
+                    responseProtocol = handleRequestWithCache(protocol);
+                } finally {
+                    rateLimiterInvoker.release();
+                    LOGGER.warn("请求资源释放成功！");
+                }
+            } else {
+                LOGGER.error("资源许可获取失败！");
+                responseProtocol = this.invokeFailRateLimiterMethod(protocol);
+            }
+        } else {
+            responseProtocol = handleRequestWithCache(protocol);
+        }
+        LOGGER.warn("handleRequestWithRateLimiter来自【{}】的请求消息处理成功，准备发送...", channel.remoteAddress());
+        return responseProtocol;
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/15 17:06
+     * @description: 因限流无法获取到资源的处理策略
+     */
+    private RpcProtocol<RpcResponse> invokeFailRateLimiterMethod(RpcProtocol<RpcRequest> protocol) {
+        LOGGER.warn("限流失败策略：{}", rateLimiterFailStrategy);
+        switch (rateLimiterFailStrategy) {
+            //exception和fallback都向消费者端发送失败的响应报文
+            case RpcConstants.RATE_LIMITER_FAIL_STRATEGY_EXCEPTION:
+            case RpcConstants.RATE_LIMITER_FAIL_STRATEGY_FALLBACK:
+                return this.handleFallbackMessage(protocol);
+            //direct和其他策略都直接去尝试调用
+            case RpcConstants.RATE_LIMITER_FAIL_STRATEGY_DIRECT:
+                return this.handleRequestWithCache(protocol);
+            default:
+                LOGGER.warn("当前限流失败执行策略：{}",rateLimiterFailStrategy);
+                return this.handleRequestWithCache(protocol);
+        }
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/15 17:11
+     * @description: 限流达到上限时，服务端生成调用失败的响应报文
+     */
+    private RpcProtocol<RpcResponse> handleFallbackMessage(RpcProtocol<RpcRequest> protocol) {
+        RpcProtocol<RpcResponse> responseProtocol = new RpcProtocol<>();
+
+        RpcHeader header = protocol.getHeader();
+        header.setMsgType((byte) RpcType.RESPONSE.getType());
+        header.setStatus((byte) RpcStatus.FAIL.getCode());
+
+        RpcResponse responseBody = new RpcResponse();
+        responseBody.setError("因服务端限流，服务调用失败，请重试！");
+
+        responseProtocol.setHeader(header);
+        responseProtocol.setBody(responseBody);
 
         return responseProtocol;
     }
@@ -174,30 +284,33 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      * @date: 2024/3/12 15:41
      * @description: 11节，增加缓存层，优先从缓存中获取之前处理过同一个请求的响应报文，没有缓存再去处理请求，
      */
-    private RpcProtocol<RpcResponse> handleRequestWithCache(RpcProtocol<RpcRequest> protocol){
+    private RpcProtocol<RpcResponse> handleRequestWithCache(RpcProtocol<RpcRequest> protocol) {
         RpcProtocol<RpcResponse> responseProtocol;
         //设置消息类型为响应类型
         RpcHeader header = protocol.getHeader();
         header.setMsgType((byte) RpcType.RESPONSE.getType());
-        LOGGER.info("接收到请求的请求id：{}", header.getRequestId());
+        LOGGER.warn("接收到请求的请求id：{}", header.getRequestId());
 
-        if (this.enableCacheResult){
-            LOGGER.info("从缓存中获取响应中...");
+        if (this.enableCacheResult) {
+            LOGGER.warn("从缓存中获取响应中...");
             RpcRequest body = protocol.getBody();
             CacheResultKey cacheResultKey = new CacheResultKey(body.getClassName(), body.getMethodName(), body.getParameterTypes(), body.getParameters(), body.getVersion(), body.getGroup());
             responseProtocol = cacheResultManager.get(cacheResultKey);
-            if (responseProtocol == null){
+            if (responseProtocol == null) {
                 LOGGER.info("未缓存响应，处理请求中...");
-                responseProtocol = handleRequest(protocol,header);
+                responseProtocol = handleRequest(protocol, header);
                 cacheResultKey.setCacheTimeStamp(System.currentTimeMillis());
-                cacheResultManager.put(cacheResultKey,responseProtocol);
-            }
-            responseProtocol.setHeader(protocol.getHeader());
-        }else{
+                cacheResultManager.put(cacheResultKey, responseProtocol);
+                LOGGER.warn("请求处理成功！");
+            } else
+                LOGGER.warn("缓存中获取中成功！");
+//            responseProtocol.setHeader(protocol.getHeader());
+        } else {
             responseProtocol = handleRequest(protocol, header);
         }
 
-        responseProtocol.setHeader(header);
+//        responseProtocol.setHeader(header);
+        LOGGER.warn("handleRequestWithCache来自【{}】的请求消息处理成功，准备发送...", channel.remoteAddress());
         return responseProtocol;
     }
 
@@ -279,7 +392,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      * @description: 7节新增，处理心跳消息并返回pong消息
      */
     private RpcProtocol<RpcResponse> handleHeartBeatFromConsumer(RpcProtocol<RpcRequest> protocol, Channel channel) {
-        LOGGER.info("接收到来自消费者{}发送的ping消息，消息内容为{}",channel.remoteAddress(),protocol.getBody().getParameters()[0]);
+        LOGGER.info("接收到来自消费者{}发送的ping消息，消息内容为{}", channel.remoteAddress(), protocol.getBody().getParameters()[0]);
         RpcProtocol<RpcResponse> responseProtocol = new RpcProtocol<>();
 
         //消息头设置
@@ -303,7 +416,7 @@ public class RpcProviderHandler extends SimpleChannelInboundHandler<RpcProtocol<
      * @description: 7节新增，收到消费者响应的pong消息就log
      */
     private void handleHeartBeatToProvider(RpcProtocol<RpcRequest> protocol, Channel channel) {
-        LOGGER.info("接收到来自消费者{}的pong消息，消息内容为：{}",channel.remoteAddress(),protocol.getBody().getParameters()[0]);
+        LOGGER.info("接收到来自消费者{}的pong消息，消息内容为：{}", channel.remoteAddress(), protocol.getBody().getParameters()[0]);
     }
 
     /**

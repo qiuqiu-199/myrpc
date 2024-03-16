@@ -1,3 +1,4 @@
+#用不上，不用管
 qrpc:
   consumer:
     version: 1.0.0
@@ -16,3 +17,7 @@ qrpc:
     retry-interval: 2000
     cache-result-expire: 6000
     enable-cache-result: true
+    enableRateLimiter: true
+    rateLimiterType: semaphore
+    permits: 100
+    milliSeconds: 1000

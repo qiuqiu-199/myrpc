@@ -9,5 +9,10 @@ qrpc:
     scanNotActiveChannelInterval: -1
     enableCacheResult: true
     cacheResultExpire: 600000
-    maxConnectionCount: 1
+    maxConnectionCount: 3
     disuseStrategyType: strategy_default
+    enableRateLimiter: true
+    rateLimiterType: counter
+    permits: 1
+    milliSeconds: 1000
+    rateLimiterFailStrategy: exception

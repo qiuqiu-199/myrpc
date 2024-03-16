@@ -24,5 +24,10 @@
         <constructor-arg name="cacheResultExpire" value="${cacheResult.expire}"/>
         <constructor-arg name="maxConnectionCount" value="${connectionManage.maxConnectionCount}"/>
         <constructor-arg name="disuseStrategyType" value="${connectionManage.disuseStrategy}"/>
+        <constructor-arg name="enableRateLimiter" value="${rateLimiter.enableRateLimiter}"/>
+        <constructor-arg name="rateLimiterType" value="${rateLimiter.rateLimiterType}"/>
+        <constructor-arg name="permits" value="${rateLimiter.permits}"/>
+        <constructor-arg name="milliSeconds" value="${rateLimiter.milliSeconds}"/>
+        <constructor-arg name="rateLimiterFailStrategy" value="${rateLimiter.failStrategy}"/>
     </bean>
 </beans>

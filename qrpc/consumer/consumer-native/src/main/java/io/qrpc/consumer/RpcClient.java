@@ -9,6 +9,7 @@ import io.qrpc.proxy.api.object.ObjectProxy;
 import io.qrpc.registry.api.RegistryService;
 import io.qrpc.registry.api.config.RegistryConfig;
 import io.qrpc.spi.loader.ExtensionLoader;
+import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,10 +43,18 @@ public class RpcClient {
     private boolean enableCacheResult;
     private int cacheResultExpire;
 
-    //容错层
+    //服务容错-服务降级
     private String reflectType;
     private String fallbackClassName;
+    @Setter  //通过set方法指定，因为xml方式的spring启动无法传递class
     private Class<?> fallbackClass;
+
+    //服务容错-服务限流
+    private boolean enableRateLimiter;
+    private String rateLimiterType;
+    private int permits;
+    private int milliSeconds;
+    private String rateLimiterFailStrategy;
 
     //构造方法
     public RpcClient(
@@ -67,8 +76,12 @@ public class RpcClient {
             int cacheResultExpire,
             String reflectType,
             String fallbackClassName,
-            Class<?> fallbackClass
-            ) {
+            boolean enableRateLimiter,
+            String rateLimiterType,
+            int permits,
+            int milliSeconds,
+            String rateLimiterFailStrategy
+    ) {
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
         this.seriliazationType = seriliazationType;
@@ -86,7 +99,12 @@ public class RpcClient {
 
         this.reflectType = reflectType;
         this.fallbackClassName = fallbackClassName;
-        this.fallbackClass = fallbackClass;
+
+        this.enableRateLimiter = enableRateLimiter;
+        this.rateLimiterType = rateLimiterType;
+        this.permits = permits;
+        this.milliSeconds = milliSeconds;
+        this.rateLimiterFailStrategy = rateLimiterFailStrategy;
     }
 
     /**
@@ -142,7 +160,13 @@ public class RpcClient {
                         cacheResultExpire,
                         reflectType,
                         fallbackClassName,
-                        fallbackClass
+                        fallbackClass,
+                        enableRateLimiter,
+                        rateLimiterType,
+                        permits,
+                        milliSeconds,
+                        rateLimiterFailStrategy
+
                 )
         );
         return proxyFactory.getProxy(interfaceClass);
@@ -174,7 +198,12 @@ public class RpcClient {
                 cacheResultExpire,
                 reflectType,
                 fallbackClassName,
-                fallbackClass
+                fallbackClass,
+                enableRateLimiter,
+                rateLimiterType,
+                permits,
+                milliSeconds,
+                rateLimiterFailStrategy
         );
     }
 

@@ -2,6 +2,7 @@ package io.qrpc.demo.springboot.consumer.service.impl;
 
 import io.qrpc.annotation.RpcReference;
 import io.qrpc.demo.api.DemoService;
+import io.qrpc.demo.springboot.consumer.fallback.FallbackDemoServiceImpl;
 import io.qrpc.demo.springboot.consumer.service.ConsumerDemoService;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,15 @@ public class ConsumerDemoServiceImpl implements ConsumerDemoService {
             maxRetryTimes = 3,
             retryInterval = 3000,
             enableCacheResult = true,
-            cacheResultExpire = 6000
+            cacheResultExpire = 6000,
+            reflectType = "jdk",
+            fallbackClassName = "io.qrpc.demo.springboot.consumer.fallback.FallbackDemoServiceImpl",
+            fallbackClass = FallbackDemoServiceImpl.class,
+            enableRateLimiter = true,
+            rateLimiterType = "guava",
+            permits = 100,
+            milliSeconds = 1000,
+            rateLimiterFailStrategy = "exception"
     )
     private DemoService demoService;  //这里的红波浪线不用管
     @Override

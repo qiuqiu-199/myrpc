@@ -41,7 +41,12 @@ public class RpcSpringServer extends BaseServer implements ApplicationContextAwa
                            boolean enableCacheResult,
                            int cacheResultExpire,
                            int maxConnectionCount,
-                           String disuseStrategyType
+                           String disuseStrategyType,
+                           boolean enableRateLimiter,
+                           String rateLimiterType,
+                           int permits,
+                           int milliSeconds,
+                           String rateLimiterFailStrategy
     ) {
         super(
                 serverAddr,
@@ -54,7 +59,12 @@ public class RpcSpringServer extends BaseServer implements ApplicationContextAwa
                 enableCacheResult,
                 cacheResultExpire,
                 maxConnectionCount,
-                disuseStrategyType
+                disuseStrategyType,
+                enableRateLimiter,
+                rateLimiterType,
+                permits,
+                milliSeconds,
+                rateLimiterFailStrategy
         );
     }
 

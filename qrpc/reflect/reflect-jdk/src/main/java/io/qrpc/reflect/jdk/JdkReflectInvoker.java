@@ -19,7 +19,7 @@ public class JdkReflectInvoker implements ReflectInvoker {
 
     @Override
     public Object invokeMethod(Object serviceBean, Class<?> serviceClass, String methodName, Class<?>[] parameterTypes, Object[] parameters) throws Throwable {
-        LOGGER.info("服务提供者调用真实方法使用的反射方式：jdk");
+        LOGGER.info("调用真实方法使用的反射方式：jdk");
 
         FastClass serviceFastClass = FastClass.create(serviceClass);
         FastMethod fastMethod = serviceFastClass.getMethod(methodName, parameterTypes);

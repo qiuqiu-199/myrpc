@@ -52,7 +52,6 @@
     <orderEntry type="library" name="Maven: org.apache.zookeeper:zookeeper:3.4.8" level="project" />
     <orderEntry type="library" name="Maven: jline:jline:0.9.94" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty:3.7.0.Final" level="project" />
-    <orderEntry type="library" name="Maven: com.google.guava:guava:16.0.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.curator:curator-recipes:2.12.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.curator:curator-x-discovery:2.12.0" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.9.13" level="project" />
@@ -79,6 +78,17 @@
     <orderEntry type="module" module-name="disuse-lru" />
     <orderEntry type="module" module-name="disuse-refuse" />
     <orderEntry type="module" module-name="disuse-random" />
+    <orderEntry type="module" module-name="ratelimiter-counter" />
+    <orderEntry type="module" module-name="ratelimiter-api" />
+    <orderEntry type="module" module-name="rateLimiter-semaphore" />
+    <orderEntry type="module" module-name="ratelimiter-guava" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:31.1-jre" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:failureaccess:1.0.1" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:3.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.checkerframework:checker-qual:3.12.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.errorprone:error_prone_annotations:2.11.0" level="project" />
+    <orderEntry type="library" name="Maven: com.google.j2objc:j2objc-annotations:1.3" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.21" level="project" />
     <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
