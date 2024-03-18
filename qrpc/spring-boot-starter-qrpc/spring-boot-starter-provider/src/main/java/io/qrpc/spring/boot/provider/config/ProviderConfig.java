@@ -34,8 +34,13 @@ public class ProviderConfig {
     private boolean enableRateLimiter;
     private String rateLimiterType;
     private int permits;
-    private int milliSeconds;
+    private int rateLimiterMilliSeconds;
     private String rateLimiterFailStrategy;
+    //服务容错-服务熔断
+    private boolean enableFusing;
+    private String fusingStrategyType;
+    private int totalFailure;
+    private int fusingMilliSeconds;
 
     public ProviderConfig(String serverAddress,
                           String registryType,
@@ -51,8 +56,12 @@ public class ProviderConfig {
                           boolean enableRateLimiter,
                           String rateLimiterType,
                           int permits,
-                          int milliSeconds,
-                           String rateLimiterFailStrategy
+                          int rateLimiterMilliSeconds,
+                          String rateLimiterFailStrategy,
+                          boolean enableFusing,
+                          String fusingStrategyType,
+                          int totalFailure,
+                          int fusingMilliSeconds
     ) {
         this.serverAddr = serverAddress;
 
@@ -76,7 +85,12 @@ public class ProviderConfig {
         this.enableRateLimiter = enableRateLimiter;
         this.rateLimiterType = rateLimiterType;
         this.permits = permits;
-        this.milliSeconds = milliSeconds;
+        this.rateLimiterMilliSeconds = rateLimiterMilliSeconds;
         this.rateLimiterFailStrategy = rateLimiterFailStrategy;
+
+        this.enableFusing = enableFusing;
+        this.fusingStrategyType = fusingStrategyType;
+        this.totalFailure = totalFailure;
+        this.fusingMilliSeconds = fusingMilliSeconds;
     }
 }

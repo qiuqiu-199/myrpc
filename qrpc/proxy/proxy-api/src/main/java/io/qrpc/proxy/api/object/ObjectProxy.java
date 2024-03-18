@@ -2,7 +2,9 @@ package io.qrpc.proxy.api.object;
 
 import io.qrpc.cache.result.CacheResultKey;
 import io.qrpc.cache.result.CacheResultManager;
+import io.qrpc.common.exception.RpcException;
 import io.qrpc.constants.RpcConstants;
+import io.qrpc.fusing.api.FusingInvoker;
 import io.qrpc.protocol.RpcProtocol;
 import io.qrpc.protocol.enumeration.RpcType;
 import io.qrpc.protocol.header.RpcHeaderFactory;
@@ -50,6 +52,9 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     private boolean enableRateLimiter;
     private RateLimiterInvoker rateLimiterInvoker;
     private String rateLimiterFailStrategy;
+    //服务容错-服务熔断相关
+    private boolean enableFusing;
+    private FusingInvoker fusingInvoker;
 
 
     //2种构造方法
@@ -78,7 +83,11 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
             String rateLimiterType,
             int permits,
             int milliSecods,
-            String rateLimiterFailStrategy
+            String rateLimiterFailStrategy,
+            boolean enableFusing,
+            String fusingStrategyType,
+            int totalFailure,
+            int fusingMilliSeconds
     ) {
         this.clazz = clazz;
         this.serviceVersion = serviceVersion;
@@ -99,14 +108,9 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         this.enableRateLimiter = enableRateLimiter;
         this.initRateLimiterInvoker(rateLimiterType, permits, milliSecods);
         this.rateLimiterFailStrategy = rateLimiterFailStrategy;
-    }
 
-    private void initRateLimiterInvoker(String rateLimiterType, int permits, int milliSecods) {
-        if (enableRateLimiter) {
-            rateLimiterType = StringUtils.isEmpty(rateLimiterType) ? RpcConstants.RATE_LIMITER_DEFAULT : rateLimiterType;
-            rateLimiterInvoker = ExtensionLoader.getExtension(RateLimiterInvoker.class, rateLimiterType);
-            rateLimiterInvoker.init(permits, milliSecods);
-        }
+        this.enableFusing = enableFusing;
+        this.initFusingInvoker(fusingStrategyType, totalFailure, fusingMilliSeconds);
     }
 
     /**
@@ -140,6 +144,34 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
 
     /**
      * @author: qiu
+     * @date: 2024/3/14 22:53
+     * @description: 初始化限流器
+     */
+    private void initRateLimiterInvoker(String rateLimiterType, int permits, int milliSecods) {
+        LOGGER.warn("初始化限流器...");
+        if (enableRateLimiter) {
+            rateLimiterType = StringUtils.isEmpty(rateLimiterType) ? RpcConstants.RATE_LIMITER_DEFAULT : rateLimiterType;
+            rateLimiterInvoker = ExtensionLoader.getExtension(RateLimiterInvoker.class, rateLimiterType);
+            rateLimiterInvoker.init(permits, milliSecods);
+        }
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/16 19:31
+     * @description: 初始化熔断器
+     */
+    private void initFusingInvoker(String fusingStrategyType, int totalFailure, int fusingMilliSeconds) {
+        LOGGER.warn("初始化熔断器...");
+        if (enableFusing) {
+            fusingStrategyType = StringUtils.isEmpty(fusingStrategyType) ? RpcConstants.FUSING_INVOKER_COUNTER : fusingStrategyType;
+            fusingInvoker = ExtensionLoader.getExtension(FusingInvoker.class, fusingStrategyType);
+            fusingInvoker.init(totalFailure, fusingMilliSeconds);
+        }
+    }
+
+    /**
+     * @author: qiu
      * @date: 2024/2/26 9:45
      * @description: 代理方法，封装请求协议对象并发送请求、接收结果
      * 23章，调用sendRequest增加参数RegistryService
@@ -149,6 +181,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         LOGGER.info("ObjectProxy#invoke动态代理的同步调用...");
+
         //invoke方法里对三种方法做一个通用的特殊处理，
         // equals方法直接返回proxy和args[0]的比较结果，
         // hashcode方法返回proxy的哈希值，
@@ -168,6 +201,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         //如果开启了缓存，先从缓存获取响应
         if (enableCacheResult)
             return invokeSendRequestMethodCache(method, args);
+
         return invokeSendRequestMethodWithFallback(method, args);
     }
 
@@ -179,10 +213,13 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
      */
     private Object invokeSendRequestMethodCache(Method method, Object[] args) throws Exception {
         LOGGER.warn("从缓存中获取响应中...");
+
         CacheResultKey cacheResultKey = new CacheResultKey(method.getDeclaringClass().getName(), method.getName(), method.getParameterTypes(), args, serviceVersion, serviceGroup);
         Object obj = this.cacheResultManager.get(cacheResultKey);
+
         if (obj == null) {
             LOGGER.warn("未缓存响应，发送请求中...");
+
             obj = invokeSendRequestMethodWithFallback(method, args);
             if (obj != null) {
                 cacheResultKey.setCacheTimeStamp(System.currentTimeMillis());
@@ -203,6 +240,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
             //调用发送请求方法并接收响应结果
             return invokeSendRequestMethodWithRateLimiter(method, args);
         } catch (Exception e) {
+            LOGGER.error("服务端发生的错误信息========");
             e.printStackTrace();  //debug时可以打印信息
             //服务调用结果获取出错，启动服务降级
             return getFallbackResult(method, args);
@@ -219,7 +257,7 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
         if (enableRateLimiter) {
             if (rateLimiterInvoker.tryAcquire()) {
                 try {
-                    result = invokeSendRequestMethod(method, args);
+                    result = invokeSendRequestMethodWithFusing(method, args);
                 } finally {
                     rateLimiterInvoker.release();
                 }
@@ -228,22 +266,37 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
                 result = this.invokeSendRequestMethodWithRateLimiterWithFail(method, args);
             }
         } else {
-            result = invokeSendRequestMethod(method, args);
+            result = invokeSendRequestMethodWithFusing(method, args);
         }
         return result;
     }
 
-    /**
-     * @author: qiu
-     * @date: 2024/3/12 16:26
-     * @description: 发送请求并接收响应结果
-     */
-    private Object invokeSendRequestMethod(Method method, Object[] args) throws Exception {
-        //封装协议信息并发送
-        RpcProtocol<RpcRequest> protocol = wrapRequestProtocol(method, args);
-        RpcFuture future = this.consumer.sendRequest(protocol, registryService);
-        return future == null ? null : timeout > 0 ? future.get(timeout, TimeUnit.MILLISECONDS) : future.get();
+    private Object invokeSendRequestMethodWithFusing(Method method, Object[] args) throws Exception {
+        if (enableFusing) {
+            //如果处于熔断状态进入熔断处理，也就是发送调用错误的响应报文
+            if (fusingInvoker.invokeFusingStrategy()) {
+                LOGGER.error("触发服务熔断...");
+                return getFallbackResult(method, args);
+            }
+            //此时非熔断状态，注意，非熔断状态增加的是调用次数，不是调用成功数
+            fusingInvoker.incrementCount();
+
+            Object res;
+            try {
+                //调用方法发送请求
+                res = invokeSendRequestMethod(method, args);
+            } catch (Throwable e) {
+//                e.printStackTrace();
+                //请求发送后接受结果时收到异常，表示调用失败，增加调用失败次数；
+                //并将异常重新抛出去
+                fusingInvoker.incrementFailureCount();
+                throw new RpcException(e.getMessage());
+            }
+            return res;
+        } else
+            return invokeSendRequestMethod(method, args);
     }
+
 
     /**
      * @author: qiu
@@ -258,10 +311,22 @@ public class ObjectProxy<T> implements IAsyncObjectProxy, InvocationHandler {
             case RpcConstants.RATE_LIMITER_FAIL_STRATEGY_FALLBACK:
                 return this.getFallbackResult(method, args);
             case RpcConstants.RATE_LIMITER_FAIL_STRATEGY_DIRECT:
-                return this.invokeSendRequestMethod(method, args);
+                return this.invokeSendRequestMethodWithFusing(method, args);
             default:
-                return this.invokeSendRequestMethod(method, args);
+                return this.invokeSendRequestMethodWithFusing(method, args);
         }
+    }
+
+    /**
+     * @author: qiu
+     * @date: 2024/3/12 16:26
+     * @description: 发送请求并接收响应结果
+     */
+    private Object invokeSendRequestMethod(Method method, Object[] args) throws Exception {
+        //封装协议信息并发送
+        RpcProtocol<RpcRequest> protocol = wrapRequestProtocol(method, args);
+        RpcFuture future = this.consumer.sendRequest(protocol, registryService);
+        return future == null ? null : timeout > 0 ? future.get(timeout, TimeUnit.MILLISECONDS) : future.get();
     }
 
     /**

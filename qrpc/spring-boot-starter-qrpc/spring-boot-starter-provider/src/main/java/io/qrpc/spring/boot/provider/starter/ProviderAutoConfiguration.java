@@ -40,8 +40,12 @@ public class ProviderAutoConfiguration {
                 config.isEnableRateLimiter(),
                 config.getRateLimiterType(),
                 config.getPermits(),
-                config.getMilliSeconds(),
-                config.getRateLimiterFailStrategy()
+                config.getRateLimiterMilliSeconds(),
+                config.getRateLimiterFailStrategy(),
+                config.isEnableFusing(),
+                config.getFusingStrategyType(),
+                config.getTotalFailure(),
+                config.getFusingMilliSeconds()
         );
     }
 }

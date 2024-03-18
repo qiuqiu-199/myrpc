@@ -65,8 +65,13 @@ public class BaseServer implements Server {
     private boolean enableRateLimiter;
     private String rateLimiterType;
     private int permits;
-    private int milliSeconds;
+    private int rateLimiterMilliSeconds;
     private String rateLimiterFailStrategy;
+    //服务容错-服务熔断
+    private boolean enableFusing;
+    private String fusingStrategyType;
+    private int totalFailure;
+    private int fusingMilliSeconds;
 
     /**
      * @author: qiu
@@ -89,8 +94,12 @@ public class BaseServer implements Server {
             boolean enableRateLimiter,
             String rateLimiterType,
             int permits,
-            int milliSeconds,
-            String rateLimiterFailStrategy
+            int rateLimiterMilliSeconds,
+            String rateLimiterFailStrategy,
+            boolean enableFusing,
+            String fusingStrategyType,
+            int totalFailure,
+            int fusingMilliSeconds
     ) {
         if (!StringUtils.isEmpty(serverAddr)) {
             this.host = serverAddr.split(":")[0];
@@ -115,8 +124,13 @@ public class BaseServer implements Server {
         this.enableRateLimiter = enableRateLimiter;
         this.rateLimiterType = rateLimiterType;
         this.permits = permits;
-        this.milliSeconds = milliSeconds;
+        this.rateLimiterMilliSeconds = rateLimiterMilliSeconds;
         this.rateLimiterFailStrategy = rateLimiterFailStrategy;
+
+        this.enableFusing = enableFusing;
+        this.fusingStrategyType = fusingStrategyType;
+        this.totalFailure = totalFailure;
+        this.fusingMilliSeconds = fusingMilliSeconds;
     }
 
     /**
@@ -173,8 +187,12 @@ public class BaseServer implements Server {
                                             enableRateLimiter,
                                             rateLimiterType,
                                             permits,
-                                            milliSeconds,
-                                            rateLimiterFailStrategy
+                                            rateLimiterMilliSeconds,
+                                            rateLimiterFailStrategy,
+                                            enableFusing,
+                                            fusingStrategyType,
+                                            totalFailure,
+                                            fusingMilliSeconds
                                     ));
                         }
                     })

@@ -37,7 +37,11 @@ public class RpcSingleServer extends BaseServer {
             String rateLimiterType,
             int permits,
             int milliSeconds,
-            String rateLimiterFailStrategy
+            String rateLimiterFailStrategy,
+            boolean enableFusing,
+            String fusingStrategyType,
+            int totalFailure,
+            int fusingMilliSeconds
     ) {
         //TODO 这里必须调用父类构造方法否则报错，原因不明
         super(
@@ -56,7 +60,11 @@ public class RpcSingleServer extends BaseServer {
                 rateLimiterType,
                 permits,
                 milliSeconds,
-                rateLimiterFailStrategy
+                rateLimiterFailStrategy,
+                enableFusing,
+                fusingStrategyType,
+                totalFailure,
+                fusingMilliSeconds
         );
 
         try {

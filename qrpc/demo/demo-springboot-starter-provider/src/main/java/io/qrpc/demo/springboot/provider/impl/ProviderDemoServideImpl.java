@@ -22,7 +22,7 @@ public class ProviderDemoServideImpl implements DemoService {
     @Override
     public String sayHello(String name) {
         //测试容错层
-        if ("fallback".equals(name)){
+        if (name != null && name.contains("fallback")){
             throw new RpcException("触发异常关键词!");
         }
         return "hello, " + name;

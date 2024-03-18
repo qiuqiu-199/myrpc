@@ -55,6 +55,15 @@ public class ProviderConfig {
     private int milliSeconds;
     @Value("${rateLimiter.failStrategy}")
     private String rateLimiterStrategy;
+    //服务容错-服务熔断
+    @Value("${fusing.enableFusing}")
+    private boolean enableFusing;
+    @Value("${fusing.fusingStrategyType}")
+    private String fusingStrategyType;
+    @Value("${fusing.totalFailure}")
+    private int totalFailure;
+    @Value("${fusing.milliSeconds}")
+    private int fusingMilliSeconds;
 
     @Bean
     public RpcSpringServer rpcSpringServer() {
@@ -74,7 +83,11 @@ public class ProviderConfig {
                 rateLimiterType,
                 permits,
                 milliSeconds,
-                rateLimiterStrategy
+                rateLimiterStrategy,
+                enableFusing,
+                fusingStrategyType,
+                totalFailure,
+                fusingMilliSeconds
         );
     }
 }

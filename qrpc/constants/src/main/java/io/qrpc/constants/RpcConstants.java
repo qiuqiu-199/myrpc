@@ -70,4 +70,12 @@ public class RpcConstants {
     public static final String RATE_LIMITER_FAIL_STRATEGY_EXCEPTION = "exception";
     public static final String RATE_LIMITER_FAIL_STRATEGY_FALLBACK = "fallback";
     public static final String RATE_LIMITER_FAIL_STRATEGY_DIRECT = "direct";
+    //服务熔断-熔断状态、默认熔断阈值、默认熔断规则
+    public static final int FUSING_STATUS_CLOSED = 1;
+    public static final int FUSING_STATUS_HALF_OPEN = 2;
+    public static final int FUSING_STATUS_OPEN = 3;
+    public static final int FUSING_TOTALFAILURE_DEFAULT = 10;
+    public static final int FUSING_MILLISECONDS_DEFAULT = 5000;
+    public static final String FUSING_INVOKER_COUNTER = "counter";
+
 }

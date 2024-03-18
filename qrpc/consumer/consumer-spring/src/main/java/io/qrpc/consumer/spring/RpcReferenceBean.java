@@ -57,6 +57,11 @@ public class RpcReferenceBean implements FactoryBean {
     private int permits;
     private int milliSeconds;
     private String rateLimiterFailStrategy;
+    //服务容错-服务熔断
+    private boolean enableFusing;
+    private String fusingStrategyType;
+    private int totalFailure;
+    private int fusingMilliSeconds;
 
     //重写BeanFactory的两个方法
     @Override
@@ -94,7 +99,11 @@ public class RpcReferenceBean implements FactoryBean {
                 rateLimiterType,
                 permits,
                 milliSeconds,
-                rateLimiterFailStrategy
+                rateLimiterFailStrategy,
+                enableFusing,
+                fusingStrategyType,
+                totalFailure,
+                fusingMilliSeconds
         );
         rpcClient.setFallbackClass(fallbackClass);
         this.proxyObject = rpcClient.create(interfaceClass);
@@ -236,5 +245,37 @@ public class RpcReferenceBean implements FactoryBean {
 
     public void setRateLimiterFailStrategy(String rateLimiterFailStrategy) {
         this.rateLimiterFailStrategy = rateLimiterFailStrategy;
+    }
+
+    public boolean isEnableFusing() {
+        return enableFusing;
+    }
+
+    public void setEnableFusing(boolean enableFusing) {
+        this.enableFusing = enableFusing;
+    }
+
+    public String getFusingStrategyType() {
+        return fusingStrategyType;
+    }
+
+    public void setFusingStrategyType(String fusingStrategyType) {
+        this.fusingStrategyType = fusingStrategyType;
+    }
+
+    public int getTotalFailure() {
+        return totalFailure;
+    }
+
+    public void setTotalFailure(int totalFailure) {
+        this.totalFailure = totalFailure;
+    }
+
+    public int getFusingMilliSeconds() {
+        return fusingMilliSeconds;
+    }
+
+    public void setFusingMilliSeconds(int fusingMilliSeconds) {
+        this.fusingMilliSeconds = fusingMilliSeconds;
     }
 }

@@ -45,8 +45,12 @@ public class RpcSpringServer extends BaseServer implements ApplicationContextAwa
                            boolean enableRateLimiter,
                            String rateLimiterType,
                            int permits,
-                           int milliSeconds,
-                           String rateLimiterFailStrategy
+                           int rateLimiterMilliSeconds,
+                           String rateLimiterFailStrategy,
+                           boolean enableFusing,
+                           String fusingStrategyType,
+                           int totalFailure,
+                           int fusingMilliSeconds
     ) {
         super(
                 serverAddr,
@@ -63,8 +67,12 @@ public class RpcSpringServer extends BaseServer implements ApplicationContextAwa
                 enableRateLimiter,
                 rateLimiterType,
                 permits,
-                milliSeconds,
-                rateLimiterFailStrategy
+                rateLimiterMilliSeconds,
+                rateLimiterFailStrategy,
+                enableFusing,
+                fusingStrategyType,
+                totalFailure,
+                fusingMilliSeconds
         );
     }
 

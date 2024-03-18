@@ -40,7 +40,11 @@ public class ConsumerDemoServiceImpl implements ConsumerDemoService {
             rateLimiterType = "guava",
             permits = 100,
             milliSeconds = 1000,
-            rateLimiterFailStrategy = "exception"
+            rateLimiterFailStrategy = "exception",
+            enableFusing = true,
+            fusingStrategyType = "counter",
+            totalFailure = 1,
+            fusingMilliSeconds = 5000
     )
     private DemoService demoService;  //这里的红波浪线不用管
     @Override

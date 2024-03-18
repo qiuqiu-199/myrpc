@@ -4,7 +4,7 @@ package io.qrpc.common.helper;
  * @ClassName: RpcServiceHelper
  * @Author: qiuzhiq
  * @Date: 2024/1/19 12:20
- * @Description: 提供者的工具类
+ * @Description: 工具类，用于构建服务名
  */
 
 public class RpcServiceHelper {

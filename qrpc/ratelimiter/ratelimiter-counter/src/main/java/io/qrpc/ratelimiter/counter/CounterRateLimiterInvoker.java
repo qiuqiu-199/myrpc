@@ -58,7 +58,7 @@ public class CounterRateLimiterInvoker extends AbstractRateLimiterInvoker {
      * @author: qiu
      * @date: 2024/3/14 21:18
      * @description: 释放资源，当前请求线程得到了许可才能释放资源。
-     * TODO
+     * 为空，原因见笔记13节服务限流
      */
     @Override
     public void release() {

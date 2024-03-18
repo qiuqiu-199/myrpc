@@ -60,5 +60,11 @@
             <artifactId>ratelimiter-guava</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.qiu</groupId>
+            <artifactId>fusing-counter</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

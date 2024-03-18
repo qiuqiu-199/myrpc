@@ -35,6 +35,8 @@
         <module name="disuse-lru" />
         <module name="disuse-random" />
         <module name="disuse-refuse" />
+        <module name="fusing-api" />
+        <module name="fusing-counter" />
         <module name="loadBalancer-api" />
         <module name="loadBalancer-consistentHash-zk" />
         <module name="loadBalancer-least-connections" />
@@ -104,6 +106,9 @@
       <module name="disuse-lru" target="1.8" />
       <module name="disuse-random" target="1.8" />
       <module name="disuse-refuse" target="1.8" />
+      <module name="fusing" target="1.8" />
+      <module name="fusing-api" target="1.8" />
+      <module name="fusing-counter" target="1.8" />
       <module name="loadBalancer" target="1.8" />
       <module name="loadBalancer-api" target="1.8" />
       <module name="loadBalancer-consistentHash-zk" target="1.8" />

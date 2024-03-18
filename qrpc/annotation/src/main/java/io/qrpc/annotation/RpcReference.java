@@ -66,5 +66,10 @@ public @interface RpcReference {
     int permits() default 100;
     int milliSeconds() default 1000;
     String rateLimiterFailStrategy() default "exception";
+    //服务容错-服务熔断
+     boolean enableFusing() default true;
+     String fusingStrategyType() default "counter";
+     int totalFailure() default 1;
+     int fusingMilliSeconds() default 5000;
 
 }

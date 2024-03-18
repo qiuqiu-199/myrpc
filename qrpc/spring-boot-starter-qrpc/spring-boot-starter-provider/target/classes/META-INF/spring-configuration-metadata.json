@@ -26,10 +26,27 @@
       "defaultValue": false
     },
     {
+      "name": "qrpc.provider.enable-fusing",
+      "type": "java.lang.Boolean",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": false
+    },
+    {
       "name": "qrpc.provider.enable-rate-limiter",
       "type": "java.lang.Boolean",
       "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
       "defaultValue": false
+    },
+    {
+      "name": "qrpc.provider.fusing-milli-seconds",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": 0
+    },
+    {
+      "name": "qrpc.provider.fusing-strategy-type",
+      "type": "java.lang.String",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
     },
     {
       "name": "qrpc.provider.heartbeat-interval",
@@ -44,12 +61,6 @@
       "defaultValue": 0
     },
     {
-      "name": "qrpc.provider.milli-seconds",
-      "type": "java.lang.Integer",
-      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
-      "defaultValue": 0
-    },
-    {
       "name": "qrpc.provider.permits",
       "type": "java.lang.Integer",
       "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
@@ -59,6 +70,12 @@
       "name": "qrpc.provider.rate-limiter-fail-strategy",
       "type": "java.lang.String",
       "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
+    },
+    {
+      "name": "qrpc.provider.rate-limiter-milli-seconds",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": 0
     },
     {
       "name": "qrpc.provider.rate-limiter-type",
@@ -95,6 +112,12 @@
       "name": "qrpc.provider.server-addr",
       "type": "java.lang.String",
       "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig"
+    },
+    {
+      "name": "qrpc.provider.total-failure",
+      "type": "java.lang.Integer",
+      "sourceType": "io.qrpc.spring.boot.provider.config.ProviderConfig",
+      "defaultValue": 0
     }
   ],
   "hints": []

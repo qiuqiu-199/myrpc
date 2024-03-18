@@ -119,8 +119,13 @@ public class RpcConsumerPostProcessor implements ApplicationContextAware, BeanCl
             builder.addPropertyValue("enableRateLimiter",anno.enableRateLimiter());
             builder.addPropertyValue("rateLimiterType",anno.rateLimiterType());
             builder.addPropertyValue("permits",anno.permits());
-            builder.addPropertyValue("milliSeconds",anno.milliSeconds());
+            builder.addPropertyValue("rateLimiterMilliSeconds",anno.milliSeconds());
             builder.addPropertyValue("rateLimiterFailStrategy",anno.rateLimiterFailStrategy());
+            builder.addPropertyValue("enableFusing",anno.enableFusing());
+            builder.addPropertyValue("fusingStrategyType",anno.fusingStrategyType());
+            builder.addPropertyValue("totalFailure",anno.totalFailure());
+            builder.addPropertyValue("fusingMilliSeconds",anno.fusingMilliSeconds());
+
 
             //缓存起来，<字段全类名，其BeanDefinition>
             this.rpcRefBeanDefinitoins.put(field.getName(),builder.getBeanDefinition());

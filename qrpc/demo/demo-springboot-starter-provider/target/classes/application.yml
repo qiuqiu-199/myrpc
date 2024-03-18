@@ -13,6 +13,11 @@ qrpc:
     disuseStrategyType: strategy_default
     enableRateLimiter: true
     rateLimiterType: counter
-    permits: 1
-    milliSeconds: 1000
+    permits: 5
+    rateLimiterMilliSeconds: 1000
     rateLimiterFailStrategy: exception
+    #服务容错-服务熔断
+    enableFusing: true
+    fusingStrategyType: counter
+    totalFailure: 3
+    fusingMilliSeconds: 5000

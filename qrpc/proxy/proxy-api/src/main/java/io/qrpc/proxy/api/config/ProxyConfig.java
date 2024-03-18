@@ -42,4 +42,9 @@ public class ProxyConfig<T> implements Serializable {
     private int permits;
     private int milliSeconds;
     private String rateLimiterFailStrategy;
+    //服务容错-服务熔断
+    private boolean enableFusing;
+    private String fusingStrategyType;
+    private int totalFailure;
+    private int fusingMilliSeconds;
 }

@@ -27,7 +27,11 @@
         <constructor-arg name="enableRateLimiter" value="${rateLimiter.enableRateLimiter}"/>
         <constructor-arg name="rateLimiterType" value="${rateLimiter.rateLimiterType}"/>
         <constructor-arg name="permits" value="${rateLimiter.permits}"/>
-        <constructor-arg name="milliSeconds" value="${rateLimiter.milliSeconds}"/>
+        <constructor-arg name="rateLimiterMilliSeconds" value="${rateLimiter.milliSeconds}"/>
         <constructor-arg name="rateLimiterFailStrategy" value="${rateLimiter.failStrategy}"/>
+        <constructor-arg name="enableFusing" value="${fusing.enableFusing}"/>
+        <constructor-arg name="fusingStrategyType" value="${fusing.fusingStrategyType}"/>
+        <constructor-arg name="totalFailure" value="${fusing.totalFailure}"/>
+        <constructor-arg name="fusingMilliSeconds" value="${fusing.milliSeconds}"/>
     </bean>
 </beans>

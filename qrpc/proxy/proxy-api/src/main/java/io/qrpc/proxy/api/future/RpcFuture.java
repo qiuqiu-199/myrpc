@@ -84,8 +84,8 @@ public class RpcFuture extends CompletableFuture<Object> {
         if (responseProtocol == null)
             return null;
 
-        if (responseProtocol.getHeader().getStatus() == RpcStatus.FAIL.getCode()){
-            throw new RuntimeException("服务调用失败，异常信息："+responseProtocol.getBody().getError());
+        if (responseProtocol.getHeader().getStatus() == RpcStatus.FAIL.getCode()) {
+            throw new RuntimeException("服务调用失败，异常信息：" + responseProtocol.getBody().getError());
         }
 
         return responseProtocol.getBody().getResult();
@@ -129,38 +129,40 @@ public class RpcFuture extends CompletableFuture<Object> {
 
     //3.5增加回调相关方法
     //添加回调方法，接收future的时候调用
-    public RpcFuture addCallback(AsyncRpcCallback callback){
+    public RpcFuture addCallback(AsyncRpcCallback callback) {
         LOGGER.info("RpcFuture#addCallback...");
         lock.lock();
-        try{
-            if (isDone()){ //如果接收到了处理结果就执行回调方法，否则将回调方法加入list中等待
-                runCallbakc(callback);
-            }else{
+        try {
+            if (isDone()) { //如果接收到了处理结果就执行回调方法，否则将回调方法加入list中等待
+                runCallback(callback);
+            } else {
                 this.pendingCallbacks.add(callback);
             }
-        }finally {
+        } finally {
             lock.unlock();
         }
         return this;
     }
+
     //执行回调方法，用于异步执行回调方法
-    private void runCallbakc(final AsyncRpcCallback callback){
+    private void runCallback(final AsyncRpcCallback callback) {
         LOGGER.info("RpcFuture#runCallback...");
         final RpcResponse rpcResponseBody = this.responseRpcProtocol.getBody();
-        ClientThreadPool.submit(()->{
-            if (!rpcResponseBody.isError()){
+        ClientThreadPool.submit(() -> {
+            if (!rpcResponseBody.isError()) {
                 callback.onSuccess(rpcResponseBody.getResult());
-            }else{
+            } else {
                 callback.onException(new RuntimeException("Response error!", new Throwable(rpcResponseBody.getError())));
             }
         });
     }
+
     //处理list中的callback
-    private void invokeCallbacks(){
+    private void invokeCallbacks() {
         lock.lock();
         try {
-            for (final AsyncRpcCallback callback : pendingCallbacks){
-                runCallbakc(callback);
+            for (final AsyncRpcCallback callback : pendingCallbacks) {
+                runCallback(callback);
             }
         } finally {
             lock.unlock();

@@ -47,7 +47,11 @@ public class ConsumerAutoConfiguration {
                 config.getRateLimiterType(),
                 config.getPermits(),
                 config.getMilliSeconds(),
-                config.getRateLimiterFailStrategy()
+                config.getRateLimiterFailStrategy(),
+                config.isEnableFusing(),
+                config.getFusingStrategyType(),
+                config.getTotalFailure(),
+                config.getFusingMilliSeconds()
         );
     }
 }

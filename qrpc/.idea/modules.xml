@@ -30,6 +30,9 @@
       <module fileurl="file://$PROJECT_DIR$/connection-disuse/disuse-lru/disuse-lru.iml" filepath="$PROJECT_DIR$/connection-disuse/disuse-lru/disuse-lru.iml" />
       <module fileurl="file://$PROJECT_DIR$/connection-disuse/disuse-random/disuse-random.iml" filepath="$PROJECT_DIR$/connection-disuse/disuse-random/disuse-random.iml" />
       <module fileurl="file://$PROJECT_DIR$/connection-disuse/disuse-refuse/disuse-refuse.iml" filepath="$PROJECT_DIR$/connection-disuse/disuse-refuse/disuse-refuse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fusing/fusing.iml" filepath="$PROJECT_DIR$/fusing/fusing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fusing/fusing-api/fusing-api.iml" filepath="$PROJECT_DIR$/fusing/fusing-api/fusing-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fusing/fusing-counter/fusing-counter.iml" filepath="$PROJECT_DIR$/fusing/fusing-counter/fusing-counter.iml" />
       <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer.iml" />
       <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-api/loadBalancer-api.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-api/loadBalancer-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/loadBalancer/loadBalancer-consistentHash-zk/loadBalancer-consistentHash-zk.iml" filepath="$PROJECT_DIR$/loadBalancer/loadBalancer-consistentHash-zk/loadBalancer-consistentHash-zk.iml" />

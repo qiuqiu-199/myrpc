@@ -29,7 +29,11 @@ public class ProviderNativeStarter {
                 "counter",
                 100,
                 1000,
-                "exception"
+                "exception",
+                true,
+                "counter",
+                3,
+                5000
         );
         server.startNettyServer();
     }

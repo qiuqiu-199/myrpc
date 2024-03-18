@@ -29,6 +29,7 @@
         <module>connection</module>
         <module>connection-disuse</module>
         <module>ratelimiter</module>
+        <module>fusing</module>
     </modules>
 
     <properties>

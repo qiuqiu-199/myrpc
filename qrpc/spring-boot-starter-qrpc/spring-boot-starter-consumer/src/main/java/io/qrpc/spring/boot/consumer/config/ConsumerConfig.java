@@ -44,6 +44,12 @@ public class ConsumerConfig {
     private int permits;
     private int milliSeconds;
     private String rateLimiterFailStrategy;
+    //服务容错-服务熔断
+    private boolean enableFusing;
+    private String fusingStrategyType;
+    private int totalFailure;
+    private int fusingMilliSeconds;
+
 
     public ConsumerConfig(
             String version,
@@ -69,7 +75,11 @@ public class ConsumerConfig {
             String rateLimiterType,
             int permits,
             int milliSeconds,
-            String rateLimiterFailStrategy
+            String rateLimiterFailStrategy,
+            boolean enableFusing,
+            String fusingStrategyType,
+            int totalFailure,
+            int fusingMilliSeconds
     ) {
         this.version = version;
         this.group = group;
@@ -98,5 +108,10 @@ public class ConsumerConfig {
         this.permits = permits;
         this.milliSeconds = milliSeconds;
         this.rateLimiterFailStrategy = rateLimiterFailStrategy;
+
+        this.enableFusing = enableFusing;
+        this.fusingStrategyType = fusingStrategyType;
+        this.totalFailure = totalFailure;
+        this.fusingMilliSeconds = fusingMilliSeconds;
     }
 }

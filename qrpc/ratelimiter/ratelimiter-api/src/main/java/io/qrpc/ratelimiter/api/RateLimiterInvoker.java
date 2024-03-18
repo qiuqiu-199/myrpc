@@ -28,7 +28,7 @@ public interface RateLimiterInvoker {
      * @author: qiu
      * @date: 2024/3/14 21:12
      * @param: permits-执行周期内的资源上限，这里指执行周期内可以处理的请求数量上限
-     * @param: milliSeconds-执行周期，单位毫秒
+     * @param: rateLimiterMilliSeconds-执行周期，单位毫秒
      * @description:
      */
     default void init(int permits, int milliSeconds){}

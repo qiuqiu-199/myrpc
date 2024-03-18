@@ -55,6 +55,11 @@ public class RpcClient {
     private int permits;
     private int milliSeconds;
     private String rateLimiterFailStrategy;
+    //服务容错-服务熔断
+    private boolean enableFusing;
+    private String fusingStrategyType;
+    private int totalFailure;
+    private int fusingMilliSeconds;
 
     //构造方法
     public RpcClient(
@@ -80,7 +85,11 @@ public class RpcClient {
             String rateLimiterType,
             int permits,
             int milliSeconds,
-            String rateLimiterFailStrategy
+            String rateLimiterFailStrategy,
+            boolean enableFusing,
+            String fusingStrategyType,
+            int totalFailure,
+            int fusingMilliSeconds
     ) {
         this.serviceVersion = serviceVersion;
         this.serviceGroup = serviceGroup;
@@ -105,6 +114,11 @@ public class RpcClient {
         this.permits = permits;
         this.milliSeconds = milliSeconds;
         this.rateLimiterFailStrategy = rateLimiterFailStrategy;
+
+        this.enableFusing = enableFusing;
+        this.fusingStrategyType = fusingStrategyType;
+        this.totalFailure = totalFailure;
+        this.fusingMilliSeconds = fusingMilliSeconds;
     }
 
     /**
@@ -165,7 +179,11 @@ public class RpcClient {
                         rateLimiterType,
                         permits,
                         milliSeconds,
-                        rateLimiterFailStrategy
+                        rateLimiterFailStrategy,
+                        enableFusing,
+                        fusingStrategyType,
+                        totalFailure,
+                        fusingMilliSeconds
 
                 )
         );
@@ -203,10 +221,19 @@ public class RpcClient {
                 rateLimiterType,
                 permits,
                 milliSeconds,
-                rateLimiterFailStrategy
+                rateLimiterFailStrategy,
+                enableFusing,
+                fusingStrategyType,
+                totalFailure,
+                fusingMilliSeconds
         );
     }
 
+    /**
+     * @author: qiu
+     * @date: 2024/3/17 9:00
+     * @description: 关闭rpc客户端，实际上也就是关闭Netty客户端
+     */
     public void shutdown() {
         LOGGER.info("RpcClient#shutdown...");
         RpcConsumer.getInstance(
